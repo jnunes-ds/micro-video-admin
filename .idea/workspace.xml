@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="chore: configure project with TypeScript, Jest, and SWC">
+      <change afterPath="$PROJECT_DIR$/src/domain/category.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.devcontainer/devcontainer.json" beforeDir="false" afterPath="$PROJECT_DIR$/.devcontainer/devcontainer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/micro-video-admin.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="17" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="UML Component" />
+        <option value="Dockerfile" />
+        <option value="docker-compose" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="denison.junior" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="39XUF7s20TGAmnhZV6ggNNSRHfj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultPlantUmlFileTemplate": "UML Component",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Node.js.index.js.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHELLCHECK.PATH": "/Users/junes-ds/Library/Application Support/JetBrains/WebStorm2025.1/plugins/Shell Script/shellcheck",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "/home/node/app/node_modules/typescript/lib",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.typescriptcompiler",
+    "ts.external.directory.path": "/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
+    <layout>
+      <window_info id="Bookmarks" side_tool="true" />
+      <window_info id="Merge Requests" />
+      <window_info id="Backup and Sync History" />
+      <window_info id="npm" side_tool="true" />
+      <window_info id="Pull Requests" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16749999" />
+      <window_info id="Commit" order="1" weight="0.25" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="TypeScript" />
+      <window_info anchor="bottom" id="TODO" />
+      <window_info anchor="bottom" id="File Transfer" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Problems" order="1" />
+      <window_info anchor="bottom" id="Problems View" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="3" />
+      <window_info anchor="bottom" id="Services" order="4" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.3305" />
+      <window_info anchor="right" id="PR AI Assistant" />
+      <window_info anchor="right" id="Endpoints" />
+      <window_info anchor="right" id="Coverage" side_tool="true" />
+      <window_info anchor="right" id="Notifications" order="0" weight="0.33035713" />
+      <window_info active="true" anchor="right" id="AIAssistant" order="1" visible="true" weight="0.33035713" />
+      <window_info anchor="right" id="Database" order="2" weight="0.25" />
+      <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.25" />
+      <window_info anchor="right" id="Hierarchy" order="5" weight="0.33035713" />
+      <window_info anchor="right" id="StudioBot" order="6" weight="0.33035713" />
+    </layout>
+  </component>
+  <component name="RecapSpentCounter">
+    <option name="endsOfQuotaMs" value="1773324083671" />
+    <option name="spentUsd" value="0.1260915" />
+  </component>
+  <component name="RecapUselessUpdatesCounter">
+    <option name="suspendCountdown" value="6" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/domain" />
+      <recent name="$PROJECT_DIR$/.devcontainer" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.30387.83" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="" />
+      <created>1770841803415</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1770841803415</updated>
+      <workItem from="1770841804562" duration="2046000" />
+      <workItem from="1770843895233" duration="105000" />
+      <workItem from="1770844006934" duration="233000" />
+      <workItem from="1770844247085" duration="57000" />
+      <workItem from="1770850268875" duration="184000" />
+      <workItem from="1770850506125" duration="73000" />
+      <workItem from="1770850888947" duration="337000" />
+      <workItem from="1770851684571" duration="73000" />
+      <workItem from="1770851766712" duration="74000" />
+      <workItem from="1770851847246" duration="94000" />
+      <workItem from="1770852240835" duration="16000" />
+      <workItem from="1770852382955" duration="155000" />
+      <workItem from="1770852545232" duration="146000" />
+      <workItem from="1770852698101" duration="227000" />
+      <workItem from="1770853170000" duration="427000" />
+      <workItem from="1770853608737" duration="696000" />
+      <workItem from="1770854314019" duration="41000" />
+      <workItem from="1770854362738" duration="278000" />
+      <workItem from="1770922304368" duration="3140000" />
+      <workItem from="1770927695075" duration="62000" />
+      <workItem from="1770927811722" duration="465000" />
+      <workItem from="1770928283972" duration="179000" />
+      <workItem from="1770928469659" duration="286000" />
+      <workItem from="1770928843958" duration="225000" />
+      <workItem from="1770929078724" duration="121000" />
+      <workItem from="1770929242056" duration="178000" />
+      <workItem from="1770929528415" duration="52000" />
+      <workItem from="1770929588856" duration="204000" />
+      <workItem from="1770930791213" duration="167000" />
+      <workItem from="1770930965423" duration="2590000" />
+      <workItem from="1770933928362" duration="20000" />
+      <workItem from="1770991092037" duration="3751000" />
+      <workItem from="1770996044248" duration="101000" />
+      <workItem from="1770996658439" duration="126000" />
+      <workItem from="1771085671610" duration="95000" />
+      <workItem from="1771085774784" duration="38000" />
+      <workItem from="1771086098044" duration="51000" />
+      <workItem from="1771086208643" duration="45000" />
+      <workItem from="1771086279974" duration="105000" />
+      <workItem from="1771086405218" duration="52000" />
+      <workItem from="1771086527778" duration="22000" />
+      <workItem from="1771086618427" duration="10000" />
+      <workItem from="1771086727600" duration="44000" />
+      <workItem from="1771086957242" duration="42000" />
+      <workItem from="1771087028529" duration="70000" />
+      <workItem from="1771087105210" duration="251000" />
+      <workItem from="1771087440517" duration="226000" />
+      <workItem from="1771087673882" duration="349000" />
+      <workItem from="1771088082339" duration="85000" />
+      <workItem from="1771088267097" duration="75000" />
+      <workItem from="1771088349180" duration="22000" />
+      <workItem from="1771088428703" duration="82000" />
+      <workItem from="1771088525665" duration="226000" />
+      <workItem from="1771088856117" duration="169000" />
+      <workItem from="1771089041348" duration="1201000" />
+      <workItem from="1771090953513" duration="69000" />
+      <workItem from="1771091030233" duration="86000" />
+      <workItem from="1771091149561" duration="39000" />
+      <workItem from="1771091222221" duration="33000" />
+      <workItem from="1771091261449" duration="177000" />
+      <workItem from="1771091474789" duration="45000" />
+      <workItem from="1771091744561" duration="36000" />
+      <workItem from="1771091845762" duration="171000" />
+      <workItem from="1771092022808" duration="716000" />
+      <workItem from="1771093210972" duration="376000" />
+      <workItem from="1771093593343" duration="141000" />
+      <workItem from="1771093741028" duration="32000" />
+      <workItem from="1771093860512" duration="77000" />
+      <workItem from="1771094165798" duration="543000" />
+      <workItem from="1771094716847" duration="39000" />
+      <workItem from="1771094762947" duration="1944000" />
+    </task>
+    <task id="LOCAL-00001" summary="init: first commit">
+      <option name="closed" value="true" />
+      <created>1770851911775</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1770851911775</updated>
+    </task>
+    <task id="LOCAL-00002" summary="init: first commit">
+      <option name="closed" value="true" />
+      <created>1770853761084</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1770853761084</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: customize devcontainer with WebStorm extensions">
+      <option name="closed" value="true" />
+      <created>1770853776761</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1770853776761</updated>
+    </task>
+    <task id="LOCAL-00004" summary="init: configure project with TypeScript, Jest, and SWC">
+      <option name="closed" value="true" />
+      <created>1770853995390</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1770853995390</updated>
+    </task>
+    <task id="LOCAL-00005" summary="chore: configure project with TypeScript, Jest, and SWC">
+      <option name="closed" value="true" />
+      <created>1770854011695</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1770854011695</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/jest.config.js" />
+        <option value="$PROJECT_DIR$/src/domain/category.entity.js" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add: WebStorm extensions to devcontainer configuration" />
+    <MESSAGE value="init: first commit" />
+    <MESSAGE value="feat: customize devcontainer with WebStorm extensions" />
+    <MESSAGE value="init: configure project with TypeScript, Jest, and SWC" />
+    <MESSAGE value="chore: configure project with TypeScript, Jest, and SWC" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: configure project with TypeScript, Jest, and SWC" />
+  </component>
+</project>
