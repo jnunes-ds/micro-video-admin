@@ -11,12 +11,9 @@
     "ghcr.io/devcontainers/features/git:1": {}
   },
   "customizations": {
-    "webstorm": {
-      "extensions": [
-        "gemini",
-        "izhangzhihao.rainbow.brackets",
-        "com.intellij.xml"
-      ]
+    "jetbrains": {
+      "settings": {
+        "com.intellij:app:BuiltInServerOptions.builtInServerPort": 52048
+      }
     }
-  }
-}
+  },}
