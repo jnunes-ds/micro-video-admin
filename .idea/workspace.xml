@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="chore: add Jest configuration and IntelliJ project files">
-      <change afterPath="$PROJECT_DIR$/src/domain/__tests__/category.entity.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.devcontainer/devcontainer.json" beforeDir="false" afterPath="$PROJECT_DIR$/.devcontainer/devcontainer.json" afterDir="false" />
+    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="chore: add unit tests for `Category` entity">
+      <change afterPath="$PROJECT_DIR$/src/@shared/domain/value_object.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/@shared/domain/value_object.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jest.config.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/category.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/category.entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/__tests__/category.entity.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/category/domain/__tests__/category.entity.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/category.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/category/domain/category.entity.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,8 +58,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultPlantUmlFileTemplate": "UML Component",
-    "Jest.All Tests.executor": "Run",
+    "Jest.All Tests in jest.config.ts.executor": "Run",
+    "Jest.All Tests.executor": "Coverage",
     "Jest.Category Unit Tests.Constructor.Should create a category with default values.executor": "Run",
+    "Jest.Category Unit Tests.Constructor.should create a category with specific created_at info.executor": "Run",
     "Jest.Category Unit Tests.executor": "Run",
     "Jest.Category Unit Tests.should activate the account.executor": "Run",
     "Jest.category.entity.spec.ts.executor": "Run",
@@ -77,14 +77,14 @@
     "SHELLCHECK.PATH": "/Users/junes-ds/Library/Application Support/JetBrains/WebStorm2025.1/plugins/Shell Script/shellcheck",
     "git-widget-placeholder": "main",
     "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "/home/node/app/node_modules/typescript/lib",
+    "last_opened_file_path": "/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/.bin/jest",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs.jest.jest_package": "/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/jest",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.TypeScript",
+    "settings.editor.selected.configurable": "AtomSelectConfig",
     "ts.external.directory.path": "/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -133,33 +133,22 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/category" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/domain" />
       <recent name="$PROJECT_DIR$/.devcontainer" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.Category Unit Tests.should activate the account">
+  <component name="RunManager" selected="Jest.Category Unit Tests.Constructor.should create a category with specific created_at info">
     <configuration name="All Tests" type="JavaScriptTestRunnerJest" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <node-interpreter value="$USER_HOME$/.nvm/versions/node/v20.19.5/bin/node" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest-cli" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="ALL" />
       <method v="2" />
     </configuration>
-    <configuration name="Category Unit Tests" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/src/domain/__tests__/category.entity.spec.ts" />
-      <test-names>
-        <test-name value="Category Unit Tests" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="Category Unit Tests.Constructor.Should create a category with default values" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="Category Unit Tests.Constructor.should create a category with specific created_at info" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
@@ -169,34 +158,17 @@
       <test-names>
         <test-name value="Category Unit Tests" />
         <test-name value="Constructor" />
-        <test-name value="Should create a category with default values" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="Category Unit Tests.should activate the account" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
-      <node-interpreter value="project" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
-      <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/domain/__tests__/category.entity.spec.ts" />
-      <test-names>
-        <test-name value="Category Unit Tests" />
-        <test-name value="should activate the account" />
+        <test-name value="should create a category with specific created_at info" />
       </test-names>
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Jest.All Tests" />
-      <item itemvalue="Jest.Category Unit Tests.should activate the account" />
-      <item itemvalue="Jest.Category Unit Tests" />
-      <item itemvalue="Jest.Category Unit Tests.Constructor.Should create a category with default values" />
+      <item itemvalue="Jest.Category Unit Tests.Constructor.should create a category with specific created_at info" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.Category Unit Tests.should activate the account" />
-        <item itemvalue="Jest.Category Unit Tests.Constructor.Should create a category with default values" />
-        <item itemvalue="Jest.Category Unit Tests" />
+        <item itemvalue="Jest.Category Unit Tests.Constructor.should create a category with specific created_at info" />
       </list>
     </recent_temporary>
   </component>
@@ -362,7 +334,31 @@
       <option name="project" value="LOCAL" />
       <updated>1771097822875</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="chore: remove Jest configuration, update devcontainer customizations, and add UUID dependency">
+      <option name="closed" value="true" />
+      <created>1771175758667</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1771175758667</updated>
+    </task>
+    <task id="LOCAL-00009" summary="chore: add unit tests for `Category` entity">
+      <option name="closed" value="true" />
+      <created>1771175767557</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1771175767557</updated>
+    </task>
+    <task id="LOCAL-00010" summary="chore: add unit tests for `Category` entity">
+      <option name="closed" value="true" />
+      <created>1771175773069</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1771175773069</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,10 +389,16 @@
     <MESSAGE value="chore: configure project with TypeScript, Jest, and SWC" />
     <MESSAGE value="chore: update project dependencies and devcontainer settings" />
     <MESSAGE value="chore: add Jest configuration and IntelliJ project files" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: add Jest configuration and IntelliJ project files" />
+    <MESSAGE value="chore: remove Jest configuration, update devcontainer customizations, and add UUID dependency" />
+    <MESSAGE value="test: add unit tests for `Category` entity" />
+    <MESSAGE value="chore: add unit tests for `Category` entity" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: add unit tests for `Category` entity" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/micro_video_admin$All_Tests.info" NAME="All Tests Coverage Results" MODIFIED="1771176263163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
