@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="chore: add unit tests for `Category` entity">
-      <change afterPath="$PROJECT_DIR$/src/@shared/domain/value_object.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/@shared/domain/value_object.ts" afterDir="false" />
+    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="test: add `ValueObject` class and update dependencies to include `lodash`">
+      <change afterPath="$PROJECT_DIR$/src/@shared/domain/value_objects/__tests__/uuid.vo.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/@shared/domain/value_objects/uuid.vo.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/__tests__/category.entity.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/category/domain/__tests__/category.entity.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/category.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/category/domain/category.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jest.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/jest.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/@shared/domain/value_object.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/@shared/domain/__tests__/value_object.spec.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,13 +124,17 @@
   </component>
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1773324083671" />
-    <option name="spentUsd" value="0.16711524" />
+    <option name="spentUsd" value="0.19160224" />
+  </component>
+  <component name="RecapUselessUpdatesCounter">
+    <option name="suspendCountdown" value="9" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/@shared/domain/__tests__" />
       <recent name="$PROJECT_DIR$/src/category" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/domain" />
@@ -358,7 +360,23 @@
       <option name="project" value="LOCAL" />
       <updated>1771175773069</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat: add `ValueObject` class and update dependencies to include `lodash`">
+      <option name="closed" value="true" />
+      <created>1771179234260</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1771179234260</updated>
+    </task>
+    <task id="LOCAL-00012" summary="test: add `ValueObject` class and update dependencies to include `lodash`">
+      <option name="closed" value="true" />
+      <created>1771179239829</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1771179239829</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -392,7 +410,9 @@
     <MESSAGE value="chore: remove Jest configuration, update devcontainer customizations, and add UUID dependency" />
     <MESSAGE value="test: add unit tests for `Category` entity" />
     <MESSAGE value="chore: add unit tests for `Category` entity" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: add unit tests for `Category` entity" />
+    <MESSAGE value="feat: add `ValueObject` class and update dependencies to include `lodash`" />
+    <MESSAGE value="test: add `ValueObject` class and update dependencies to include `lodash`" />
+    <option name="LAST_COMMIT_MESSAGE" value="test: add `ValueObject` class and update dependencies to include `lodash`" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
