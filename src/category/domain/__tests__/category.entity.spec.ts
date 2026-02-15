@@ -39,6 +39,23 @@ describe('Category Unit Tests', () => {
 		expect(category.is_active).toBeFalsy();
 	});
 
+	it('should returns all category info with a JSON format', () => {
+		const created_at = new Date();
+		const category = new Category({
+			name: 'Movie',
+			description: 'Movie description',
+			is_active: false,
+			created_at
+		});
+		expect(category.toJSON()).toStrictEqual({
+			category_id: category.category_id,
+			name: 'Movie',
+			description: 'Movie description',
+			is_active: false,
+			created_at
+		})
+	});
+
 	describe('Constructor', () => {
 		it('should create a category with default values', () => {
 			const category = new Category({
