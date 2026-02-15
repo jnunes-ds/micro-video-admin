@@ -57,6 +57,17 @@ describe('Category Unit Tests', () => {
 		})
 	});
 
+	describe('category_id field', () => {
+		const arrange: {category_id: Uuid}[] = [{category_id: null as never}, {category_id: undefined as never}, {category_id: new Uuid()}];
+		test.each(arrange)('id = %j', ({category_id}) => {
+			const category = new Category({
+				name: 'Movie',
+				category_id
+			});
+			expect(category.category_id).toBeInstanceOf(Uuid);
+		});
+	});
+
 	describe('Constructor', () => {
 		it('should create a category with default values', () => {
 			const category = new Category({
