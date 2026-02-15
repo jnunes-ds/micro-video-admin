@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="test: add `ValueObject` class and update dependencies to include `lodash`">
-      <change afterPath="$PROJECT_DIR$/src/@shared/domain/value_objects/__tests__/uuid.vo.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/@shared/domain/value_objects/uuid.vo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jest.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/jest.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/@shared/domain/value_object.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/@shared/domain/__tests__/value_object.spec.ts" afterDir="false" />
+    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="test: change jest config and add uuid value object">
+      <change beforePath="$PROJECT_DIR$/src/category/domain/__tests__/category.entity.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/category/domain/__tests__/category.entity.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/category/domain/category.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/category/domain/category.entity.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -376,7 +373,31 @@
       <option name="project" value="LOCAL" />
       <updated>1771179239829</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="test: add `ValueObject` class and update dependencies to include `lodash`">
+      <option name="closed" value="true" />
+      <created>1771181830270</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1771181830270</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: change jest config and add uuid value object">
+      <option name="closed" value="true" />
+      <created>1771181883481</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1771181883481</updated>
+    </task>
+    <task id="LOCAL-00015" summary="test: change jest config and add uuid value object">
+      <option name="closed" value="true" />
+      <created>1771181889023</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1771181889023</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -412,7 +433,9 @@
     <MESSAGE value="chore: add unit tests for `Category` entity" />
     <MESSAGE value="feat: add `ValueObject` class and update dependencies to include `lodash`" />
     <MESSAGE value="test: add `ValueObject` class and update dependencies to include `lodash`" />
-    <option name="LAST_COMMIT_MESSAGE" value="test: add `ValueObject` class and update dependencies to include `lodash`" />
+    <MESSAGE value="feat: change jest config and add uuid value object" />
+    <MESSAGE value="test: change jest config and add uuid value object" />
+    <option name="LAST_COMMIT_MESSAGE" value="test: change jest config and add uuid value object" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
