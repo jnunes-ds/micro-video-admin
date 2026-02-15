@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="chore: configure project with TypeScript, Jest, and SWC">
-      <change afterPath="$PROJECT_DIR$/src/domain/category.entity.ts" afterDir="false" />
+    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="chore: add Jest configuration and IntelliJ project files">
+      <change afterPath="$PROJECT_DIR$/src/domain/__tests__/category.entity.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.devcontainer/devcontainer.json" beforeDir="false" afterPath="$PROJECT_DIR$/.devcontainer/devcontainer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/micro-video-admin.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jest.config.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/category.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/category.entity.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +22,6 @@
   </component>
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="17" />
-    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -41,6 +41,10 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/node_modules/uuid/dist/v4.d.ts" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/domain/category.entity.ts" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -56,12 +60,19 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultPlantUmlFileTemplate": "UML Component",
+    "Jest.All Tests.executor": "Run",
+    "Jest.Category Unit Tests.Constructor.Should create a category with default values.executor": "Run",
+    "Jest.Category Unit Tests.executor": "Run",
+    "Jest.Category Unit Tests.should activate the account.executor": "Run",
+    "Jest.category.entity.spec.ts.executor": "Run",
+    "Jest.xpto.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Node.js.index.js.executor": "Run",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.rust.reset.selective.auto.import": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHELLCHECK.PATH": "/Users/junes-ds/Library/Application Support/JetBrains/WebStorm2025.1/plugins/Shell Script/shellcheck",
     "git-widget-placeholder": "main",
@@ -71,8 +82,9 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/jest",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.typescriptcompiler",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.TypeScript",
     "ts.external.directory.path": "/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -84,7 +96,7 @@
       <window_info id="Backup and Sync History" />
       <window_info id="npm" side_tool="true" />
       <window_info id="Pull Requests" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16749999" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11347656" />
       <window_info id="Commit" order="1" weight="0.25" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -96,25 +108,25 @@
       <window_info anchor="bottom" id="Problems View" order="2" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info anchor="bottom" id="Services" order="4" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.3305" />
       <window_info anchor="bottom" id="Find" order="5" weight="0.3305" />
       <window_info anchor="right" id="PR AI Assistant" />
       <window_info anchor="right" id="Endpoints" />
       <window_info anchor="right" id="Coverage" side_tool="true" />
-      <window_info anchor="right" id="Notifications" order="0" weight="0.33035713" />
-      <window_info active="true" anchor="right" id="AIAssistant" order="1" visible="true" weight="0.33035713" />
+      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="AIAssistant" order="1" weight="0.25" />
       <window_info anchor="right" id="Database" order="2" weight="0.25" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
       <window_info anchor="right" id="Maven" order="4" weight="0.25" />
-      <window_info anchor="right" id="Hierarchy" order="5" weight="0.33035713" />
-      <window_info anchor="right" id="StudioBot" order="6" weight="0.33035713" />
+      <window_info anchor="right" id="Cargo" order="5" weight="0.2" />
+      <window_info anchor="right" id="Hierarchy" order="6" weight="0.33035713" />
+      <window_info anchor="right" id="RustCargo" order="7" weight="0.2" />
+      <window_info anchor="right" id="StudioBot" order="8" weight="0.33035713" />
     </layout>
   </component>
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1773324083671" />
-    <option name="spentUsd" value="0.1260915" />
-  </component>
-  <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="6" />
+    <option name="spentUsd" value="0.16711524" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -125,6 +137,68 @@
       <recent name="$PROJECT_DIR$/src/domain" />
       <recent name="$PROJECT_DIR$/.devcontainer" />
     </key>
+  </component>
+  <component name="RunManager" selected="Jest.Category Unit Tests.should activate the account">
+    <configuration name="All Tests" type="JavaScriptTestRunnerJest" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Category Unit Tests" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file value="$PROJECT_DIR$/src/domain/__tests__/category.entity.spec.ts" />
+      <test-names>
+        <test-name value="Category Unit Tests" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Category Unit Tests.Constructor.Should create a category with default values" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/domain/__tests__/category.entity.spec.ts" />
+      <test-names>
+        <test-name value="Category Unit Tests" />
+        <test-name value="Constructor" />
+        <test-name value="Should create a category with default values" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="Category Unit Tests.should activate the account" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/domain/__tests__/category.entity.spec.ts" />
+      <test-names>
+        <test-name value="Category Unit Tests" />
+        <test-name value="should activate the account" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Jest.All Tests" />
+      <item itemvalue="Jest.Category Unit Tests.should activate the account" />
+      <item itemvalue="Jest.Category Unit Tests" />
+      <item itemvalue="Jest.Category Unit Tests.Constructor.Should create a category with default values" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.Category Unit Tests.should activate the account" />
+        <item itemvalue="Jest.Category Unit Tests.Constructor.Should create a category with default values" />
+        <item itemvalue="Jest.Category Unit Tests" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -211,6 +285,26 @@
       <workItem from="1771094165798" duration="543000" />
       <workItem from="1771094716847" duration="39000" />
       <workItem from="1771094762947" duration="1944000" />
+      <workItem from="1771102809914" duration="31000" />
+      <workItem from="1771102999086" duration="18000" />
+      <workItem from="1771103131197" duration="75000" />
+      <workItem from="1771103239948" duration="325000" />
+      <workItem from="1771103674330" duration="638000" />
+      <workItem from="1771104490669" duration="59000" />
+      <workItem from="1771104813370" duration="469000" />
+      <workItem from="1771105291835" duration="29000" />
+      <workItem from="1771105327845" duration="92000" />
+      <workItem from="1771105555396" duration="45000" />
+      <workItem from="1771105608123" duration="69000" />
+      <workItem from="1771105684296" duration="37000" />
+      <workItem from="1771105727638" duration="144000" />
+      <workItem from="1771105879302" duration="234000" />
+      <workItem from="1771106122020" duration="35000" />
+      <workItem from="1771106164762" duration="76000" />
+      <workItem from="1771106290762" duration="390000" />
+      <workItem from="1771106724023" duration="2204000" />
+      <workItem from="1771166740915" duration="177000" />
+      <workItem from="1771175090543" duration="58000" />
     </task>
     <task id="LOCAL-00001" summary="init: first commit">
       <option name="closed" value="true" />
@@ -252,7 +346,23 @@
       <option name="project" value="LOCAL" />
       <updated>1770854011695</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="chore: update project dependencies and devcontainer settings">
+      <option name="closed" value="true" />
+      <created>1771097811321</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1771097811321</updated>
+    </task>
+    <task id="LOCAL-00007" summary="chore: add Jest configuration and IntelliJ project files">
+      <option name="closed" value="true" />
+      <created>1771097822875</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1771097822875</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,6 +391,12 @@
     <MESSAGE value="feat: customize devcontainer with WebStorm extensions" />
     <MESSAGE value="init: configure project with TypeScript, Jest, and SWC" />
     <MESSAGE value="chore: configure project with TypeScript, Jest, and SWC" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: configure project with TypeScript, Jest, and SWC" />
+    <MESSAGE value="chore: update project dependencies and devcontainer settings" />
+    <MESSAGE value="chore: add Jest configuration and IntelliJ project files" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: add Jest configuration and IntelliJ project files" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

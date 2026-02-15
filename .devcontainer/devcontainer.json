@@ -10,10 +10,21 @@
   "features": {
     "ghcr.io/devcontainers/features/git:1": {}
   },
+  "postCreateCommand": "git config --global user.email 'denisonprobable13@gmail.com'",
   "customizations": {
     "jetbrains": {
       "settings": {
         "com.intellij:app:BuiltInServerOptions.builtInServerPort": 52048
-      }
+      },
+      "plugins": [
+        "org.plantuml.jetbrains.plantuml",
+        "com.intellij.ml.llm",
+        "com.mallowigi",
+        "JavaScript",
+        "com.intellij.css",
+        "com.intellij.eslint",
+        "com.intellij.prettierjs"
+      ]
     }
-  },}
+  }
+}
