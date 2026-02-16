@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="test: integrate `Uuid` value object into `Category` entity">
+    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="test: add tests for `category_id` field in `Category` entity, and add verbose flag to Jest script">
+      <change afterPath="$PROJECT_DIR$/src/@shared/validators/validator-rules.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/category/domain/__tests__/category.entity.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/category/domain/__tests__/category.entity.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jest.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/jest.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/category/domain/category.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/category/domain/category.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +17,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="17" />
+    <option name="cachedIndexableFilesCount" value="22" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -34,18 +38,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "jnunes-ds"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jnunes-ds&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:jnunes-ds/micro-video-admin.git",
-    "accountId": "50c33319-3241-45e7-94ae-19202e845a90"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:jnunes-ds/micro-video-admin.git&quot;,
+    &quot;accountId&quot;: &quot;50c33319-3241-45e7-94ae-19202e845a90&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/node_modules/uuid/dist/v4.d.ts" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/domain/category.entity.ts" root0="FORCE_HIGHLIGHTING" />
@@ -62,40 +66,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultPlantUmlFileTemplate": "UML Component",
-    "Jest.All Tests in jest.config.ts.executor": "Run",
-    "Jest.All Tests.executor": "Coverage",
-    "Jest.Category Unit Tests.Constructor.Should create a category with default values.executor": "Run",
-    "Jest.Category Unit Tests.Constructor.should create a category with specific created_at info.executor": "Run",
-    "Jest.Category Unit Tests.executor": "Run",
-    "Jest.Category Unit Tests.should activate the account.executor": "Run",
-    "Jest.category.entity.spec.ts.executor": "Run",
-    "Jest.xpto.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Node.js.index.js.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.rust.reset.selective.auto.import": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHELLCHECK.PATH": "/Users/junes-ds/Library/Application Support/JetBrains/WebStorm2025.1/plugins/Shell Script/shellcheck",
-    "git-widget-placeholder": "main",
-    "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/.bin/jest",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs.jest.jest_package": "/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/jest",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "AtomSelectConfig",
-    "ts.external.directory.path": "/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Component&quot;,
+    &quot;Jest.All Tests in jest.config.ts.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.All Tests.executor&quot;: &quot;Coverage&quot;,
+    &quot;Jest.Category Unit Tests.Constructor.Should create a category with default values.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Category Unit Tests.Constructor.should create a category with specific created_at info.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Category Unit Tests.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.Category Unit Tests.should activate the account.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.category.entity.spec.ts.executor&quot;: &quot;Run&quot;,
+    &quot;Jest.xpto.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.index.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.rust.reset.selective.auto.import&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;/Users/junes-ds/Library/Application Support/JetBrains/WebStorm2025.1/plugins/Shell Script/shellcheck&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/.bin/jest&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/jest&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AtomSelectConfig&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/junes-ds/WebstormProjects/codeflix/micro-video-admin/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql_aurora&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Bookmarks" side_tool="true" />
@@ -133,10 +142,10 @@
   </component>
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1773324083671" />
-    <option name="spentUsd" value="0.19160224" />
+    <option name="spentUsd" value="0.24117224" />
   </component>
   <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="9" />
+    <option name="suspendCountdown" value="5" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -152,7 +161,7 @@
   </component>
   <component name="RunManager" selected="Jest.Category Unit Tests.Constructor.should create a category with specific created_at info">
     <configuration name="All Tests" type="JavaScriptTestRunnerJest" nameIsGenerated="true">
-      <node-interpreter value="$USER_HOME$/.nvm/versions/node/v20.19.5/bin/node" />
+      <node-interpreter value="$PROJECT_DIR$/../.nvm/versions/node/v20.19.5/bin/node" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest-cli" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
@@ -288,6 +297,7 @@
       <workItem from="1771106724023" duration="2204000" />
       <workItem from="1771166740915" duration="177000" />
       <workItem from="1771175090543" duration="58000" />
+      <workItem from="1771242624870" duration="2386000" />
     </task>
     <task id="LOCAL-00001" summary="init: first commit">
       <option name="closed" value="true" />
@@ -425,7 +435,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771182197645</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="test: add tests for `category_id` field in `Category` entity, and add verbose flag to Jest script">
+      <option name="closed" value="true" />
+      <created>1771183243537</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1771183243537</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -465,7 +483,8 @@
     <MESSAGE value="test: change jest config and add uuid value object" />
     <MESSAGE value="refactor: integrate `Uuid` value object into `Category` entity" />
     <MESSAGE value="test: integrate `Uuid` value object into `Category` entity" />
-    <option name="LAST_COMMIT_MESSAGE" value="test: integrate `Uuid` value object into `Category` entity" />
+    <MESSAGE value="test: add tests for `category_id` field in `Category` entity, and add verbose flag to Jest script" />
+    <option name="LAST_COMMIT_MESSAGE" value="test: add tests for `category_id` field in `Category` entity, and add verbose flag to Jest script" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
