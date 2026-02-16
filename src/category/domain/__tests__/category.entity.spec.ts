@@ -210,7 +210,7 @@ describe('Category Unit Tests', () => {
 
 describe('Category Validator', () => {
 	describe('Create command', () => {
-		it('should print an error', () => {
+		it('should print an error if name is invalid', () => {
 			expect(() => Category.create({ name: null })).containsErrorMessages({
 				name: [
 					"name should not be empty",
@@ -218,6 +218,62 @@ describe('Category Validator', () => {
 					"name must be shorter than or equal to 255 characters"
 				]
 			});
-		})
+			expect(() => Category.create({ name: '' })).containsErrorMessages({
+				name: [
+					"name should not be empty",
+				]
+			});
+
+			expect(() => Category.create({ name: false as any })).containsErrorMessages({
+				name: [
+					"name must be a string",
+					"name must be shorter than or equal to 255 characters"
+				]
+			});
+			expect(() => Category.create({ name: 'n'.repeat(256) })).containsErrorMessages({
+				name: [
+					"name must be shorter than or equal to 255 characters"
+				]
+			});
+		});
+
+		it('should print an error if description is invalid', () => {
+			expect(() => Category.create({ name: 'Movie', description: 8 as any })).containsErrorMessages({
+				description: [
+					"description must be a string"
+				]
+			});
+		});
+
+		it('should print an error if is_active is invalid', () => {
+			expect(() => Category.create({ name: 'Movie', is_active: 'false' as any })).containsErrorMessages({
+				is_active: [
+					"is_active must be a boolean value"
+				]
+			});
+		});
+	});
+
+	// METHODS
+	describe('Methods', () => {
+		it('should print an error if changeName method receives an is invalid argument', () => {
+			const category = Category.create({ name: 'Movie' });
+			expect(() => category.changeName(null)).containsErrorMessages({
+				name: [
+					"name should not be empty",
+					"name must be a string",
+					"name must be shorter than or equal to 255 characters"
+				]
+			});
+		});
+
+		it('should print an error if changeDescription method receives an is invalid argument', () => {
+			const category = Category.create({ name: 'Movie' });
+			expect(() => category.changeDescription(null)).containsErrorMessages({
+				description: [
+					"name must be a string"
+				]
+			});
+		});
 	});
 });
