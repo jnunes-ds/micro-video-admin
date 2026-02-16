@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="feat: update tsconfig and Jest config for path aliases, update imports in `Category` entity">
-      <change afterPath="$PROJECT_DIR$/src/@shared/domain/validators/class_validator_fields.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/@shared/domain/validators/validator_fields.interface.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/category/domain/category.validator.ts" afterDir="false" />
+    <list default="true" id="78f7da8d-f339-48ec-a936-98bc7f3b17b2" name="Changes" comment="feat: add validation logic to `Category` entity using `class-validator`, implement reusable validator interfaces and factories">
+      <change afterPath="$PROJECT_DIR$/.swcrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jest.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/jest.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/category/domain/__tests__/category.entity.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/category/domain/__tests__/category.entity.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/category/domain/category.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/category/domain/category.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/category/domain/category.validator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/category/domain/category.validator.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,10 +143,10 @@
   </component>
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1773324083671" />
-    <option name="spentUsd" value="0.24117224" />
+    <option name="spentUsd" value="0.27489248" />
   </component>
   <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="5" />
+    <option name="suspendCountdown" value="3" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -299,7 +298,7 @@
       <workItem from="1771106724023" duration="2204000" />
       <workItem from="1771166740915" duration="177000" />
       <workItem from="1771175090543" duration="58000" />
-      <workItem from="1771242624870" duration="3784000" />
+      <workItem from="1771242624870" duration="6119000" />
     </task>
     <task id="LOCAL-00001" summary="init: first commit">
       <option name="closed" value="true" />
@@ -453,7 +452,23 @@
       <option name="project" value="LOCAL" />
       <updated>1771245173845</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="feat: enable experimental decorators and metadata in tsconfig, add `class-validator` dependency">
+      <option name="closed" value="true" />
+      <created>1771246685210</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1771246685210</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat: add validation logic to `Category` entity using `class-validator`, implement reusable validator interfaces and factories">
+      <option name="closed" value="true" />
+      <created>1771246701305</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1771246701305</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -489,7 +504,9 @@
     <MESSAGE value="test: integrate `Uuid` value object into `Category` entity" />
     <MESSAGE value="test: add tests for `category_id` field in `Category` entity, and add verbose flag to Jest script" />
     <MESSAGE value="feat: update tsconfig and Jest config for path aliases, update imports in `Category` entity" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: update tsconfig and Jest config for path aliases, update imports in `Category` entity" />
+    <MESSAGE value="feat: enable experimental decorators and metadata in tsconfig, add `class-validator` dependency" />
+    <MESSAGE value="feat: add validation logic to `Category` entity using `class-validator`, implement reusable validator interfaces and factories" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add validation logic to `Category` entity using `class-validator`, implement reusable validator interfaces and factories" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
