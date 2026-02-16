@@ -1,7 +1,13 @@
 import {Category} from "../category.entity";
-import {Uuid} from "../../../@shared/domain/value_objects/uuid.vo";
+import {jest} from "@jest/globals";
+import {Uuid} from "@/@shared/domain/value_objects/uuid.vo";
 
 describe('Category Unit Tests', () => {
+	let validateSpy: any;
+	beforeEach(() => {
+		validateSpy = jest.spyOn(Category, 'validate');
+	});
+
 	it('should change name', () => {
 		const category = new Category({
 			name: 'Movie'
@@ -157,6 +163,7 @@ describe('Category Unit Tests', () => {
 			expect(category.description).toBeNull();
 			expect(category.is_active).toBeTruthy();
 			expect(category.created_at).toBeInstanceOf(Date);
+			expect(validateSpy).toBeCalledTimes(1);
 		});
 
 		it('should create a cetegory with description', () => {
@@ -170,6 +177,7 @@ describe('Category Unit Tests', () => {
 			expect(category.description).toBe('Movie description');
 			expect(category.is_active).toBeTruthy();
 			expect(category.created_at).toBeInstanceOf(Date);
+			expect(validateSpy).toBeCalledTimes(1);
 		});
 
 		it('should create a category with active property true', () => {
@@ -182,6 +190,7 @@ describe('Category Unit Tests', () => {
 			expect(category.description).toBeNull();
 			expect(category.is_active).toBeTruthy();
 			expect(category.created_at).toBeInstanceOf(Date);
+			expect(validateSpy).toBeCalledTimes(1);
 		});
 
 		it('should create a category with active property false', () => {
@@ -194,6 +203,7 @@ describe('Category Unit Tests', () => {
 			expect(category.description).toBeNull();
 			expect(category.is_active).toBeFalsy();
 			expect(category.created_at).toBeInstanceOf(Date);
+			expect(validateSpy).toBeCalledTimes(1);
 		});
 	});
 });
