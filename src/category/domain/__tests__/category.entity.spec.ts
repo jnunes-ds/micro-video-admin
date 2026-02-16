@@ -1,7 +1,6 @@
 import {Category} from "../category.entity";
 import {jest} from "@jest/globals";
 import {Uuid} from "@/@shared/domain/value_objects/uuid.vo";
-import {EntityValidationError} from "@/@shared/domain/validators/validation.error";
 
 describe('Category Unit Tests', () => {
 	let validateSpy: any;
@@ -212,13 +211,13 @@ describe('Category Unit Tests', () => {
 describe('Category Validator', () => {
 	describe('Create command', () => {
 		it('should print an error', () => {
-			expect(() => {
-				Category.create({
-					name: ''
-				});
-			}).toThrow(
-				new EntityValidationError({name: ['name should not be empty']})
-			);
+			expect(() => Category.create({ name: null })).containsErrorMessages({
+				name: [
+					"name should not be empty",
+					"name must be a string",
+					"name must be shorter than or equal to 255 characters"
+				]
+			});
 		})
 	});
 });
