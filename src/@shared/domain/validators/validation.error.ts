@@ -2,7 +2,7 @@ import {FieldsErrors} from "@/@shared/domain/validators/validator_fields.interfa
 
 export class EntityValidationError extends Error {
 	constructor(public error: FieldsErrors, message = "Validation Error") {
-		super();
+		super(message);
 	}
 
 	count() {
