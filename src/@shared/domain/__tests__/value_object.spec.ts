@@ -13,7 +13,7 @@ class ComplexValueObject extends ValueObject {
 }
 
 describe('Value Object Unit Tests', () => {
-	it('should be equals', () => {
+	it('[IT] should be equals', () => {
 		const stringValueObject1 = new StringValueObject('test');
 		const stringValueObject2 = new StringValueObject('test');
 		expect(stringValueObject1.equals(stringValueObject2)).toBeTruthy();
@@ -23,7 +23,7 @@ describe('Value Object Unit Tests', () => {
 		expect(complexValueObject1.equals(complexValueObject2)).toBeTruthy();
 	});
 
-	it('should not be equals', () => {
+	it('[IT] should not be equals', () => {
 		const stringValueObject1 = new StringValueObject('test');
 		const stringValueObject2 = new StringValueObject('test2');
 		expect(stringValueObject1.equals(stringValueObject2)).toBeFalsy();

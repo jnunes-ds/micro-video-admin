@@ -43,7 +43,7 @@ describe('InMemoryRepository Unit Tests', () => {
 		repository = new StubInMemoryRepository();
 	});
 
-	it('should insert a new entity', async () => {
+	it('[IT] should insert a new entity', async () => {
 		const entity = new StubEntity({
 			entity_id: new Uuid(),
 			name: 'Test',
@@ -55,7 +55,7 @@ describe('InMemoryRepository Unit Tests', () => {
 		expect(repository?.items[0]).toEqual(entity);
 	});
 
-	it('should bulk insert entities', async () => {
+	it('[IT] should bulk insert entities', async () => {
 		const entities: StubEntity[] = [
 			new StubEntity({
 				entity_id: new Uuid(),
@@ -74,7 +74,7 @@ describe('InMemoryRepository Unit Tests', () => {
 		expect(repository?.items).toEqual(entities);
 	});
 
-	it('should retorns all entities', async () => {
+	it('[IT] should retorns all entities', async () => {
 		const entity1 = new StubEntity({
 			entity_id: new Uuid(),
 			name: 'Test 1',
@@ -92,7 +92,7 @@ describe('InMemoryRepository Unit Tests', () => {
 		expect(entities).toStrictEqual([entity1, entity2]);
 	});
 
-	it('should throws error on update when entity is not found', () => {
+	it('[IT] should throws error on update when entity is not found', () => {
 		const entity = new StubEntity({
 			entity_id: new Uuid(),
 			name: 'Test',
@@ -103,7 +103,7 @@ describe('InMemoryRepository Unit Tests', () => {
 		);
 	});
 
-	it('should updates an entity', async () => {
+	it('[IT] should updates an entity', async () => {
 		const entity = new StubEntity({
 			entity_id: new Uuid(),
 			name: 'Test',
@@ -121,7 +121,7 @@ describe('InMemoryRepository Unit Tests', () => {
 
 	});
 
-	it('should throws error on delete when aggregate is not found', async () => {
+	it('[IT] should throws error on delete when aggregate is not found', async () => {
 		const uuid = new Uuid();
 
 		await expect(repository.delete(uuid)).rejects.toThrowError(
@@ -135,7 +135,7 @@ describe('InMemoryRepository Unit Tests', () => {
 		)
 	});
 
-	it('should delete an entity', async () => {
+	it('[IT] should delete an entity', async () => {
 		const entity = new StubEntity({
 			entity_id: new Uuid(),
 			name: 'Test',
@@ -150,7 +150,7 @@ describe('InMemoryRepository Unit Tests', () => {
 		expect(repository?.items.length).toBe(0);
 	});
 
-	it('should find an entity by id', async () => {
+	it('[IT] should find an entity by id', async () => {
 		const entity1 = new StubEntity({
 			entity_id: new Uuid(),
 			name: 'Test',
@@ -175,7 +175,7 @@ describe('InMemoryRepository Unit Tests', () => {
 		expect(entityFound).toStrictEqual(entity1);
 	});
 
-	it('should find all entities', async () => {
+	it('[IT] should find all entities', async () => {
 		const entities: StubEntity[] = [
 			new StubEntity({
 				entity_id: new Uuid(),
