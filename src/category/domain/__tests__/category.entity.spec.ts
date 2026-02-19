@@ -210,7 +210,7 @@ describe('Category Unit Tests', () => {
 
 describe('Category Validator', () => {
 	describe('Create command', () => {
-		it('should print an error if name is invalid', () => {
+		it('should print an errors if name is invalid', () => {
 			expect(() => Category.create({ name: null })).containsErrorMessages({
 				name: [
 					"name should not be empty",
@@ -237,7 +237,7 @@ describe('Category Validator', () => {
 			});
 		});
 
-		it('should print an error if description is invalid', () => {
+		it('should print an errors if description is invalid', () => {
 			expect(() => Category.create({ name: 'Movie', description: 8 as any })).containsErrorMessages({
 				description: [
 					"description must be a string"
@@ -245,7 +245,7 @@ describe('Category Validator', () => {
 			});
 		});
 
-		it('should print an error if is_active is invalid', () => {
+		it('should print an errors if is_active is invalid', () => {
 			expect(() => Category.create({ name: 'Movie', is_active: 'false' as any })).containsErrorMessages({
 				is_active: [
 					"is_active must be a boolean value"
@@ -256,7 +256,7 @@ describe('Category Validator', () => {
 
 	// METHODS
 	describe('Methods', () => {
-		it('should print an error if changeName method receives an is invalid argument', () => {
+		it('should print an errors if changeName method receives an is invalid argument', () => {
 			const category = Category.create({ name: 'Movie' });
 			expect(() => category.changeName(null)).containsErrorMessages({
 				name: [
@@ -267,7 +267,7 @@ describe('Category Validator', () => {
 			});
 		});
 
-		it('should print an error if changeDescription method receives an is invalid argument', () => {
+		it('should print an errors if changeDescription method receives an is invalid argument', () => {
 			const category = Category.create({ name: 'Movie' });
 			expect(() => category.changeDescription(null)).containsErrorMessages({
 				description: [

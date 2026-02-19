@@ -3,10 +3,10 @@ import {InvalidUuidError, Uuid} from "../uuid.vo";
 import {jest} from "@jest/globals";
 
 describe('UUID Unit Tests', () => {
-	// @ts-expect-error validate-is-a-private-method
+	// @ts-expect-errors validate-is-a-private-method
 	const validateSpy = jest.spyOn(Uuid.prototype, 'validate');
 
-	it('should throw an error when uuid is invalid', () => {
+	it('should throw an errors when uuid is invalid', () => {
 		expect(() => {
 			new Uuid('invalid-uuid');
 		}).toThrowError(new InvalidUuidError());
