@@ -1,5 +1,7 @@
 import {Entity} from "@/@shared/domain/entity";
 import {ValueObject} from "@/@shared/domain/value_object";
+import {SearchParams} from "@/@shared/domain/repository/search_params";
+import {SearchResult} from "@/@shared/domain/repository/search_result";
 
 export interface IRepository<
 	E extends Entity,
@@ -14,4 +16,14 @@ export interface IRepository<
 	findAll(): Promise<E[]>;
 
 	getEntity(): new (...args: any[]) => E;
+}
+
+export interface ISearchableRepository<
+	E extends Entity,
+	Id extends ValueObject,
+	SearchInput = SearchParams,
+	SearchOutput = SearchResult,
+> extends IRepository<E, Id> {
+	sortableFields: string[];
+	search(props: SearchInput): Promise<SearchOutput>;
 }
