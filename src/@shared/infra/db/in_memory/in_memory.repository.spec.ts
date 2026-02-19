@@ -1,4 +1,4 @@
-import {InMemoryRepository} from "@/@shared/db/in_memory/in_memory.repository";
+import {InMemoryRepository} from "@/@shared/infra/db/in_memory/in_memory.repository";
 import {Entity} from "@/@shared/domain/entity";
 import {Uuid} from "@/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@/@shared/domain/errors/not_found.error";
