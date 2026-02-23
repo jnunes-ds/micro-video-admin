@@ -21,7 +21,8 @@ export interface IRepository<
 export interface ISearchableRepository<
 	E extends Entity,
 	Id extends ValueObject,
-	SearchInput = SearchParams,
+	Filter = string,
+	SearchInput = SearchParams<Filter>,
 	SearchOutput = SearchResult,
 > extends IRepository<E, Id> {
 	sortableFields: string[];
