@@ -1,7 +1,9 @@
-import {IRepository} from "@/@shared/domain/repository/repository_interface";
+import {IRepository, ISearchableRepository} from "@/@shared/domain/repository/repository_interface";
 import {Entity} from "@/@shared/domain/entity";
 import {ValueObject} from "@/@shared/domain/value_object";
 import {NotFoundError} from "@/@shared/domain/errors/not_found.error";
+import {SearchResult} from "@/@shared/domain/repository/search_result";
+import {SearchParams, SortDirection} from "@/@shared/domain/repository/search_params";
 
 export abstract class InMemoryRepository<
 	E extends Entity,
@@ -45,4 +47,68 @@ export abstract class InMemoryRepository<
 	}
 
 	abstract getEntity(): new (...args: any[]) => E;
+}
+
+export abstract class InMemorySearchableRepository<
+	E extends Entity,
+	Id extends ValueObject,
+	Filter = string
+> extends InMemoryRepository<E, Id>
+	implements ISearchableRepository<E, Id, Filter>
+{
+	sortableFields: string[] = [];
+	async search(props: SearchParams<Filter>): Promise<SearchResult<E>> {
+		const filteredItems = await this.applyFilter(this.items, props.filter);
+		const sortedItems = this.applySort(
+			filteredItems,
+			props.sort,
+			props.sort_dir
+		);
+		const paginaterItems = this.applyPaginate(
+			sortedItems,
+			props.page,
+			props.per_page
+		);
+		return new SearchResult({
+			items: paginaterItems,
+			total: filteredItems.length,
+			current_page: props.page,
+			per_page: props.per_page
+		});
+	};
+
+	protected abstract applyFilter(items: E[], filter: Filter | null): Promise<E[]>;
+
+	protected  applyPaginate(items: E[], page: SearchParams['page'], per_page: SearchParams['per_page']): E[] {
+		const start = (page - 1) * per_page;
+		const limit = start + per_page;
+		return items.slice(start, limit);
+	}
+
+	protected applySort(
+		items: E[],
+		sort: string | null,
+		sort_dir: SortDirection | null,
+		custom_getter?: (sort: string, item: E) => any
+	): E[] {
+		if (!sort || this.sortableFields.includes(sort)) {
+			return items;
+		}
+
+		// @ts-ignore
+		return [...items].sort((a, b) => {
+		// @ts-ignore
+			const aValue = custom_getter ? custom_getter(sort, a) : a[sort];
+		// @ts-ignore
+			const bValue = custom_getter ? custom_getter(sort, b) : b[sort];
+			if (aValue < bValue) {
+				return sort_dir === 'asc' ? -1 : 1;
+			}
+			if (aValue > bValue) {
+				return sort_dir === 'asc' ? 1 : -1;
+			}
+
+			return 0;
+		});
+	}
 }
