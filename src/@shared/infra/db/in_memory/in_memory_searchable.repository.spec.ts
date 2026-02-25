@@ -58,7 +58,7 @@ describe('InMemorySearchableRepository Unit Tests', () => {
 	beforeEach(() => (repository = new StubInMemorySearchableRepository()));
 
 	describe('applyFilter method', () => {
-		it('[IT] should no filter items when filter params is null', async () => {
+		it('should no filter items when filter params is null', async () => {
 			const items = [new StubEntity({name: 'name value', price: 5})];
 			const spyFilterMethod = jest.spyOn(items, 'filter');
 			const itemsFiltered = await repository['applyFilter'](items, null);
@@ -66,7 +66,7 @@ describe('InMemorySearchableRepository Unit Tests', () => {
 			expect(spyFilterMethod).not.toHaveBeenCalled();
 		});
 
-		it('[IT] should filter using a filter param', async () => {
+		it('should filter using a filter param', async () => {
 			const items = [
 				new StubEntity({name: 'test', price: 5}),
 				new StubEntity({name: 'TEST', price: 5}),

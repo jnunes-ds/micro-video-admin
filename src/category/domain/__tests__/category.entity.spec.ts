@@ -8,7 +8,7 @@ describe('Category Unit Tests', () => {
 		validateSpy = jest.spyOn(Category, 'validate');
 	});
 
-	it('[IT] should change name', () => {
+	it('should change name', () => {
 		const category = new Category({
 			name: 'Movie'
 		});
@@ -16,7 +16,7 @@ describe('Category Unit Tests', () => {
 		expect(category.name).toBe('Series');
 	});
 
-	it('[IT] should change description', () => {
+	it('should change description', () => {
 		const category = new Category({
 			name: 'Movie',
 			description: 'Movie description'
@@ -26,7 +26,7 @@ describe('Category Unit Tests', () => {
 		expect(category.description).toBe('Documentary');
 	});
 
-	it('[IT] should activate the category', () => {
+	it('should activate the category', () => {
 		const category = new Category({
 			name: 'Movie'
 		});
@@ -35,7 +35,7 @@ describe('Category Unit Tests', () => {
 		expect(category.is_active).toBeTruthy();
 	});
 
-	it('[IT] should deactivate the category ', () => {
+	it('should deactivate the category ', () => {
 		const category = new Category({
 			name: 'Movie',
 			is_active: true
@@ -46,7 +46,7 @@ describe('Category Unit Tests', () => {
 		expect(category.is_active).toBeFalsy();
 	});
 
-	it('[IT] should returns all category info with a JSON format', () => {
+	it('should returns all category info with a JSON format', () => {
 		const created_at = new Date();
 		const category = new Category({
 			name: 'Movie',
@@ -75,7 +75,7 @@ describe('Category Unit Tests', () => {
 	});
 
 	describe('Constructor', () => {
-		it('[IT] should create a category with default values', () => {
+		it('should create a category with default values', () => {
 			const category = new Category({
 				name: 'Movie'
 			});
@@ -86,7 +86,7 @@ describe('Category Unit Tests', () => {
 			expect(category.created_at).toBeInstanceOf(Date);
 		});
 
-		it('[IT] should create a cetegory with description', () => {
+		it('should create a cetegory with description', () => {
 			const category = new Category({
 				name: 'Movie',
 				description: 'Movie description'
@@ -99,7 +99,7 @@ describe('Category Unit Tests', () => {
 			expect(category.created_at).toBeInstanceOf(Date);
 		});
 
-		it('[IT] should create a category with active property true', () => {
+		it('should create a category with active property true', () => {
 			const category = new Category({
 				name: 'Movie',
 				is_active: true
@@ -111,7 +111,7 @@ describe('Category Unit Tests', () => {
 			expect(category.created_at).toBeInstanceOf(Date);
 		});
 
-		it('[IT] should create a category with active property false', () => {
+		it('should create a category with active property false', () => {
 			const category = new Category({
 				name: 'Movie',
 				is_active: false
@@ -123,7 +123,7 @@ describe('Category Unit Tests', () => {
 			expect(category.created_at).toBeInstanceOf(Date);
 		});
 
-		it('[IT] should create a category with specific created_at info', () => {
+		it('should create a category with specific created_at info', () => {
 			const created_at = new Date();
 			const category = new Category({
 				name: 'Movie',
@@ -136,7 +136,7 @@ describe('Category Unit Tests', () => {
 			expect(category.created_at).toBe(created_at);
 		});
 
-		it('[IT] should create a category with all specific values', () => {
+		it('should create a category with all specific values', () => {
 			const created_at = new Date();
 			const category = new Category({
 				name: 'Movie',
@@ -153,7 +153,7 @@ describe('Category Unit Tests', () => {
 	});
 
 	describe('Create Command', () => {
-		it('[IT] should create a category', () => {
+		it('should create a category', () => {
 			const category = Category.create({
 				name: 'Movie'
 			});
@@ -166,7 +166,7 @@ describe('Category Unit Tests', () => {
 			expect(validateSpy).toBeCalledTimes(1);
 		});
 
-		it('[IT] should create a cetegory with description', () => {
+		it('should create a cetegory with description', () => {
 			const category = Category.create({
 				name: 'Movie',
 				description: 'Movie description'
@@ -180,7 +180,7 @@ describe('Category Unit Tests', () => {
 			expect(validateSpy).toBeCalledTimes(1);
 		});
 
-		it('[IT] should create a category with active property true', () => {
+		it('should create a category with active property true', () => {
 			const category = Category.create({
 				name: 'Movie',
 				is_active: true
@@ -193,7 +193,7 @@ describe('Category Unit Tests', () => {
 			expect(validateSpy).toBeCalledTimes(1);
 		});
 
-		it('[IT] should create a category with active property false', () => {
+		it('should create a category with active property false', () => {
 			const category = Category.create({
 				name: 'Movie',
 				is_active: false
@@ -210,7 +210,7 @@ describe('Category Unit Tests', () => {
 
 describe('Category Validator', () => {
 	describe('Create command', () => {
-		it('[IT] should print an errors if name is invalid', () => {
+		it('should print an errors if name is invalid', () => {
 			expect(() => Category.create({ name: null })).containsErrorMessages({
 				name: [
 					"name should not be empty",
@@ -237,7 +237,7 @@ describe('Category Validator', () => {
 			});
 		});
 
-		it('[IT] should print an errors if description is invalid', () => {
+		it('should print an errors if description is invalid', () => {
 			expect(() => Category.create({ name: 'Movie', description: 8 as any })).containsErrorMessages({
 				description: [
 					"description must be a string"
@@ -245,7 +245,7 @@ describe('Category Validator', () => {
 			});
 		});
 
-		it('[IT] should print an errors if is_active is invalid', () => {
+		it('should print an errors if is_active is invalid', () => {
 			expect(() => Category.create({ name: 'Movie', is_active: 'false' as any })).containsErrorMessages({
 				is_active: [
 					"is_active must be a boolean value"
@@ -256,7 +256,7 @@ describe('Category Validator', () => {
 
 	// METHODS
 	describe('Methods', () => {
-		it('[IT] should print an errors if changeName method receives an is invalid argument', () => {
+		it('should print an errors if changeName method receives an is invalid argument', () => {
 			const category = Category.create({ name: 'Movie' });
 			expect(() => category.changeName(null)).containsErrorMessages({
 				name: [
@@ -267,7 +267,7 @@ describe('Category Validator', () => {
 			});
 		});
 
-		it('[IT] should print an errors if changeDescription method receives an is invalid argument', () => {
+		it('should print an errors if changeDescription method receives an is invalid argument', () => {
 			const category = Category.create({ name: 'Movie' });
 			expect(() => category.changeDescription(null)).containsErrorMessages({
 				description: [

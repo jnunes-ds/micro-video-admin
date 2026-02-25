@@ -1,7 +1,7 @@
 import {SearchResult} from "@/@shared/domain/repository/search_result";
 
 describe('SearchResult Unit Test', () => {
-	test('[TEST] constructor props', () => {
+	test('constructor props', () => {
 		let result = new SearchResult({
 			items: ['entity1', 'entity2'] as any,
 			total: 4,
@@ -48,7 +48,7 @@ describe('SearchResult Unit Test', () => {
 		});
 	});
 
-	test('[TEST] last_page prop when total is not a multiple of per_page', () => {
+	test('last_page prop when total is not a multiple of per_page', () => {
 		const result = new SearchResult({
 			items: [] as any,
 			total: 101,
@@ -59,7 +59,7 @@ describe('SearchResult Unit Test', () => {
 		expect(result.last_page).toBe(6);
 	});
 
-	it('[IT] should force toJSON on items', () => {
+	it('should force toJSON on items', () => {
 		const item = {
 			toJSON: () => ({ id: '1', name: 'test' })
 		};

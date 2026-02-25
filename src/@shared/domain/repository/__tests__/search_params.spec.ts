@@ -1,7 +1,7 @@
 import {SearchParams} from "@/@shared/domain/repository/search_params";
 
 describe('SearchParams Unit Tests', () => {
-	test('[TEST] page prop', () => {
+	test('page prop', () => {
 		const params = new SearchParams();
 		expect(params.page).toBe(1);
 
@@ -25,7 +25,7 @@ describe('SearchParams Unit Tests', () => {
 		});
 	});
 
-	test('[TEST] per_page prop', () => {
+	test('per_page prop', () => {
 		const params = new SearchParams();
 		expect(params.per_page).toBe(15);
 
@@ -50,7 +50,7 @@ describe('SearchParams Unit Tests', () => {
 		});
 	});
 
-	test('[TEST] sort prop', () => {
+	test('sort prop', () => {
 		const params = new SearchParams();
 		expect(params.sort).toBeNull();
 
@@ -72,7 +72,7 @@ describe('SearchParams Unit Tests', () => {
 		});
 	});
 
-	test('[TEST] sort_dir prop', () => {
+	test('sort_dir prop', () => {
 		let params = new SearchParams();
 		expect(params.sort_dir).toBeNull();
 
@@ -102,7 +102,7 @@ describe('SearchParams Unit Tests', () => {
 		});
 	});
 
-	test('[TEST] filter prop', () => {
+	test('filter prop', () => {
 		const params = new SearchParams();
 		expect(params.filter).toBeNull();
 
