@@ -7,7 +7,6 @@ describe('Category Unit Tests', () => {
 	beforeEach(() => {
 		validateSpy = jest.spyOn(Category, 'validate');
 	});
-
 	it('should change name', () => {
 		const category = new Category({
 			name: 'Movie'
