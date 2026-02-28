@@ -8,37 +8,27 @@ describe('Category Unit Tests', () => {
 		validateSpy = jest.spyOn(Category, 'validate');
 	});
 	it('should change name', () => {
-		const category = new Category({
-			name: 'Movie'
-		});
+		const category = Category.fake().aCategory().build();
 		category.changeName('Series');
 		expect(category.name).toBe('Series');
 	});
 
 	it('should change description', () => {
-		const category = new Category({
-			name: 'Movie',
-			description: 'Movie description'
-		});
+		const category = Category.fake().aCategory().build()
 
 		category.changeDescription('Documentary');
 		expect(category.description).toBe('Documentary');
 	});
 
 	it('should activate the category', () => {
-		const category = new Category({
-			name: 'Movie'
-		});
+		const category = Category.fake().aCategory().build()
 
 		category.activate();
 		expect(category.is_active).toBeTruthy();
 	});
 
 	it('should deactivate the category ', () => {
-		const category = new Category({
-			name: 'Movie',
-			is_active: true
-		});
+		const category = Category.fake().aCategory().build()
 
 		expect(category.is_active).toBeTruthy();
 		category.deactivate();
@@ -47,12 +37,12 @@ describe('Category Unit Tests', () => {
 
 	it('should returns all category info with a JSON format', () => {
 		const created_at = new Date();
-		const category = new Category({
-			name: 'Movie',
-			description: 'Movie description',
-			is_active: false,
-			created_at
-		});
+		const category = Category.fake().aCategory()
+			.withName('Movie')
+			.withDescription('Movie description')
+			.deactivate()
+			.build();
+
 		expect(category.toJSON()).toStrictEqual({
 			category_id: category.category_id.id,
 			name: 'Movie',
@@ -65,19 +55,19 @@ describe('Category Unit Tests', () => {
 	describe('category_id field', () => {
 		const arrange: {category_id: Uuid}[] = [{category_id: null as never}, {category_id: undefined as never}, {category_id: new Uuid()}];
 		test.each(arrange)('id = %j', ({category_id}) => {
-			const category = new Category({
-				name: 'Movie',
-				category_id
-			});
+			const category = Category.fake().aCategory().withUuid(category_id).build();
 			expect(category.category_id).toBeInstanceOf(Uuid);
 		});
 	});
 
 	describe('Constructor', () => {
 		it('should create a category with default values', () => {
-			const category = new Category({
-				name: 'Movie'
-			});
+			const category = Category.fake()
+				.aCategory()
+				.withName('Movie')
+				.withDescription(null)
+				.build();
+
 			expect(category.category_id).toBeInstanceOf(Uuid);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
@@ -86,10 +76,11 @@ describe('Category Unit Tests', () => {
 		});
 
 		it('should create a cetegory with description', () => {
-			const category = new Category({
-				name: 'Movie',
-				description: 'Movie description'
-			});
+			const category = Category.fake()
+				.aCategory()
+				.withName('Movie')
+				.withDescription('Movie description')
+				.build();
 
 			expect(category.category_id).toBeInstanceOf(Uuid);
 			expect(category.name).toBe('Movie');
@@ -99,10 +90,13 @@ describe('Category Unit Tests', () => {
 		});
 
 		it('should create a category with active property true', () => {
-			const category = new Category({
-				name: 'Movie',
-				is_active: true
-			});
+			const category = Category.fake()
+				.aCategory()
+				.withName('Movie')
+				.withDescription(null)
+				.activate()
+				.build();
+
 			expect(category.category_id).toBeInstanceOf(Uuid);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
@@ -111,10 +105,13 @@ describe('Category Unit Tests', () => {
 		});
 
 		it('should create a category with active property false', () => {
-			const category = new Category({
-				name: 'Movie',
-				is_active: false
-			});
+			const category = Category.fake()
+				.aCategory()
+				.withName('Movie')
+				.withDescription(null)
+				.deactivate()
+				.build();
+
 			expect(category.category_id).toBeInstanceOf(Uuid);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
@@ -124,10 +121,14 @@ describe('Category Unit Tests', () => {
 
 		it('should create a category with specific created_at info', () => {
 			const created_at = new Date();
-			const category = new Category({
-				name: 'Movie',
-				created_at
-			});
+			const category = Category.fake()
+				.aCategory()
+				.withName('Movie')
+				.withDescription(null)
+				.activate()
+				.withCreatedAt(created_at)
+				.build();
+
 			expect(category.category_id).toBeInstanceOf(Uuid);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
@@ -153,9 +154,12 @@ describe('Category Unit Tests', () => {
 
 	describe('Create Command', () => {
 		it('should create a category', () => {
-			const category = Category.create({
-				name: 'Movie'
-			});
+			const category = Category.fake()
+				.aCategory()
+				.withName('Movie')
+				.withDescription(null)
+				.activate()
+				.build();
 
 			expect(category.category_id).toBeInstanceOf(Uuid);
 			expect(category.name).toBe('Movie');
@@ -166,10 +170,12 @@ describe('Category Unit Tests', () => {
 		});
 
 		it('should create a cetegory with description', () => {
-			const category = Category.create({
-				name: 'Movie',
-				description: 'Movie description'
-			});
+			const category = Category.fake()
+				.aCategory()
+				.withName('Movie')
+				.withDescription('Movie description')
+				.activate()
+				.build();
 
 			expect(category.category_id).toBeInstanceOf(Uuid);
 			expect(category.name).toBe('Movie');
@@ -180,10 +186,13 @@ describe('Category Unit Tests', () => {
 		});
 
 		it('should create a category with active property true', () => {
-			const category = Category.create({
-				name: 'Movie',
-				is_active: true
-			});
+			const category = Category.fake()
+				.aCategory()
+				.withName('Movie')
+				.withDescription(null)
+				.activate()
+				.build();
+
 			expect(category.category_id).toBeInstanceOf(Uuid);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
@@ -208,28 +217,27 @@ describe('Category Unit Tests', () => {
 });
 
 describe('Category Validator', () => {
-	describe('Create command', () => {
 		it('should print an errors if name is invalid', () => {
-			expect(() => Category.create({ name: null })).containsErrorMessages({
+			expect(() => Category.fake().aCategory().withName(null).build()).containsErrorMessages({
 				name: [
 					"name should not be empty",
 					"name must be a string",
 					"name must be shorter than or equal to 255 characters"
 				]
 			});
-			expect(() => Category.create({ name: '' })).containsErrorMessages({
+			expect(() => Category.fake().aCategory().withName('').build()).containsErrorMessages({
 				name: [
 					"name should not be empty",
 				]
 			});
 
-			expect(() => Category.create({ name: false as any })).containsErrorMessages({
+			expect(() => Category.fake().aCategory().withName(false as any).build()).containsErrorMessages({
 				name: [
 					"name must be a string",
 					"name must be shorter than or equal to 255 characters"
 				]
 			});
-			expect(() => Category.create({ name: 'n'.repeat(256) })).containsErrorMessages({
+			expect(() => Category.fake().aCategory().withInvalidNameTooLong()).containsErrorMessages({
 				name: [
 					"name must be shorter than or equal to 255 characters"
 				]
@@ -237,7 +245,7 @@ describe('Category Validator', () => {
 		});
 
 		it('should print an errors if description is invalid', () => {
-			expect(() => Category.create({ name: 'Movie', description: 8 as any })).containsErrorMessages({
+			expect(() => Category.fake().aCategory().withDescription(1 as any).build()).containsErrorMessages({
 				description: [
 					"description must be a string"
 				]
@@ -245,7 +253,8 @@ describe('Category Validator', () => {
 		});
 
 		it('should print an errors if is_active is invalid', () => {
-			expect(() => Category.create({ name: 'Movie', is_active: 'false' as any })).containsErrorMessages({
+			const category = Category.fake().aCategory().activate().build()
+			expect(() => category['is_active'] = 8 as any).containsErrorMessages({
 				is_active: [
 					"is_active must be a boolean value"
 				]
@@ -256,7 +265,7 @@ describe('Category Validator', () => {
 	// METHODS
 	describe('Methods', () => {
 		it('should print an errors if changeName method receives an is invalid argument', () => {
-			const category = Category.create({ name: 'Movie' });
+			const category = Category.fake().aCategory().withInvalidNameTooLong('Movie').build()
 			expect(() => category.changeName(null)).containsErrorMessages({
 				name: [
 					"name should not be empty",
@@ -267,12 +276,11 @@ describe('Category Validator', () => {
 		});
 
 		it('should print an errors if changeDescription method receives an is invalid argument', () => {
-			const category = Category.create({ name: 'Movie' });
+			const category = Category.fake().aCategory().withName('Movie').build();
 			expect(() => category.changeDescription(null)).containsErrorMessages({
 				description: [
 					"name must be a string"
 				]
-			});
 		});
 	});
 });
