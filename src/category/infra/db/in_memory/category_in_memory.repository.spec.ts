@@ -1,4 +1,4 @@
-import {CategoryInMemoryRepository} from "@/category/infra/db/category_in_memory.repository";
+import {CategoryInMemoryRepository} from "@/category/infra/db/in_memory/category_in_memory.repository";
 import {Category} from "@/category/domain/category.entity";
 
 describe('CategoryInMemoryRepository Unit Test', () => {
