@@ -1,7 +1,7 @@
 import {Column, DataType, Model, PrimaryKey, Table} from "sequelize-typescript";
 
 export type CategoryModelProps = {
-	id: string;
+	category_id: string;
 	name: string;
 	description: string | null;
 	is_active: boolean;
