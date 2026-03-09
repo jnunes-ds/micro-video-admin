@@ -5,7 +5,7 @@ import {CategoryModel} from "@/category/infra/db/sequelize/category.model";
 import {NotFoundError} from "@/@shared/domain/errors/not_found.error";
 import {CategorySearchParams, CategorySearchResult} from "@/category/domain/category.repository";
 import {Op} from "sequelize";
-import {CategoryModelMapper} from "@/category/infra/db/sequelize/category_mapper";
+import {CategoryModelMapper} from "@/category/infra/db/sequelize/category_model_mapper";
 
 export class CategorySequelizeRepository implements ISearchableRepository<Category, Uuid> {
 	sortableFields: string[] = ['name', 'created_at'];
