@@ -1,11 +1,13 @@
 import {DataType, Sequelize} from "sequelize-typescript";
 import {CategoryModel} from "@/category/infra/db/sequelize/category.model";
+import {Config} from "@/@shared/infra/config";
 
 describe('CategoryModel Integration Test', () => {
 	let sequelize: Sequelize;
 	const force: boolean = true;
 
 	beforeEach(async () => {
+		console.log(Config.db());
 		sequelize = new Sequelize({
 			dialect: 'sqlite',
 			storage: ':memory:',

@@ -85,13 +85,7 @@ export class CategorySequelizeRepository implements ISearchableRepository<Catego
 		});
 
 		return new CategorySearchResult({
-			items: models.map(model => new Category({
-				category_id: new Uuid(model.category_id),
-				name: model.name,
-				description: model.description,
-				is_active: model.is_active,
-				created_at: model.created_at,
-			})),
+			items: models.map(CategoryModelMapper.toEntity),
 			current_page: props.page,
 			per_page: props.per_page,
 			total: count
