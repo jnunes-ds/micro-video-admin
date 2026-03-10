@@ -1,4 +1,3 @@
-import {Sequelize} from "sequelize-typescript";
 import {CategoryModel} from "../category.model";
 import {CategorySequelizeRepository} from "@/category/infra/db/sequelize/category-sequelize.repository";
 import {Category} from "@/category/domain/category.entity";
@@ -6,21 +5,15 @@ import {Uuid} from "@/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@/@shared/domain/errors/not_found.error";
 import {CategoryModelMapper} from "@/category/infra/db/sequelize/category_model_mapper";
 import {CategorySearchParams, CategorySearchResult} from "@/category/domain/category.repository";
+import {setupSequelize} from "@/@shared/infra/testing/helpers";
 
 describe('CategorySequelizeRepository Integration Test', () => {
-	let sequelize: Sequelize;
+	setupSequelize({
+		models: [CategoryModel]
+	});
 	let repository: CategorySequelizeRepository;
-	const force: boolean = true;
 
 	beforeEach(async () => {
-		sequelize = new Sequelize({
-			dialect: 'sqlite',
-			storage: ':memory:',
-			logging: false,
-			models: [CategoryModel]
-		});
-
-		await sequelize.sync({force});
 		repository = new CategorySequelizeRepository(CategoryModel);
 	});
 
@@ -215,7 +208,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 						per_page: 2,
 						sort: 'name'
 					}),
-					resuld: new CategorySearchResult({
+					result: new CategorySearchResult({
 						items: [categories[1], categories[0]],
 						total: 5,
 						current_page: 1,
@@ -228,7 +221,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 						per_page: 2,
 						sort: 'name'
 					}),
-					resuld: new CategorySearchResult({
+					result: new CategorySearchResult({
 						items: [categories[4], categories[2]],
 						total: 5,
 						current_page: 2,
@@ -242,7 +235,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 						sort: 'name',
 						sort_dir: 'desc'
 					}),
-					resuld: new CategorySearchResult({
+					result: new CategorySearchResult({
 						items: [categories[3], categories[2]],
 						total: 5,
 						current_page: 1,
@@ -256,7 +249,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 						sort: 'name',
 						sort_dir: 'desc'
 					}),
-					resuld: new CategorySearchResult({
+					result: new CategorySearchResult({
 						items: [categories[4], categories[0]],
 						total: 5,
 						current_page: 2,
@@ -267,7 +260,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 
 			for (const i of arrange) {
 				const result = await repository.search(i.params);
-				expect(result.toJSON(true)).toMatchObject(i.resuld.toJSON(true));
+				expect(result.toJSON(true)).toMatchObject(i.result.toJSON(true));
 			}
 		});
 
