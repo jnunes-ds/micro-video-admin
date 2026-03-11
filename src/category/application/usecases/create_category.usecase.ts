@@ -1,6 +1,7 @@
 import {IUseCase} from "@/@shared/application/usecase.interface";
 import {Category} from "@/category/domain/category.entity";
 import {ICategoryRepository} from "@/category/domain/category.repository";
+import {CategoryOutput, CategoryOutputMapper} from "@/category/application/usecases/common/category_output";
 
 export class CreatecategoryUsecase
 	implements IUseCase<CreateCategoryInput, CreateCategoryOutput> {
@@ -12,13 +13,7 @@ export class CreatecategoryUsecase
 
 		this.categoryRepository.insert(entity);
 
-		return {
-			id: entity.category_id.id,
-			name: entity.name,
-			description: entity.description,
-			is_active: entity.is_active,
-			created_at: entity.created_at,
-		}
+		return CategoryOutputMapper.toOutput(entity);
 	}
 }
 
@@ -28,10 +23,4 @@ export type CreateCategoryInput = {
 	is_active?: boolean;
 }
 
-export type CreateCategoryOutput = {
-	id: string;
-	name: string;
-	description?: string | null;
-	is_active?: boolean;
-	created_at: Date;
-}
+export type CreateCategoryOutput = CategoryOutput
