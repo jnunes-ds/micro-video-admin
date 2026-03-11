@@ -1,4 +1,4 @@
-import {UpdateCategoryUseCase} from "@/category/application/update_category.usecase";
+import {UpdateCategoryUseCase} from "@/category/application/usecases/update_category.usecase";
 import {CategoryInMemoryRepository} from "@/category/infra/db/in_memory/category_in_memory.repository";
 import {InvalidUuidError, Uuid} from "@/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@/@shared/domain/errors/not_found.error";

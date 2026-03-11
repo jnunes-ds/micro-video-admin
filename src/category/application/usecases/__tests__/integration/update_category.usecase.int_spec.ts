@@ -1,4 +1,4 @@
-import {UpdateCategoryUseCase} from "@/category/application/update_category.usecase";
+import {UpdateCategoryUseCase} from "@/category/application/usecases/update_category.usecase";
 import {Uuid} from "@/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@/@shared/domain/errors/not_found.error";
 import {Category} from "@/category/domain/category.entity";
