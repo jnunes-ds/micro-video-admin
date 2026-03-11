@@ -14,6 +14,7 @@ export interface ICategoryRepository
 	extends ISearchableRepository<
 		Category,
 		Uuid,
+		CategoryFilter,
 		CategorySearchParams,
 		CategorySearchResult
 	> {}

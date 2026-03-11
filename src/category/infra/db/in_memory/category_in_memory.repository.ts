@@ -2,9 +2,13 @@ import {InMemorySearchableRepository} from "@/@shared/infra/db/in_memory/in_memo
 import {Category} from "@/category/domain/category.entity";
 import {Uuid} from "@/@shared/domain/value_objects/uuid.vo";
 import {SortDirection} from "@/@shared/domain/repository/search_params";
-import {CategoryFilter, ICategoryRepository} from "@/category/domain/category.repository";
+import {
+	CategoryFilter,
+	ICategoryRepository,
+	CategorySearchParams,
+	CategorySearchResult
+} from "@/category/domain/category.repository";
 
-// @ts-expect-error
 export class CategoryInMemoryRepository
 	extends InMemorySearchableRepository<Category, Uuid>
 	implements ICategoryRepository
@@ -41,4 +45,13 @@ export class CategoryInMemoryRepository
 			: super.applySort(items, 'created_at', 'desc');
 	}
 
+	async search(props: CategorySearchParams): Promise<CategorySearchResult> {
+		const result = await super.search(props);
+		return new CategorySearchResult({
+			items: result.items,
+			total: result.total,
+			current_page: props.page,
+			per_page: props.per_page,
+		});
+	}
 }
