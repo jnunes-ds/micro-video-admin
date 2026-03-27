@@ -2,7 +2,7 @@ import {CategoryInMemoryRepository} from "@/category/infra/db/in_memory/category
 import {InvalidUuidError, Uuid} from "@/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@/@shared/domain/errors/not_found.error";
 import {Category} from "@/category/domain/category.entity";
-import {DeleteCategoryUsecase} from "@/category/application/usecases/delete_category.usecase";
+import {DeleteCategoryUsecase} from "@/category/application/usecases/delete_category/delete_category.usecase";
 
 describe('DeleteCategoryUsecase Unit Tests', () => {
 	let usecase: DeleteCategoryUsecase;

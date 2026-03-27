@@ -1,23 +1,23 @@
-import {UpdateCategoryUseCase} from "@/category/application/usecases/update_category.usecase";
-import {Uuid} from "@/@shared/domain/value_objects/uuid.vo";
+import {UpdateCategoryUseCase} from "@/category/application/usecases/update_category/update_category.usecase";
+import {CategoryInMemoryRepository} from "@/category/infra/db/in_memory/category_in_memory.repository";
+import {InvalidUuidError, Uuid} from "@/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@/@shared/domain/errors/not_found.error";
 import {Category} from "@/category/domain/category.entity";
-import {CategorySequelizeRepository} from "@/category/infra/db/sequelize/category-sequelize.repository";
-import {CategoryModel} from "@/category/infra/db/sequelize/category.model";
-import {setupSequelize} from "@/@shared/infra/testing/helpers";
 
-describe('UpdateCategoryUsecase Integration Tests', () => {
+describe('UpdateCategoryUsecase Unit Tests', () => {
 	let usecase: UpdateCategoryUseCase;
-	let repository: CategorySequelizeRepository;
-
-	setupSequelize({models: [CategoryModel]});
+	let repository: CategoryInMemoryRepository;
 
 	beforeEach(() => {
-		repository = new CategorySequelizeRepository(CategoryModel);
+		repository = new CategoryInMemoryRepository();
 		usecase = new UpdateCategoryUseCase(repository);
 	});
 
 	it('should throws an error when entity is not found', async () => {
+		await expect(
+			() => usecase.execute({id: 'fake id', name: 'fake'})
+		).rejects.toThrow(new InvalidUuidError());
+
 		const uuid = new Uuid();
 
 		await expect(
@@ -32,7 +32,7 @@ describe('UpdateCategoryUsecase Integration Tests', () => {
 			.withName('Movie')
 			.withDescription(null)
 			.build();
-		repository.insert(entity);
+		repository.items = [entity];
 
 		let output = await usecase.execute({
 			id: entity.category_id.id,
@@ -129,21 +129,13 @@ describe('UpdateCategoryUsecase Integration Tests', () => {
 				...("description" in i.input && { description: i.input.description }),
 				...("is_active" in i.input && { is_active: i.input.is_active }),
 			});
-			const entityUpdated = await repository.findById(new Uuid(i.input.id));
+
 			expect(output).toStrictEqual({
 				id: i.expected.id,
 				name: i.expected.name,
 				description: i.expected.description,
 				is_active: i.expected.is_active,
-				created_at: entityUpdated.created_at,
-			});
-
-			expect(entityUpdated.toJSON()).toStrictEqual({
-				category_id: entity.category_id.id,
-				name: i.expected.name,
-				description: i.expected.description,
-				is_active: i.expected.is_active,
-				created_at: entityUpdated.created_at,
+				created_at: i.expected.created_at,
 			});
 		}
 	});

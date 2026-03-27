@@ -1,5 +1,5 @@
 import {CategoryInMemoryRepository} from "@/category/infra/db/in_memory/category_in_memory.repository";
-import {ListCategoriesUseCase} from "@/category/application/usecases/list_categories.usecase";
+import {ListCategoriesUseCase} from "@/category/application/usecases/list_categories/list_categories.usecase";
 import {CategorySearchResult} from "@/category/domain/category.repository";
 import {Category} from "@/category/domain/category.entity";
 import {CategoryOutputMapper} from "@/category/application/usecases/common/category_output";

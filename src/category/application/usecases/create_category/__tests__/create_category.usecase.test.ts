@@ -1,4 +1,4 @@
-import {CreateCategoryInput, CreatecategoryUsecase} from "@/category/application/usecases/create_category.usecase";
+import {CreateCategoryInput, CreatecategoryUsecase} from "@/category/application/usecases/create_category/create_category.usecase";
 import {setupSequelize} from "@/@shared/infra/testing/helpers";
 import {CategoryModel} from "@/category/infra/db/sequelize/category.model";
 import {CategorySequelizeRepository} from "@/category/infra/db/sequelize/category-sequelize.repository";

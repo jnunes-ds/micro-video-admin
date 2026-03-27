@@ -1,23 +1,23 @@
-import {CategoryInMemoryRepository} from "@/category/infra/db/in_memory/category_in_memory.repository";
-import {GetCategoryUsecase} from "@/category/application/usecases/get_category.usecase";
-import {InvalidUuidError, Uuid} from "@/@shared/domain/value_objects/uuid.vo";
+import {GetCategoryUsecase} from "@/category/application/usecases/get_category/get_category.usecase";
+import {Uuid} from "@/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@/@shared/domain/errors/not_found.error";
 import {Category} from "@/category/domain/category.entity";
+import {CategorySequelizeRepository} from "@/category/infra/db/sequelize/category-sequelize.repository";
+import {CategoryModel} from "@/category/infra/db/sequelize/category.model";
+import {setupSequelize} from "@/@shared/infra/testing/helpers";
 
-describe('GetCategoryUsecase Unit Tests', () => {
+describe('GetCategoryUsecase Integration Tests', () => {
 	let usecase: GetCategoryUsecase;
-	let repository: CategoryInMemoryRepository;
+	let repository: CategorySequelizeRepository;
+
+	setupSequelize({ models: [CategoryModel] });
 
 	beforeEach(() => {
-		repository = new CategoryInMemoryRepository();
+		repository = new CategorySequelizeRepository(CategoryModel);
 		usecase = new GetCategoryUsecase(repository);
 	});
 
 	it('should throws an error when entity is not found', async () => {
-		await expect(
-			() => usecase.execute({id: 'fake id'})
-		).rejects.toThrow(new InvalidUuidError());
-
 		const uuid = new Uuid();
 
 		await expect(
@@ -30,7 +30,7 @@ describe('GetCategoryUsecase Unit Tests', () => {
 			.theCategories(11)
 			.withName(index => `name-${index + 1}`)
 			.build();
-		repository.items = items;
+		repository.bulkInsert(items);
 
 		const spy = jest.spyOn(repository, 'findById');
 		const seventhItemId = items[6].category_id.id;
