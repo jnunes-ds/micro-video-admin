@@ -32,6 +32,7 @@ export const validationSchema = z.object({
 });
 
 type ValidationSchemaType = z.infer<typeof validationSchema>;
+export type CONFIG_SCHEMA_TYPE = ValidationSchemaType;
 
 @Module({})
 export class ConfigModule extends NestConfigModule {
