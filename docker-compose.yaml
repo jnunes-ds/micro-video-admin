@@ -7,3 +7,13 @@ services:
       - 3000:3000
     volumes:
       - .:/home/node/app
+  db:
+    image: mysql:8.0.30-debian
+    platform: linux/amd64
+    environment:
+      - MYSQL_DATABASE=micro_videos
+      - MYSQL_ROOT_PASSWORD=root
+    tmpfs:
+      - /var/lib/mysql
+    security_opt:
+      - seccomp:unconfined
