@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { join } from 'path';
-import {ConfigModule, validationSchema} from "@/config/config.module";
+import {ConfigModule, validationSchema} from "@/nest-modules/config/config.module";
 
 function expectValidate(schema: any, value: any, key?: string) {
 	const result = schema.safeParse(value);

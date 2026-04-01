@@ -1,6 +1,6 @@
-import {CONFIG_SCHEMA_TYPE, ConfigModule} from "@/config/config.module";
+import {CONFIG_SCHEMA_TYPE, ConfigModule} from "@/nest-modules/config/config.module";
 import {Test} from "@nestjs/testing";
-import {DatabaseModule} from "@/database/database.module";
+import {DatabaseModule} from "@/nest-modules/database/database.module";
 import {Sequelize} from "sequelize-typescript";
 import {getConnectionToken} from "@nestjs/sequelize";
 
