@@ -7,7 +7,7 @@ import {Category} from "@core/category/domain/category.entity";
 import {CategoryOutput, CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
 
 
-export class UpdateCategoryUseCase
+export class UpdateCategoryUsecase
 	implements IUseCase<UpdateCategoryInput, UpdateCategoryOutput>{
 	constructor(private categoryRepo: ICategoryRepository) {}
 

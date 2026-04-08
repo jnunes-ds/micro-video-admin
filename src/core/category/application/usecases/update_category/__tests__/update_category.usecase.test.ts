@@ -1,4 +1,4 @@
-import {UpdateCategoryUseCase} from "@core/category/application/usecases/update_category/update_category.usecase";
+import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_category/update_category.usecase";
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
@@ -8,14 +8,14 @@ import {Category} from "@core/category/domain/category.entity";
 
 
 describe('UpdateCategoryUsecase Integration Tests', () => {
-	let usecase: UpdateCategoryUseCase;
+	let usecase: UpdateCategoryUsecase;
 	let repository: CategorySequelizeRepository;
 
 	setupSequelize({models: [CategoryModel]});
 
 	beforeEach(() => {
 		repository = new CategorySequelizeRepository(CategoryModel);
-		usecase = new UpdateCategoryUseCase(repository);
+		usecase = new UpdateCategoryUsecase(repository);
 	});
 
 	it('should throws an error when entity is not found', async () => {

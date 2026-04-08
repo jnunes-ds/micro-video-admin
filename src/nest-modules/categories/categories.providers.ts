@@ -5,8 +5,8 @@ import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {getModelToken} from "@nestjs/sequelize";
 import {CreatecategoryUsecase} from "@core/category/application/usecases/create_category/create_category.usecase";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
-import {UpdateCategoryUseCase} from "@core/category/application/usecases/update_category/update_category.usecase";
-import {ListCategoriesUseCase} from "@core/category/application/usecases/list_categories/list_categories.usecase";
+import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_category/update_category.usecase";
+import {ListCategoriesUsecase} from "@core/category/application/usecases/list_categories/list_categories.usecase";
 import {GetCategoryUsecase} from "@core/category/application/usecases/get_category/get_category.usecase";
 import {DeleteCategoryUsecase} from "@core/category/application/usecases/delete_category/delete_category.usecase";
 
@@ -55,13 +55,13 @@ export const USE_CASES: Usecases = {
 		inject: [REPOSITORIES.CATEGORY_REPOSITORY['provide']]
 	},
 	UPDATE_CATEGORY_USE_CASE: {
-		provide: UpdateCategoryUseCase,
-		useFactory: (categoryRepo: ICategoryRepository) => new UpdateCategoryUseCase(categoryRepo),
+		provide: UpdateCategoryUsecase,
+		useFactory: (categoryRepo: ICategoryRepository) => new UpdateCategoryUsecase(categoryRepo),
 		inject: [REPOSITORIES.CATEGORY_REPOSITORY['provide']]
 	},
 	LIST_CATEGORIES_USE_CASE: {
-		provide: ListCategoriesUseCase,
-		useFactory: (categoryRepo: ICategoryRepository) => new ListCategoriesUseCase(categoryRepo),
+		provide: ListCategoriesUsecase,
+		useFactory: (categoryRepo: ICategoryRepository) => new ListCategoriesUsecase(categoryRepo),
 		inject: [REPOSITORIES.CATEGORY_REPOSITORY['provide']]
 	},
 	GET_CATEGORY_USE_CASE: {
