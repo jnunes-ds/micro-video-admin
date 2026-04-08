@@ -38,7 +38,7 @@ export const REPOSITORIES: Repositories = {
 	}
 }
 
-enum UseCasesEnum  {
+enum UseCasesKeysEnum  {
 	CREATE_CATEGORY_USE_CASE = 'CREATE_CATEGORY_USE_CASE',
 	UPDATE_CATEGORY_USE_CASE = 'UPDATE_CATEGORY_USE_CASE',
 	LIST_CATEGORIES_USE_CASE = 'LIST_CATEGORIES_USE_CASE',
@@ -46,7 +46,7 @@ enum UseCasesEnum  {
 	DELETE_CATEGORY_USE_CASE = 'DELETE_CATEGORY_USE_CASE'
 }
 
-type Usecases = Providers<UseCasesEnum>;
+type Usecases = Providers<UseCasesKeysEnum>;
 
 export const USE_CASES: Usecases = {
 	CREATE_CATEGORY_USE_CASE: {
