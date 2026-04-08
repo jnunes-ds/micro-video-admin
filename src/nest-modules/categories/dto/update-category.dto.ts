@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateCategoryDto } from './create-category.dto';
+import {UpdateCategoryInput} from "@core/category/application/usecases/update_category/update_category.input";
+import {OmitType} from "@nestjs/mapped-types";
 
-export class UpdateCategoryDto extends PartialType(CreateCategoryDto) {}
+export class UpdateCategoryInputWithoutId extends OmitType(UpdateCategoryInput, ['id']) {}
+
+export class UpdateCategoryDto extends UpdateCategoryInputWithoutId {}
