@@ -7,8 +7,8 @@ import {
   Param,
   Delete,
   Inject,
-  ParseUUIDPipe,
   HttpCode,
+  ParseUUIDPipe,
   HttpStatus
 } from '@nestjs/common';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -51,8 +51,9 @@ export class CategoriesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-
+  async findOne(@Param('id', new ParseUUIDPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})) id: string) {
+    const output = await this.getUsecase.execute({id});
+    return CategoriesController.serialize(output);
   }
 
   @Patch(':id')
