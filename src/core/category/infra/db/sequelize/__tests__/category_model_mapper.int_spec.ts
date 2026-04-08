@@ -30,7 +30,7 @@ describe('CategoryModelMapper Integration Test', () => {
 		}
 	});
 
-	it('should convert a category model into a category entity', () => {
+	it('should convert a category class into a category entity', () => {
 		const category_id = '850704d1-806c-4a35-81c2-e535f36a07ae';
 		const name = 'Movie';
 		const description = 'some description';
@@ -58,7 +58,7 @@ describe('CategoryModelMapper Integration Test', () => {
 		)
 	});
 
-	it('should convert a category entity into a category model', () => {
+	it('should convert a category entity into a category class', () => {
 		const category_id = '850704d1-806c-4a35-81c2-e535f36a07ae';
 		const name = 'Movie';
 		const description = 'some description';
