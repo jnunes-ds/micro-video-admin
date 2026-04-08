@@ -1,11 +1,11 @@
 import {Controller, Get, Post, Body, Patch, Param, Delete, Inject} from '@nestjs/common';
-import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import {CreatecategoryUsecase} from "@core/category/application/usecases/create_category/create_category.usecase";
 import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_category/update_category.usecase";
 import {DeleteCategoryUsecase} from "@core/category/application/usecases/delete_category/delete_category.usecase";
 import {GetCategoryUsecase} from "@core/category/application/usecases/get_category/get_category.usecase";
 import {ListCategoriesUsecase} from "@core/category/application/usecases/list_categories/list_categories.usecase";
+import {CreateCategoryDto} from "@/nest-modules/categories/dto/create-category.dto";
 
 @Controller('categories')
 export class CategoriesController {
@@ -27,7 +27,7 @@ export class CategoriesController {
 
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto) {
-
+    this.createUsecase.execute(createCategoryDto);
   }
 
   @Get()
