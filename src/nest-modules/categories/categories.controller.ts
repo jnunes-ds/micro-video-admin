@@ -1,4 +1,16 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, Inject, ParseUUIDPipe} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Inject,
+  ParseUUIDPipe,
+  HttpCode,
+  HttpStatus
+} from '@nestjs/common';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import {CreatecategoryUsecase} from "@core/category/application/usecases/create_category/create_category.usecase";
 import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_category/update_category.usecase";
@@ -45,16 +57,17 @@ export class CategoriesController {
 
   @Patch(':id')
   async update(
-    @Param('id', new ParseUUIDPipe({errorHttpStatusCode: 422})) id: string,
+    @Param('id', new ParseUUIDPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})) id: string,
     @Body() updateCategoryDto: UpdateCategoryDto
   ) {
     const output = await this.updateUsecase.execute({id, ...updateCategoryDto});
     return CategoriesController.serialize(output);
   }
 
+  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-
+  async remove(@Param('id', new ParseUUIDPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})) id: string) {
+    await this.deleteUsecase.execute({id});
   }
 
   private static serialize(output: CategoryOutput): CategoryPresenter {
