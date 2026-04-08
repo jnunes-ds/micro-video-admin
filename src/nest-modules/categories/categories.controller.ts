@@ -9,17 +9,20 @@ import {
   Inject,
   HttpCode,
   ParseUUIDPipe,
-  HttpStatus
+  HttpStatus, Query
 } from '@nestjs/common';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import {CreatecategoryUsecase} from "@core/category/application/usecases/create_category/create_category.usecase";
 import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_category/update_category.usecase";
 import {DeleteCategoryUsecase} from "@core/category/application/usecases/delete_category/delete_category.usecase";
 import {GetCategoryUsecase} from "@core/category/application/usecases/get_category/get_category.usecase";
-import {ListCategoriesUsecase} from "@core/category/application/usecases/list_categories/list_categories.usecase";
+import {
+  ListCategoriesUsecase
+} from "@core/category/application/usecases/list_categories/list_categories.usecase";
 import {CreateCategoryDto} from "@/nest-modules/categories/dto/create-category.dto";
-import {CategoryPresenter} from "@/nest-modules/categories/categories.presenter";
+import {CategoryCollectionPresenter, CategoryPresenter} from "@/nest-modules/categories/categories.presenter";
 import {CategoryOutput} from "@core/category/application/usecases/common/category_output";
+import {SearchCategoriesDto} from "@/nest-modules/categories/dto/search_categories.dto";
 
 @Controller('categories')
 export class CategoriesController {
@@ -46,8 +49,9 @@ export class CategoriesController {
   }
 
   @Get()
-  findAll() {
-
+  async search(@Query() searchParamsDto: SearchCategoriesDto) {
+    const output = await this.listUsecase.execute(searchParamsDto);
+    return new CategoryCollectionPresenter(output);
   }
 
   @Get(':id')
