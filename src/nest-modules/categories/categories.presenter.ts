@@ -5,6 +5,8 @@ import {
 } from "@core/category/application/usecases/list_categories/list_categories.usecase";
 import {CollectionPresenter} from "@/shared/collection.presenter";
 
+type CategoryCollectionPresenterParams = Omit<ListCategoriesOutput, 'last_page' | 'total'>;
+
 export class CategoryPresenter {
 	id: string;
 	name: string;
@@ -25,10 +27,13 @@ export class CategoryPresenter {
 export class CategoryCollectionPresenter extends CollectionPresenter {
 	data: CategoryPresenter[];
 
-	constructor(output: ListCategoriesOutput) {
+	constructor(output: CategoryCollectionPresenterParams) {
 		const {items, ...paginationProps} = output;
-		super(paginationProps);
-
+		super({
+			...paginationProps,
+			last_page: Math.ceil(items.length / paginationProps.per_page),
+			total: items.length,
+		});
 		this.data = items.map(item => new CategoryPresenter(item));
 	}
 }
