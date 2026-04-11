@@ -1,6 +1,6 @@
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
-import {Provider} from "@nestjs/common/interfaces/modules/provider.interface";
+import {Provider} from "@nestjs/common";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {getModelToken} from "@nestjs/sequelize";
 import {CreatecategoryUsecase} from "@core/category/application/usecases/create_category/create_category.usecase";
@@ -10,9 +10,12 @@ import {ListCategoriesUsecase} from "@core/category/application/usecases/list_ca
 import {GetCategoryUsecase} from "@core/category/application/usecases/get_category/get_category.usecase";
 import {DeleteCategoryUsecase} from "@core/category/application/usecases/delete_category/delete_category.usecase";
 
+export type ObjectProvider = Exclude<Provider, Function | string | symbol>;
+
 type Providers<T extends string> = {
-	[key in T]: Provider;
+	[key in T]: ObjectProvider;
 };
+
 
 enum RepositoriesKeysEnum {
 	CATEGORY_REPOSITORY = 'CATEGORY_REPOSITORY',
@@ -29,14 +32,14 @@ export const REPOSITORIES: Repositories = {
 	},
 	CATEGORY_IN_MEMORY_REPOSITORY: {
 		provide: CategoryInMemoryRepository,
-		useClass: CategorySequelizeRepository
+		useClass: CategoryInMemoryRepository
 	},
 	CATEGORY_SEQUELIZE_REPOSITORY: {
 		provide: CategorySequelizeRepository,
 		useFactory: (categoryModel: typeof CategoryModel) => new CategorySequelizeRepository(categoryModel),
 		inject: [getModelToken(CategoryModel)]
 	}
-}
+};
 
 enum UseCasesKeysEnum  {
 	CREATE_CATEGORY_USE_CASE = 'CREATE_CATEGORY_USE_CASE',
@@ -74,7 +77,7 @@ export const USE_CASES: Usecases = {
 		useFactory: (categoryRepo: ICategoryRepository) => new DeleteCategoryUsecase(categoryRepo),
 		inject: [REPOSITORIES.CATEGORY_REPOSITORY['provide']]
 	}
-}
+};
 
 export const CATEGORY_PROVIDERS = {
 	REPOSITORIES,
