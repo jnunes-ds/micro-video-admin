@@ -15,7 +15,7 @@ import {CategoryPresenter, CategoryCollectionPresenter} from "@/nest-modules/cat
 //   controller = module.get<CategoriesController>(CategoriesController);
 // });
 
-describe('CategoriesController Unit Tests', () => {
+describe('CategoriesController Integration Tests', () => {
   let controller: CategoriesController;
 
   beforeEach(async () => {
