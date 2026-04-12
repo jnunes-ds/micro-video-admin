@@ -20,7 +20,7 @@ export class UpdateCategoryUsecase
 		}
 
 		if (input.name) category.changeName(input.name);
-		if (input.description) category.changeDescription(input.description);
+		if (input.description !== undefined) category.changeDescription(input.description);
 		if (input.is_active) category.activate();
 		if (input.is_active === false) category.deactivate();
 
