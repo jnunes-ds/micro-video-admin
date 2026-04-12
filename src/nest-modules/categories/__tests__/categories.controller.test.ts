@@ -10,8 +10,12 @@ import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_
 import {DeleteCategoryUsecase} from "@core/category/application/usecases/delete_category/delete_category.usecase";
 import {GetCategoryUsecase} from "@core/category/application/usecases/get_category/get_category.usecase";
 import {ListCategoriesUsecase} from "@core/category/application/usecases/list_categories/list_categories.usecase";
-import {CreateCategoryFixture, UpdateCategoryFixture} from "@/nest-modules/categories/testing/category_fixture";
-import {CategoryPresenter} from "@/nest-modules/categories/categories.presenter";
+import {
+	CreateCategoryFixture,
+	ListCategoriesFixture,
+	UpdateCategoryFixture
+} from "@/nest-modules/categories/testing/category_fixture";
+import {CategoryCollectionPresenter, CategoryPresenter} from "@/nest-modules/categories/categories.presenter";
 import {CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
 import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {Category} from "@core/category/domain/category.entity";
@@ -83,5 +87,65 @@ describe('CategoriesController Integration Tests', () => {
 			const output = CategoryOutputMapper.toOutput(entity);
 			expect(presenter).toEqual(new CategoryPresenter(output));
 		})
+	});
+
+	test('category deletion', async () => {
+		const category = Category.fake().aCategory().build();
+		await repository.insert(category);
+		const response = await controller.remove(category.category_id.id);
+		expect(response).not.toBeDefined();
+		await expect(repository.findById(category.category_id)).resolves.toBeNull();
+	});
+
+	test('if we can get a category', async () => {
+		const category = Category.fake().aCategory().build();
+		await repository.insert(category);
+		const presenter = await controller.findOne(category.category_id.id);
+
+		expect(presenter.id).toBe(category.category_id.id);
+		expect(presenter.name).toBe(category.name);
+		expect(presenter.description).toBe(category.description);
+		expect(presenter.is_active).toBe(category.is_active);
+		expect(presenter.created_at).toStrictEqual(category.created_at);
+	});
+
+	describe('search method', () => {
+		describe('should sort categories by created_at', () => {
+			const {arrange, entitiesMap} = ListCategoriesFixture.arrangeIncrementedWithCreatedAt();
+
+			beforeEach(async () => {
+				await repository.bulkInsert(Object.values(entitiesMap));
+			});
+
+			test.each(arrange)('when send_data is $send_data', async ({expected, send_data}) => {
+				const presenter = await controller.search(send_data);
+				const {entities, meta} = expected;
+				expect(presenter).toEqual(
+					new CategoryCollectionPresenter({
+						items: entities.map(CategoryOutputMapper.toOutput),
+						...meta
+					})
+				);
+			});
+		});
+
+		describe('should return categories using pagination, sort and filter', () => {
+			const {arrange, entitiesMap} = ListCategoriesFixture.arrangeUnsorted();
+
+			beforeEach(async () => {
+				await repository.bulkInsert(Object.values(entitiesMap));
+			});
+
+			test.each(arrange)('when send_data is $send_data', async ({expected, send_data}) => {
+				const presenter = await controller.search(send_data);
+				const {entities, meta} = expected;
+				expect(presenter).toEqual(
+					new CategoryCollectionPresenter({
+						items: entities.map(CategoryOutputMapper.toOutput),
+						...meta
+					})
+				);
+			});
+		});
 	});
 });
