@@ -1,4 +1,4 @@
-import {PaginationPresenter} from "@/shared/pagination.presenter";
+import {PaginationPresenter} from "@/nest-modules/shared/pagination.presenter";
 import {instanceToPlain} from "class-transformer";
 
 describe('PaginationPresenter unit Tests', () => {

@@ -1,4 +1,4 @@
-import {PaginationPresenter, PaginationPresenterProps} from "@/shared/pagination.presenter";
+import {PaginationPresenter, PaginationPresenterProps} from "@/nest-modules/shared/pagination.presenter";
 import {Exclude, Expose} from "class-transformer";
 
 export abstract class CollectionPresenter {

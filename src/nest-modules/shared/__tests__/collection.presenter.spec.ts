@@ -1,5 +1,5 @@
-import {CollectionPresenter} from "@/shared/collection.presenter";
-import {PaginationPresenter} from "@/shared/pagination.presenter";
+import {CollectionPresenter} from "@/nest-modules/shared/collection.presenter";
+import {PaginationPresenter} from "@/nest-modules/shared/pagination.presenter";
 import {instanceToPlain} from "class-transformer";
 
 class StubCollectionPresenter extends CollectionPresenter {

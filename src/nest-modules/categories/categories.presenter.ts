@@ -3,7 +3,7 @@ import {Transform} from "class-transformer";
 import {
 	ListCategoriesOutput
 } from "@core/category/application/usecases/list_categories/list_categories.usecase";
-import {CollectionPresenter} from "@/shared/collection.presenter";
+import {CollectionPresenter} from "@/nest-modules/shared/collection.presenter";
 
 type CategoryCollectionPresenterParams = Omit<ListCategoriesOutput, 'last_page' | 'total'>;
 
