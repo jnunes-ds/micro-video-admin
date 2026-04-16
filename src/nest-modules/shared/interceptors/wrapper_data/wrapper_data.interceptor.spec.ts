@@ -1,7 +1,7 @@
-import { WrapperDataInterceptor } from './wrapper-data.interceptor';
+import { WrapperDataInterceptor } from './wrapper_data.interceptor.service';
 import {of, lastValueFrom} from "rxjs";
 
-describe('WrapperDataInterceptor', () => {
+describe('Wrapper_dataInterceptor', () => {
   let interceptor: WrapperDataInterceptor;
 
   beforeEach(() => {

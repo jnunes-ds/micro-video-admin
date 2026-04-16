@@ -1,8 +1,8 @@
 import {NestFactory, Reflector} from '@nestjs/core';
 import {AppModule} from './app.module';
 import {ClassSerializerInterceptor, HttpStatus, ValidationPipe} from "@nestjs/common";
-import {WrapperDataInterceptor} from "@/nest-modules/shared/interceptors/wrapper-data/wrapper-data.interceptor";
 import {NotFoundFilter} from "@/nest-modules/shared/not_found/not_found.filter";
+import {WrapperDataInterceptor} from "@/nest-modules/shared/interceptors/wrapper_data/wrapper_data.interceptor.service";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
