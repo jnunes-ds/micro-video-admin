@@ -3,7 +3,7 @@ import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {Response} from 'express';
 
 @Catch()
-export class NotFoundFilter<T> implements ExceptionFilter {
+export class NotFoundErrorFilter<T> implements ExceptionFilter {
   catch(exception: NotFoundError, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response: Response = ctx.getResponse();
