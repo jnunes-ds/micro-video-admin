@@ -2,7 +2,7 @@ import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {Response} from 'express';
 
-@Catch()
+@Catch(NotFoundError)
 export class NotFoundErrorFilter<T> implements ExceptionFilter {
   catch(exception: NotFoundError, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
