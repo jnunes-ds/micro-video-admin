@@ -6,6 +6,7 @@ import {ListCategoriesFixture} from "@/nest-modules/categories/testing/category_
 import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers";
 import {CategoriesController} from "@/nest-modules/categories/categories.controller";
 import {CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
+import {HttpStatus} from "@nestjs/common";
 
 describe('CategoriesController (e2e)', () => {
 	describe('/categories (GET)', () => {
@@ -28,7 +29,7 @@ describe('CategoriesController (e2e)', () => {
 					const queryParams = new URLSearchParams(send_data as any).toString();
 					return request(nestApp.app.getHttpServer())
 						.get(`/categories/?${queryParams}`)
-						.expect(200)
+						.expect(HttpStatus.OK)
 						.expect({
 							data: expected.entities.map((e) =>
 								instanceToPlain(
@@ -61,7 +62,7 @@ describe('CategoriesController (e2e)', () => {
 					const queryParams = new URLSearchParams(send_data as any).toString();
 					return request(nestApp.app.getHttpServer())
 						.get(`/categories/?${queryParams}`)
-						.expect(200)
+						.expect(HttpStatus.OK)
 						.expect({
 							data: expected.entities.map((e) =>
 								instanceToPlain(

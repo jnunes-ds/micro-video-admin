@@ -1,12 +1,13 @@
 import request from 'supertest';
-import { instanceToPlain } from 'class-transformer';
-import { ICategoryRepository } from '@/core/category/domain/category.repository';
-import { CategoryOutputMapper } from '@/core/category/application/usecases/common/category_output';
+import {instanceToPlain} from 'class-transformer';
+import {ICategoryRepository} from '@/core/category/domain/category.repository';
+import {CategoryOutputMapper} from '@/core/category/application/usecases/common/category_output';
 import {startApp} from "@/nest-modules/shared/testing/helpers/start_app.helper";
 import {Category} from "@core/category/domain/category.entity";
 import {GetCategoryFixture} from "@/nest-modules/categories/testing/category_fixture";
 import {CategoriesController} from "@/nest-modules/categories/categories.controller";
 import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers";
+import {HttpStatus} from "@nestjs/common";
 
 describe('CategoriesController (e2e)', () => {
 	const nestApp = startApp();
@@ -18,14 +19,14 @@ describe('CategoriesController (e2e)', () => {
 					expected: {
 						message:
 							'Category Not found using ID 88ff2587-ce5a-4769-a8c6-1d63d29c5f7a',
-						statusCode: 404,
+						statusCode: HttpStatus.NOT_FOUND,
 						error: 'Not Found',
 					},
 				},
 				{
 					id: 'fake id',
 					expected: {
-						statusCode: 422,
+						statusCode: HttpStatus.UNPROCESSABLE_ENTITY,
 						message: 'Validation failed (uuid is expected)',
 						error: 'Unprocessable Entity',
 					},
@@ -49,7 +50,7 @@ describe('CategoriesController (e2e)', () => {
 
 			const res = await request(nestApp.app.getHttpServer())
 				.get(`/categories/${category.category_id.id}`)
-				.expect(200);
+				.expect(HttpStatus.OK);
 			const keyInResponse = GetCategoryFixture.keysInResponse;
 			expect(Object.keys(res.body)).toStrictEqual(['data']);
 			expect(Object.keys(res.body.data)).toStrictEqual(keyInResponse);
