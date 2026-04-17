@@ -76,7 +76,7 @@ export class CategoriesController {
     await this.deleteUsecase.execute({id});
   }
 
-  private static serialize(output: CategoryOutput): CategoryPresenter {
+  public static serialize(output: CategoryOutput): CategoryPresenter {
     return new CategoryPresenter(output);
   }
 }
