@@ -51,7 +51,7 @@ describe('CategoriesController (e2e)', () => {
 				})
 			)
 
-			test.each(arrange)('when body is $label', ({ value }) => {
+			test.each(arrange)('when label is $label', ({ value }) => {
 				return request(appHelper.app.getHttpServer())
 					.post('/categories')
 					.send(value.send_data)
