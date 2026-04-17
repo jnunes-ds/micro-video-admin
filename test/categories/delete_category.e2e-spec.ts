@@ -3,6 +3,7 @@ import { ICategoryRepository } from '@/core/category/domain/category.repository'
 import {startApp} from "@/nest-modules/shared/testing/helpers/start_app.helper";
 import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers";
 import {Category} from "@core/category/domain/category.entity";
+import {HttpStatus} from "@nestjs/common";
 
 describe('CategoriesController (e2e)', () => {
 	describe('/delete/:id (DELETE)', () => {
@@ -45,7 +46,7 @@ describe('CategoriesController (e2e)', () => {
 
 			await request(appHelper.app.getHttpServer())
 				.delete(`/categories/${category.category_id.id}`)
-				.expect(204);
+				.expect(HttpStatus.NO_CONTENT);
 
 			await expect(
 				categoryRepo.findById(category.category_id),
