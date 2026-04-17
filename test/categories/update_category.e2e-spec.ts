@@ -8,6 +8,7 @@ import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers
 import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {CategoriesController} from "@/nest-modules/categories/categories.controller";
 import {CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
+import {HttpStatus} from "@nestjs/common";
 
 describe('CategoriesController (e2e)', () => {
 	const uuid = '9366b7dc-2d71-4799-b91c-c64adb205104';
@@ -61,7 +62,7 @@ describe('CategoriesController (e2e)', () => {
 				return request(app.app.getHttpServer())
 					.patch(`/categories/${uuid}`)
 					.send(value.send_data)
-					.expect(422)
+					.expect(HttpStatus.UNPROCESSABLE_ENTITY)
 					.expect(value.expected);
 			});
 		});
@@ -87,7 +88,7 @@ describe('CategoriesController (e2e)', () => {
 				return request(app.app.getHttpServer())
 					.patch(`/categories/${category.category_id.id}`)
 					.send(value.send_data)
-					.expect(422)
+					.expect(HttpStatus.UNPROCESSABLE_ENTITY)
 					.expect(value.expected);
 			});
 		});
@@ -111,7 +112,7 @@ describe('CategoriesController (e2e)', () => {
 					const res = await request(appHelper.app.getHttpServer())
 						.patch(`/categories/${categoryCreated.category_id.id}`)
 						.send(send_data)
-						.expect(200);
+						.expect(HttpStatus.OK);
 					const keyInResponse = UpdateCategoryFixture.keysInResponse;
 					expect(Object.keys(res.body)).toStrictEqual(['data']);
 					expect(Object.keys(res.body.data)).toStrictEqual(keyInResponse);
