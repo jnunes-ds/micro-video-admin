@@ -1,26 +1,15 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
-import {INestApplication} from "@nestjs/common";
-import {AppModule} from "@/app.module";
 import {CreateCategoryFixture} from "@/nest-modules/categories/testing/category_fixture";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers";
-import {applyGlobalConfig} from "@/nest-modules/global_config";
+import {startApp} from "@/nest-modules/shared/testing/helpers/start_app.helper";
 
 describe('CategoriesController (e2e)', () => {
-	let app: INestApplication;
+	const appHelper = startApp();
 	let categoryRepo: ICategoryRepository;
 
 	beforeEach(async () => {
-		const moduleFixture: TestingModule = await Test.createTestingModule({
-			imports: [AppModule],
-		}).compile();
-
-		app = moduleFixture.createNestApplication();
-		applyGlobalConfig(app);
-		await app.init();
-
-		categoryRepo = app.get<ICategoryRepository>(
+		categoryRepo = appHelper.app.get<ICategoryRepository>(
 			CATEGORY_PROVIDERS.REPOSITORIES.CATEGORY_REPOSITORY.provide
 		);
 	});
@@ -29,7 +18,7 @@ describe('CategoriesController (e2e)', () => {
 		const arrange = CreateCategoryFixture.arrangeForCreate();
 
 		test.each(arrange)('when body is $send_data', async ({ send_data }) => {
-			const res = await request(app.getHttpServer())
+			const res = await request(appHelper.app.getHttpServer())
 				.post('/categories')
 				.send(send_data)
 				.expect(201);
