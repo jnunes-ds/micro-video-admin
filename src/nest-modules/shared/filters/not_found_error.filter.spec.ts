@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 import {Entity} from "@core/@shared/domain/entity";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {NotFoundErrorFilter} from "@/nest-modules/shared/not_found/not_found_error.filter";
+import {NotFoundErrorFilter} from "@/nest-modules/shared/filters/not_found_error.filter";
 
 class StubEntity extends Entity {
   entity_id: any;
