@@ -68,7 +68,7 @@ describe('CategoriesController (e2e)', () => {
 				const res = await request(appHelper.app.getHttpServer())
 					.post('/categories')
 					.send(send_data)
-					.expect(201);
+					.expect(HttpStatus.CREATED);
 
 				const keysInReponse = CreateCategoryFixture.keysInResponse;
 				expect(Object.keys(res.body)).toStrictEqual(['data']);
