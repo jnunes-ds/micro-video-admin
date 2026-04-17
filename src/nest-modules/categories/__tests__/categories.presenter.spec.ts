@@ -43,6 +43,8 @@ describe('CategoriesPresenter Unit Tests', () => {
             items: [presenterOne, presenterTwo],
             current_page: 1,
             per_page: 2,
+            last_page: 1,
+            total: 2
         });
 
         const presenterPlain = instanceToPlain(collectionPresenter);

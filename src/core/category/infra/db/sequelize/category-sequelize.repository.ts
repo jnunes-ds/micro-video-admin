@@ -5,13 +5,23 @@ import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {CategoryModelMapper} from "@core/category/infra/db/sequelize/category_model_mapper";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {CategorySearchParams, CategorySearchResult} from "@core/category/domain/category.repository";
-import {Op} from "sequelize";
+import {Op, literal} from "sequelize";
 
 
 export class CategorySequelizeRepository implements ISearchableRepository<Category, Uuid> {
 	sortableFields: string[] = ['name', 'created_at'];
 
 	constructor(private categoryModel: typeof CategoryModel) {}
+
+	private formatSort(sort: string, sort_dir: string | null) {
+		const dialect = this.categoryModel.sequelize?.getDialect();
+		if (this.sortableFields.includes(sort)) {
+			return dialect === 'mysql'
+				? [[literal(`BINARY ${sort}`), sort_dir || 'asc']]
+				: [[sort, sort_dir || 'asc']];
+		}
+		return [['created_at', 'desc']];
+	}
 
 	async insert(entity: Category): Promise<void> {
 		const model = CategoryModelMapper.toModel(entity);
@@ -79,7 +89,7 @@ export class CategorySequelizeRepository implements ISearchableRepository<Catego
 				}
 			}),
 			...(props.sort && this.sortableFields.includes(props.sort)
-					? { order: [[props.sort, props.sort_dir]] }
+					? { order: this.formatSort(props.sort, props.sort_dir) }
 					: { order: [['created_at', 'desc']] }),
 			offset,
 			limit
