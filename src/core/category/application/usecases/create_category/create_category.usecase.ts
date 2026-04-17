@@ -17,7 +17,7 @@ export class CreatecategoryUsecase
 			throw new EntityValidationError(entity.notification.toJSON());
 		}
 
-		this.categoryRepository.insert(entity);
+		await this.categoryRepository.insert(entity);
 
 		return CategoryOutputMapper.toOutput(entity);
 	}
