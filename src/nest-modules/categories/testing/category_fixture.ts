@@ -1,4 +1,5 @@
 import {Category} from "@core/category/domain/category.entity";
+import {HttpStatus} from "@nestjs/common";
 
 const _keysInResponse = [
 	'id',
@@ -80,57 +81,73 @@ export class CreateCategoryFixture {
 	}
 
 	static arrangeForInvalidRequests() {
-		const faker = Category.fake()
-			.aCategory()
-			.withName('Movie')
-			.withDescription('test description');
-		return [
-			{
-				send_data: {
-					name: faker.name
-				},
-				expected: {
-					name: faker.name,
-					description: null,
-					is_active: true,
-				}
-			},
-			{
-				send_data: {
-					name: faker.name,
-					description: faker.description
-				},
-				expected: {
-					name: faker.name,
-					description: faker.description,
-					is_active: true,
-				}
-			},
-			{
-				send_data: {
-					name: faker.name,
-					is_active: false
-				},
-				expected: {
-					name: faker.name,
-					description: null,
-					is_active: false,
-				}
-			},
-			{
-				send_data: {
-					name: faker.name,
-					description: faker.description,
-					is_active: false
-				},
-				expected: {
-					name: faker.name,
-					description: faker.description,
-					is_active: false,
-				}
-			},
+		const defaultExpected = {
+			statusCode: 422,
+			error: 'Unprocessable Entity',
+		};
 
-		]
+		return {
+			EMPTY: {
+				send_data: {},
+				expected: {
+					message: ['name should not be empty', 'name must be a string'],
+					...defaultExpected,
+				},
+			},
+			NAME_UNDEFINED: {
+				send_data: {
+					name: undefined,
+				},
+				expected: {
+					message: ['name should not be empty', 'name must be a string'],
+					...defaultExpected,
+				},
+			},
+			NAME_NULL: {
+				send_data: {
+					name: null,
+				},
+				expected: {
+					message: ['name should not be empty', 'name must be a string'],
+					...defaultExpected,
+				},
+			},
+			NAME_EMPTY: {
+				send_data: {
+					name: '',
+				},
+				expected: {
+					message: ['name should not be empty'],
+					...defaultExpected,
+				},
+			},
+			DESCRIPTION_NOT_A_STRING: {
+				send_data: {
+					description: 5,
+				},
+				expected: {
+					message: [
+						'name should not be empty',
+						'name must be a string',
+						'description must be a string',
+					],
+					...defaultExpected,
+				},
+			},
+			IS_ACTIVE_NOT_A_BOOLEAN: {
+				send_data: {
+					is_active: 'a',
+				},
+				expected: {
+					message: [
+						'name should not be empty',
+						'name must be a string',
+						'is_active must be a boolean value',
+					],
+					...defaultExpected,
+				},
+			},
+		};
 	}
 
 	static arrangeInvalidRequest() {
