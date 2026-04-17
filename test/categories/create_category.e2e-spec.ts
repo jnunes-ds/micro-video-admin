@@ -3,6 +3,11 @@ import {CreateCategoryFixture} from "@/nest-modules/categories/testing/category_
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers";
 import {startApp} from "@/nest-modules/shared/testing/helpers/start_app.helper";
+import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
+import {CategoriesController} from "@/nest-modules/categories/categories.controller";
+import {CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
+import {instanceToPlain} from "class-transformer";
+import {HttpStatus} from "@nestjs/common";
 
 describe('CategoriesController (e2e)', () => {
 	const appHelper = startApp();
@@ -15,44 +20,74 @@ describe('CategoriesController (e2e)', () => {
 	});
 
 	describe('/categories (POST)', () => {
-		const arrange = CreateCategoryFixture.arrangeForCreate();
 
-		test.each(arrange)('when body is $send_data', async ({ send_data }) => {
-			const res = await request(appHelper.app.getHttpServer())
-				.post('/categories')
-				.send(send_data)
-				.expect(201);
+		describe('should return a response error with status code 422 when throw EntityValidationError', () => {
+			const invalidRequests = CreateCategoryFixture.arrangeForEntityValidationError();
 
-			const keysInReponse = CreateCategoryFixture.keysInResponse;
-			expect(Object.keys(res.body)).toStrictEqual(['data']);
-			expect(Object.keys(res.body.data)).toStrictEqual(keysInReponse);
+			const arrange = Object.keys(invalidRequests).map(
+				key => ({
+					label: key,
+					value: invalidRequests[key]
+				})
+			)
 
-			// const presenter = await controller.create(send_data);
-			// const entity = await categoryRepo.findById(new Uuid(presenter.id));
-			// expect(entity.toJSON()).toStrictEqual({
-			// 	category_id: presenter.id,
-			// 	created_at: presenter.created_at,
-			// 	...expected
-			// });
-			// const output = CategoryOutputMapper.toOutput(entity);
-			// expect(presenter).toEqual(new CategoryPresenter(output));
-		})
+			test.each(arrange)('when body is $label', ({ value }) => {
+				return request(appHelper.app.getHttpServer())
+					.post('/categories')
+					.send(value.send_data)
+					.expect(HttpStatus.UNPROCESSABLE_ENTITY)
+					.expect(value.expected);
+			});
+
+		});
+
+		describe('should return a response error with status code 422 when request body is invalid', () => {
+			const invalidRequests = CreateCategoryFixture.arrangeForInvalidRequests();
+
+			const arrange = Object.keys(invalidRequests).map(
+				key => ({
+					label: key,
+					value: invalidRequests[key]
+				})
+			)
+
+			test.each(arrange)('when body is $label', ({ value }) => {
+				return request(appHelper.app.getHttpServer())
+					.post('/categories')
+					.send(value.send_data)
+					.expect(HttpStatus.UNPROCESSABLE_ENTITY)
+					.expect(value.expected);
+			});
+
+		});
+
+		describe('should create a category', () => {
+			const arrange = CreateCategoryFixture.arrangeForCreate();
+
+			test.each(arrange)('when body is $send_data', async ({ send_data, expected }) => {
+				const res = await request(appHelper.app.getHttpServer())
+					.post('/categories')
+					.send(send_data)
+					.expect(201);
+
+				const keysInReponse = CreateCategoryFixture.keysInResponse;
+				expect(Object.keys(res.body)).toStrictEqual(['data']);
+				expect(Object.keys(res.body.data)).toStrictEqual(keysInReponse);
+				const id = res.body.data.id;
+				const createdCategory = await categoryRepo.findById(new Uuid(id));
+
+				const presenter = CategoriesController.serialize(
+					CategoryOutputMapper.toOutput(createdCategory)
+				);
+				const serialized = instanceToPlain(presenter);
+
+				expect(res.body.data).toStrictEqual({
+					id: serialized.id,
+					created_at: serialized.created_at,
+					...expected
+				});
+			})
+		});
+
 	});
-
-
-	// beforeEach(async () => {
-	// 	const moduleFixture: TestingModule = await Test.createTestingModule({
-	// 		imports: [AppModule],
-	// 	}).compile();
-	//
-	// 	app = moduleFixture.createNestApplication();
-	// 	await app.init();
-	// });
-	//
-	// it('/ (GET)', () => {
-	// 	return request(app.getHttpServer())
-	// 		.get('/')
-	// 		.expect(200)
-	// 		.expect('Hello World!');
-	// });
 });
