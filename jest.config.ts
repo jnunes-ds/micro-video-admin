@@ -191,12 +191,13 @@ const config: Config = {
       'shared/testing/',
       'validator.ts',
       '_fixture.ts',
+      '.int_spec.ts',
       '.input.ts',
       '.d.ts',
       'app.module.ts',
-      'main.ts'
+      'main.ts',
     ],
-  coverageThreshold: {
+    coverageThreshold: {
       global: {
         statements: 80,
         branches: 80,
