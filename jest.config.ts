@@ -185,6 +185,26 @@ const config: Config = {
       "**/*.(t|j)s"
     ],
     coverageDirectory: "../coverage",
+    coveragePathIgnorePatterns: [
+      '/node_modules/',
+      '.interface.ts',
+      'shared/testing/',
+      'validator.ts',
+      '_fixture.ts',
+      '.int_spec.ts',
+      '.input.ts',
+      '.d.ts',
+      'app.module.ts',
+      'main.ts',
+    ],
+    coverageThreshold: {
+      global: {
+        statements: 80,
+        branches: 80,
+        functions: 80,
+        lines: 80
+      }
+  },
     testEnvironment: "node",
     clearMocks: true,
     coverageProvider: "v8",
