@@ -1,4 +1,4 @@
-import {ListCategoriesUseCase} from "@core/category/application/usecases/list_categories/list_categories.usecase";
+import {ListCategoriesUsecase} from "@core/category/application/usecases/list_categories/list_categories.usecase";
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {CategorySearchResult} from "@core/category/domain/category.repository";
 import {Category} from "@core/category/domain/category.entity";
@@ -6,12 +6,12 @@ import {CategoryOutputMapper} from "@core/category/application/usecases/common/c
 
 
 describe('ListCategoriesUsecase Unit Tests', () => {
-	let usecase: ListCategoriesUseCase;
+	let usecase: ListCategoriesUsecase;
 	let repository: CategoryInMemoryRepository;
 
 	beforeEach(() => {
 		repository = new CategoryInMemoryRepository();
-		usecase = new ListCategoriesUseCase(repository);
+		usecase = new ListCategoriesUsecase(repository);
 	});
 
 	test('toOutput method', () => {

@@ -64,7 +64,7 @@ describe('Schema Unit Tests', () => {
 					'DB_DATABASE is required when DB_VENDOR is mysql',
 				);
 
-				expectValidate(schema, { DB_VENDOR: 'mysql' }, 'DB_DATABASE' ).toContain(
+				expectValidate(schema, { DB_VENDOR: 'mysql', DB_HOST: 'localhost', DB_AUTO_LOAD_MODELS: true }, 'DB_DATABASE' ).toContain(
 					'DB_DATABASE is required when DB_VENDOR is mysql',
 				);
 
@@ -92,7 +92,7 @@ describe('Schema Unit Tests', () => {
 					'DB_USERNAME is required when DB_VENDOR is mysql',
 				);
 
-				expectValidate(schema, { DB_VENDOR: 'mysql' }, 'DB_USERNAME').toContain(
+				expectValidate(schema, { DB_VENDOR: 'mysql', DB_HOST: 'localhost', DB_AUTO_LOAD_MODELS: true }, 'DB_USERNAME').toContain(
 					'DB_USERNAME is required when DB_VENDOR is mysql',
 				);
 
@@ -120,7 +120,7 @@ describe('Schema Unit Tests', () => {
 					'DB_PASSWORD is required when DB_VENDOR is mysql',
 				);
 
-				expectValidate(schema, { DB_VENDOR: 'mysql' }, 'DB_PASSWORD').toContain(
+				expectValidate(schema, { DB_VENDOR: 'mysql', DB_HOST: 'localhost', DB_AUTO_LOAD_MODELS: true }, 'DB_PASSWORD').toContain(
 					'DB_PASSWORD is required when DB_VENDOR is mysql',
 				);
 
@@ -148,7 +148,7 @@ describe('Schema Unit Tests', () => {
 					'DB_PORT is required when DB_VENDOR is mysql',
 				);
 
-				expectValidate(schema, { DB_VENDOR: 'mysql' }, 'DB_PORT').toContain(
+				expectValidate(schema, { DB_VENDOR: 'mysql', DB_HOST: 'localhost', DB_AUTO_LOAD_MODELS: true }, 'DB_PORT').toContain(
 					'DB_PORT is required when DB_VENDOR is mysql',
 				);
 

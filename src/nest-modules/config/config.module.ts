@@ -3,8 +3,7 @@ import {ConfigModule as NestConfigModule, ConfigModuleOptions} from '@nestjs/con
 import {join} from "path";
 import {z} from "zod";
 
-export const validationSchema = z.intersection(
-	z.object({
+export const validationSchema = z.object({
 		DB_VENDOR: z.string().superRefine((val, ctx) => {
 			if (val && val !== 'mysql' && val !== 'sqlite') {
 				ctx.addIssue({
@@ -38,13 +37,6 @@ export const validationSchema = z.intersection(
 				}
 			})
 			.transform(val => val === 'true' || val === true),
-	}),
-	z.object({
-		DB_VENDOR: z.any().optional(),
-		DB_DATABASE: z.any().optional(),
-		DB_USERNAME: z.any().optional(),
-		DB_PASSWORD: z.any().optional(),
-		DB_PORT: z.any().optional(),
 	}).superRefine((data, ctx) => {
 		if (!data.DB_VENDOR) {
 			ctx.addIssue({
@@ -66,9 +58,7 @@ export const validationSchema = z.intersection(
 				}
 			}
 		}
-		return z.NEVER;
-	})
-);
+	});
 
 type ValidationSchemaType = z.infer<typeof validationSchema>;
 export type CONFIG_SCHEMA_TYPE = ValidationSchemaType & { DB_VENDOR: 'mysql' | 'sqlite' };

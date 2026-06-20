@@ -10,7 +10,7 @@ import {PaginationOutput, PaginationOutputMapper} from "@core/@shared/applicatio
 import {SearchParamsConstructorProps} from "@core/@shared/domain/repository/search_params";
 
 
-export class ListCategoriesUseCase
+export class ListCategoriesUsecase
 	implements IUseCase<ListCategoriesInput, ListCategoriesOutput> {
 	constructor(private readonly repository: ICategoryRepository) {}
 

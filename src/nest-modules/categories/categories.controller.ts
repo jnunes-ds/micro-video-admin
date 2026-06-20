@@ -1,36 +1,82 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { CreateCategoryDto } from './dto/create-category.dto';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Inject,
+  HttpCode,
+  Query,
+  ParseUUIDPipe,
+  HttpStatus,
+} from '@nestjs/common';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
+import {CreatecategoryUsecase} from "@core/category/application/usecases/create_category/create_category.usecase";
+import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_category/update_category.usecase";
+import {DeleteCategoryUsecase} from "@core/category/application/usecases/delete_category/delete_category.usecase";
+import {GetCategoryUsecase} from "@core/category/application/usecases/get_category/get_category.usecase";
+import {
+  ListCategoriesUsecase
+} from "@core/category/application/usecases/list_categories/list_categories.usecase";
+import {CreateCategoryDto} from "@/nest-modules/categories/dto/create-category.dto";
+import {CategoryCollectionPresenter, CategoryPresenter} from "@/nest-modules/categories/categories.presenter";
+import {CategoryOutput} from "@core/category/application/usecases/common/category_output";
+import {SearchCategoriesDto} from "@/nest-modules/categories/dto/search_categories.dto";
 
 @Controller('categories')
 export class CategoriesController {
-  constructor(private categoryRepo: CategorySequelizeRepository) {
-    console.log(this.categoryRepo);
-  }
+
+  @Inject(CreatecategoryUsecase)
+  private createUsecase: CreatecategoryUsecase;
+
+  @Inject(UpdateCategoryUsecase)
+  private updateUsecase: UpdateCategoryUsecase;
+
+  @Inject(DeleteCategoryUsecase)
+  private deleteUsecase: DeleteCategoryUsecase;
+
+  @Inject(GetCategoryUsecase)
+  private getUsecase: GetCategoryUsecase;
+
+  @Inject(ListCategoriesUsecase)
+  private listUsecase: ListCategoriesUsecase;
 
   @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {
-
+  async create(@Body() createCategoryDto: CreateCategoryDto) {
+    const output = await this.createUsecase.execute(createCategoryDto);
+    return CategoriesController.serialize(output);
   }
 
   @Get()
-  findAll() {
-
+  async search(@Query() searchParamsDto: SearchCategoriesDto) {
+    const output = await this.listUsecase.execute(searchParamsDto);
+    return new CategoryCollectionPresenter(output);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-
+  async findOne(@Param('id', new ParseUUIDPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})) id: string) {
+    const output = await this.getUsecase.execute({id});
+    return CategoriesController.serialize(output);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-
+  async update(
+    @Param('id', new ParseUUIDPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})) id: string,
+    @Body() updateCategoryDto: UpdateCategoryDto
+  ) {
+    const output = await this.updateUsecase.execute({id, ...updateCategoryDto});
+    return CategoriesController.serialize(output);
   }
 
+  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id', new ParseUUIDPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})) id: string) {
+    await this.deleteUsecase.execute({id});
+  }
 
+  public static serialize(output: CategoryOutput): CategoryPresenter {
+    return new CategoryPresenter(output);
   }
 }

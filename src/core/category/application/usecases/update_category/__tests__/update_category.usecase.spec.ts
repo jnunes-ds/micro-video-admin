@@ -1,4 +1,4 @@
-import {UpdateCategoryUseCase} from "@core/category/application/usecases/update_category/update_category.usecase";
+import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_category/update_category.usecase";
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {InvalidUuidError, Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
@@ -6,12 +6,12 @@ import {Category} from "@core/category/domain/category.entity";
 
 
 describe('UpdateCategoryUsecase Unit Tests', () => {
-	let usecase: UpdateCategoryUseCase;
+	let usecase: UpdateCategoryUsecase;
 	let repository: CategoryInMemoryRepository;
 
 	beforeEach(() => {
 		repository = new CategoryInMemoryRepository();
-		usecase = new UpdateCategoryUseCase(repository);
+		usecase = new UpdateCategoryUsecase(repository);
 	});
 
 	it('should throws an error when entity is not found', async () => {
