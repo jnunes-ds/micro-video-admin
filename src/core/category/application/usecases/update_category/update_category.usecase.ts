@@ -2,7 +2,7 @@ import {IUseCase} from "@core/@shared/application/usecase.interface";
 import {UpdateCategoryInput} from "@core/category/application/usecases/update_category/update_category.input";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category, CategoryId} from "@core/category/domain/category.entity";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {CategoryOutput, CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
 

@@ -3,7 +3,7 @@ import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/cat
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {CreateCategoryInput} from "@core/category/application/usecases/create_category/create_category.input";
-import {CategoryId} from "@core/category/domain/category.entity";
+import {CategoryId} from "@core/category/domain/category.aggregate";
 
 
 describe('CreateCategoryUsecase Integration Tests', () => {

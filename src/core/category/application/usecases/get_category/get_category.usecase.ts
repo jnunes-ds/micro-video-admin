@@ -1,7 +1,7 @@
 import {IUseCase} from "@core/@shared/application/usecase.interface";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category, CategoryId} from "@core/category/domain/category.entity";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {CategoryOutput, CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
 
 

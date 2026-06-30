@@ -1,6 +1,6 @@
 
 import Chance from "chance";
-import {Category, CategoryId} from "@core/category/domain/category.entity";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 
 type PropOrFactory<T> = T | ((index: number) => T);
 

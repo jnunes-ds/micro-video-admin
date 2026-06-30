@@ -6,7 +6,7 @@ import {
 } from '@/core/category/domain/category.repository';
 import { CategoryModel } from './category.model';
 import {SortDirection} from "@core/@shared/domain/repository/search_params";
-import {Category, CategoryId} from "@core/category/domain/category.entity";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {CategoryModelMapper} from "@core/category/infra/db/sequelize/category_model_mapper";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 

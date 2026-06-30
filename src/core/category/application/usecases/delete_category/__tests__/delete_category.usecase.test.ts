@@ -3,7 +3,7 @@ import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/cat
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category, CategoryId} from "@core/category/domain/category.entity";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 
 
 describe('DeleteCategoryUsecase Integration Tests', () => {

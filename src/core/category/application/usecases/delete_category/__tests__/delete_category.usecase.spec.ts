@@ -2,7 +2,7 @@ import {DeleteCategoryUsecase} from "@core/category/application/usecases/delete_
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {InvalidUuidError} from "@core/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category, CategoryId} from "@core/category/domain/category.entity";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 
 
 describe('DeleteCategoryUsecase Unit Tests', () => {

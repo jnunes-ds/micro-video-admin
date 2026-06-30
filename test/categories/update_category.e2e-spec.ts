@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { instanceToPlain } from 'class-transformer';
 import {startApp} from "@/nest-modules/shared/testing/helpers/start_app.helper";
-import {Category, CategoryId} from "@core/category/domain/category.entity";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {UpdateCategoryFixture} from "@/nest-modules/categories/testing/category_fixture";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers";

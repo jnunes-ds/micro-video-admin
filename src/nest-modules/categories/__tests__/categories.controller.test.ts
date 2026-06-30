@@ -18,7 +18,7 @@ import {
 import {CategoryCollectionPresenter, CategoryPresenter} from "@/nest-modules/categories/categories.presenter";
 import {CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
 import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
-import {Category} from "@core/category/domain/category.entity";
+import {Category} from "@core/category/domain/category.aggregate";
 
 describe('CategoriesController Integration Tests', () => {
   let controller: CategoriesController;

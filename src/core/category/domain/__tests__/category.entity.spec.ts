@@ -1,4 +1,4 @@
-import {Category, CategoryId} from "../category.entity";
+import {Category, CategoryId} from "../category.aggregate";
 
 describe('Category Unit Tests', () => {
 

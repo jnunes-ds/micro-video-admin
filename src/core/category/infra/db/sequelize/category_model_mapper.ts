@@ -1,4 +1,4 @@
-import {Category, CategoryId} from "@core/category/domain/category.entity";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
 

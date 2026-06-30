@@ -1,7 +1,7 @@
 import {CategoryModel} from "../category.model";
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
-import {Category, CategoryId} from "@core/category/domain/category.entity";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {CategoryModelMapper} from "@core/category/infra/db/sequelize/category_model_mapper";
 import {CategorySearchParams, CategorySearchResult} from "@core/category/domain/category.repository";

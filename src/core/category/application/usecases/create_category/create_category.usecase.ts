@@ -1,7 +1,7 @@
 import {IUseCase} from "@core/@shared/application/usecase.interface";
 import {CreateCategoryInput} from "@core/category/application/usecases/create_category/create_category.input";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
-import {Category} from "@core/category/domain/category.entity";
+import {Category} from "@core/category/domain/category.aggregate";
 import {CategoryOutput, CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
 

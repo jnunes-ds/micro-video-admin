@@ -1,5 +1,5 @@
 import Chance from "chance";
-import {Category, CategoryId} from "@core/category/domain/category.entity";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {CategoryFakeBuilder} from "@core/category/domain/category_fake.builder";
 
 describe('CategoryFakeBuilder Unit Test', () => {
