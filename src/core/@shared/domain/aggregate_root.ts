@@ -1,9 +1,3 @@
-import {Notification} from "@core/@shared/domain/validators/notification";
-import {ValueObject} from "@core/@shared/domain/value_object";
+import {Entity} from "@core/@shared/domain/entity";
 
-export abstract class AggregateRoot {
-	notification: Notification = new Notification();
-
-	abstract get aggregate_root_id(): ValueObject;
-	abstract toJSON(): any;
-}
+export abstract class AggregateRoot extends Entity {}
