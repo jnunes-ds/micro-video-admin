@@ -15,7 +15,9 @@ export function setupSequelize(options: SequelizeOptions = {}) {
 	beforeEach(async () => await _sequelize.sync({force}));
 
 	afterAll(async () => {
-		await _sequelize.close();
+		if (_sequelize) {
+			await _sequelize.close();
+		}
 	});
 
 	return {
