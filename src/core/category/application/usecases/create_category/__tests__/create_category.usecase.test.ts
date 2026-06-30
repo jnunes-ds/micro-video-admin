@@ -3,7 +3,7 @@ import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/cat
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {CreateCategoryInput} from "@core/category/application/usecases/create_category/create_category.input";
-import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
+import {CategoryId} from "@core/category/domain/category.entity";
 
 
 describe('CreateCategoryUsecase Integration Tests', () => {
@@ -20,7 +20,7 @@ describe('CreateCategoryUsecase Integration Tests', () => {
 	it('should create a category', async () => {
 		let input: CreateCategoryInput = {name: 'test'};
 		let output = await usecase.execute(input);
-		let entity = await repository.findById(new Uuid(output.id));
+		let entity = await repository.findById(new CategoryId(output.id));
 
 		expect(output).toStrictEqual({
 			id: entity.category_id.id,
@@ -32,7 +32,7 @@ describe('CreateCategoryUsecase Integration Tests', () => {
 
 		input = {name: 'test2', description: 'some description'}
 		output = await usecase.execute(input);
-		entity = await repository.findById(new Uuid(output.id));
+		entity = await repository.findById(new CategoryId(output.id));
 		expect(output).toStrictEqual({
 			id: entity.category_id.id,
 			name: 'test2',

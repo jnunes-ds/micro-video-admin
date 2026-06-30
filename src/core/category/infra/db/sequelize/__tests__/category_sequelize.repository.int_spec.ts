@@ -1,8 +1,7 @@
 import {CategoryModel} from "../category.model";
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
-import {Category} from "@core/category/domain/category.entity";
-import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
+import {Category, CategoryId} from "@core/category/domain/category.entity";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {CategoryModelMapper} from "@core/category/infra/db/sequelize/category_model_mapper";
 import {CategorySearchParams, CategorySearchResult} from "@core/category/domain/category.repository";
@@ -26,7 +25,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 	});
 
 	it('should find a category by id', async () => {
-		let foundedCategory = await repository.findById(new Uuid());
+		let foundedCategory = await repository.findById(new CategoryId());
 		expect(foundedCategory).toBeNull();
 
 		const category = Category.fake().aCategory().build();
@@ -100,7 +99,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 			});
 			searchOutput.items.forEach(item => {
 				expect(item).toBeInstanceOf(Category);
-				expect(item.category_id).toBeInstanceOf(Uuid);
+				expect(item.category_id).toBeInstanceOf(CategoryId);
 				expect(item.name).toBe('Movie');
 				expect(item.description).toBeNull();
 				expect(item.is_active).toBeTruthy();

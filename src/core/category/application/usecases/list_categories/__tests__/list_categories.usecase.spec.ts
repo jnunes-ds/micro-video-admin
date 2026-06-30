@@ -64,6 +64,7 @@ describe('ListCategoriesUsecase Unit Tests', () => {
 		const items = Category.fake()
 			.theCategories(2)
 			.withName(index => `name ${index + 1}`)
+			.withCreatedAt(index => new Date(new Date().getTime() + (index + 1) * 1000))
 			.build();
 
 		repository.items = items;

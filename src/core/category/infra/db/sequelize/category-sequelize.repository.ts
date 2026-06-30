@@ -6,10 +6,9 @@ import {
 } from '@/core/category/domain/category.repository';
 import { CategoryModel } from './category.model';
 import {SortDirection} from "@core/@shared/domain/repository/search_params";
-import {Category} from "@core/category/domain/category.entity";
+import {Category, CategoryId} from "@core/category/domain/category.entity";
 import {CategoryModelMapper} from "@core/category/infra/db/sequelize/category_model_mapper";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 
 export class CategorySequelizeRepository implements ICategoryRepository {
 	sortableFields: string[] = ['name', 'created_at'];
@@ -49,7 +48,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 		}
 	}
 
-	async delete(category_id: Uuid): Promise<void> {
+	async delete(category_id: CategoryId): Promise<void> {
 		const id = category_id.id;
 
 		const affectedRows = await this.categoryModel.destroy({
@@ -61,7 +60,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 		}
 	}
 
-	async findByIds(ids: Uuid[]): Promise<Category[]> {
+	async findByIds(ids: CategoryId[]): Promise<Category[]> {
 		const models = await this.categoryModel.findAll({
 			where: {
 				category_id: {
@@ -73,8 +72,8 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 	}
 
 	async existsById(
-		ids: Uuid[],
-	): Promise<{ exists: Uuid[]; not_exists: Uuid[] }> {
+		ids: CategoryId[],
+	): Promise<{ exists: CategoryId[]; not_exists: CategoryId[] }> {
 		if (!ids.length) {
 			throw new Error(
 				'ids must be an array with at least one element',
@@ -90,7 +89,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 			},
 		});
 		const existsCategoryIds = existsCategoryModels.map(
-			(m) => new Uuid(m.category_id),
+			(m) => new CategoryId(m.category_id),
 		);
 		const notExistsCategoryIds = ids.filter(
 			(id) => !existsCategoryIds.some((e) => e.equals(id)),
@@ -101,7 +100,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 		};
 	}
 
-	async findById(entity_id: Uuid): Promise<Category | null> {
+	async findById(entity_id: CategoryId): Promise<Category | null> {
 		const model = await this.categoryModel.findByPk(entity_id.id);
 
 		return model ? CategoryModelMapper.toEntity(model) : null;
