@@ -97,7 +97,7 @@ export class CastMemberSequelizeRepository implements ICastMemberRepository {
 	}
 	async delete(cast_member_id: CastMemberId): Promise<void> {
 		const id = cast_member_id.id;
-		const affectedRows = await this.castMemberModel.destroy({
+		await this.castMemberModel.destroy({
 			where: { cast_member_id: id }
 		});
 	}

@@ -5,9 +5,7 @@ import {
 	SearchParamsConstructorProps
 } from "@core/@shared/domain/repository/search_params";
 import {SearchResult} from "@core/@shared/domain/repository/search_result";
-import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {ISearchableRepository} from "@core/@shared/domain/repository/repository_interface";
-import {CategoryFilter} from "@core/category/domain/category.repository";
 import {CastMember, CastMemberId} from "@core/cast_member/domain/cast_member.aggregate";
 
 export type CastMemberFilter = {
