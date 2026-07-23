@@ -1,7 +1,4 @@
 import {IUseCase} from "@core/@shared/application/usecase.interface";
-import {CreateCategoryInput} from "@core/category/application/usecases/create_category/create_category.input";
-import {Category} from "@core/category/domain/category.aggregate";
-import {CategoryOutput, CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
 import {ICastMemberRepository} from "@core/cast_member/domain/cast_member.repository";
 import {CastMember} from "@core/cast_member/domain/cast_member.aggregate";
@@ -12,18 +9,29 @@ import {
 	CastMemberOutput,
 	CastMemberOutputMapper
 } from "@core/cast_member/application/usecases/common/cast_member_output";
+import {CastMemberType} from "@core/cast_member/domain/cast-member-type.vo";
 
 export type CreateCastMemberOutput = CastMemberOutput;
 
-export class CreatecastMemberUsecase
+export class CreateCastMemberUsecase
 	implements IUseCase<CreateCastMemberInput, CreateCastMemberOutput> {
 
 	constructor(private readonly categoryRepository: ICastMemberRepository) {}
 
 	async execute(input: CreateCastMemberInput): Promise<CreateCastMemberOutput> {
-		const entity = CastMember.create(input);
+		const [type, errorCastMemberType] = CastMemberType.create(input.type).asArray();
+		const entity = CastMember.create({
+			...input,
+			type
+		});
 
-		if (entity.notification.hasErrors()) {
+		const notification = entity.notification;
+
+		if (errorCastMemberType) {
+			notification.setError(errorCastMemberType.message, 'type');
+		}
+
+		if (notification.hasErrors()) {
 			throw new EntityValidationError(entity.notification.toJSON());
 		}
 
