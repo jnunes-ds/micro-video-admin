@@ -31,6 +31,17 @@ export class CastMemberType extends ValueObject {
 	static createADirector() {
 		return CastMemberType.create(CastMemberTypes.DIRECTOR);
 	}
+
+
+	asArray(): [CastMemberType, Error?] {
+		try {
+			return [this];
+		} catch (e) {
+			return [null as any, e as Error];
+		}
+
+	}
+
 }
 
 export class InvalidCastMemberTypeError extends Error {

@@ -17,3 +17,18 @@ export class EntityValidationError extends BaseValidationError {
 		this.name = 'EntityValidationError';
 	}
 }
+
+export class LoadEntityError extends BaseValidationError {
+	constructor(public error: FieldsErrors[]) {
+		super(error, 'Load Entity Error');
+		this.name = 'LoadEntityError';
+	}
+}
+
+// crie o InvalidArgumentError
+export class InvalidArgumentError extends Error {
+	constructor(message = 'Invalid Argument Error') {
+		super(message);
+		this.name = 'InvalidArgumentError';
+	}
+}
