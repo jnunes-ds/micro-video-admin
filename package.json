@@ -51,6 +51,7 @@
     "@swc/cli": "^0.8.1",
     "@swc/core": "^1.15.21",
     "@swc/jest": "^0.2.39",
+    "@types/chance": "^1.1.8",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.2",
     "@types/lodash": "^4.17.24",
