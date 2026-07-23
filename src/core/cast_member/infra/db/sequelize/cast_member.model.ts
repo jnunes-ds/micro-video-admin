@@ -8,7 +8,7 @@ export type CastMemberModelProps = {
 	created_at: Date;
 };
 
-@Table({tableName: 'categories', timestamps: false})
+@Table({tableName: 'cast_members', timestamps: false})
 export class CastMemberModel extends Model<CastMemberModelProps> {
 	@PrimaryKey
 	@Column({type: DataType.UUID})
