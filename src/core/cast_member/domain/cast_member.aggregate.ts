@@ -71,7 +71,7 @@ export class CastMember extends AggregateRoot {
 		return {
 			cast_member_id: this.cast_member_id.id,
 			name: this.name,
-			type: this.type,
+			type: this.type.type,
 			created_at: this.created_at,
 		}
 	}
