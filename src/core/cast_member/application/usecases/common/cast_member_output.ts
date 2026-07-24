@@ -1,11 +1,11 @@
 import {CastMember} from "@core/cast_member/domain/cast_member.aggregate";
-import {CastMemberType} from "@core/cast_member/domain/cast-member-type.vo";
+import {CastMemberType, CastMemberTypes} from "@core/cast_member/domain/cast-member-type.vo";
 
 
 export type CastMemberOutput = {
-	id: string;
+	cast_member_id: string;
 	name: string;
-	type: CastMemberType;
+	type: CastMemberTypes;
 	created_at: Date;
 }
 
@@ -15,8 +15,10 @@ export class CastMemberOutputMapper {
 	static toOutput(entity: CastMember): CastMemberOutput {
 		const {cast_member_id, ...otherProps} = entity.toJSON();
 		return {
-			id: entity.cast_member_id.id,
-			...otherProps
+			cast_member_id: entity.cast_member_id.id,
+			name: otherProps.name,
+			type: otherProps.type,
+			created_at: otherProps.created_at
 		}
 	}
 }
