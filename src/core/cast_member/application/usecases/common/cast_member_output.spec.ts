@@ -14,7 +14,7 @@ describe('CategoryOutputMapper Unit Tests', () => {
 		const output = CastMemberOutputMapper.toOutput(entity);
 		expect(spyToJSON).toHaveBeenCalled();
 		expect(output).toStrictEqual({
-			id: entity.cast_member_id.id,
+			cast_member_id: entity.cast_member_id.id,
 			name: entity.name,
 			type: CastMemberTypes.ACTOR,
 			created_at: entity.created_at,

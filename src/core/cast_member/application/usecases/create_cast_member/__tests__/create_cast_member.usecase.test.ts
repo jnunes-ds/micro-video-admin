@@ -25,10 +25,10 @@ describe('CreateCastMemberUsecase Integration Tests', () => {
 	it('should create a cast member', async () => {
 		let input: CreateCastMemberInput = {name: 'test', type: CastMemberTypes.ACTOR};
 		let output = await usecase.execute(input);
-		let entity = await repository.findById(new CastMemberId(output.id));
+		let entity = await repository.findById(new CastMemberId(output.cast_member_id));
 
 		expect(output).toStrictEqual({
-			id: entity.cast_member_id.id,
+			cast_member_id: entity.cast_member_id.id,
 			name: 'test',
 			type: CastMemberTypes.ACTOR,
 			created_at: entity.created_at,
@@ -36,9 +36,9 @@ describe('CreateCastMemberUsecase Integration Tests', () => {
 
 		input = {name: 'test2', type: CastMemberTypes.ACTOR}
 		output = await usecase.execute(input);
-		entity = await repository.findById(new CastMemberId(output.id));
+		entity = await repository.findById(new CastMemberId(output.cast_member_id));
 		expect(output).toStrictEqual({
-			id: entity.cast_member_id.id,
+			cast_member_id: entity.cast_member_id.id,
 			name: 'test2',
 			type: CastMemberTypes.ACTOR,
 			created_at: entity.created_at,

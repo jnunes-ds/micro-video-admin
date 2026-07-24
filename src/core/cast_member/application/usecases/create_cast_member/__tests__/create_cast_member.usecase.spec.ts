@@ -19,7 +19,7 @@ describe('CreateCastMemberUsecase Unit Tests', () => {
 		let output = await usecase.execute({name: 'test', type:CastMemberTypes.ACTOR});
 		expect(spyInsert).toHaveBeenCalledTimes(1);
 		expect(output).toStrictEqual({
-			id: repository.items[0].cast_member_id.id,
+			cast_member_id: repository.items[0].cast_member_id.id,
 			name: 'test',
 			type: CastMemberTypes.ACTOR,
 			created_at: repository.items[0].created_at,
@@ -32,7 +32,7 @@ describe('CreateCastMemberUsecase Unit Tests', () => {
 
 		expect(spyInsert).toHaveBeenCalledTimes(2);
 		expect(output).toStrictEqual({
-			id: repository.items[1].cast_member_id.id,
+			cast_member_id: repository.items[1].cast_member_id.id,
 			name: 'test',
 			type: CastMemberTypes.DIRECTOR,
 			created_at: repository.items[1].created_at,
