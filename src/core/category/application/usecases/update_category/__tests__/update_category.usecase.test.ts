@@ -3,7 +3,7 @@ import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/cat
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category, CategoryId} from "@core/category/domain/category.aggregate";
+import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
 
 
 describe('UpdateCategoryUsecase Integration Tests', () => {
@@ -18,7 +18,7 @@ describe('UpdateCategoryUsecase Integration Tests', () => {
 	});
 
 	it('should throws an error when entity is not found', async () => {
-		const categoryId = new CategoryId();
+		const categoryId = new CastMemberId();
 
 		await expect(
 			() => usecase.execute({id: categoryId.id, name: 'fake'})
@@ -129,7 +129,7 @@ describe('UpdateCategoryUsecase Integration Tests', () => {
 				...("description" in i.input && { description: i.input.description }),
 				...("is_active" in i.input && { is_active: i.input.is_active }),
 			});
-			const entityUpdated = await repository.findById(new CategoryId(i.input.id));
+			const entityUpdated = await repository.findById(new CastMemberId(i.input.id));
 			expect(output).toStrictEqual({
 				id: i.expected.id,
 				name: i.expected.name,
