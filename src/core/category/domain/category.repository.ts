@@ -1,6 +1,6 @@
 import {SearchParams} from "@core/@shared/domain/repository/search_params";
 import {SearchResult} from "@core/@shared/domain/repository/search_result";
-import {Category, CategoryId} from "@core/category/domain/category.aggregate";
+import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
 import {ISearchableRepository} from "@core/@shared/domain/repository/repository_interface";
 
 
@@ -13,7 +13,7 @@ export class CategorySearchResult extends SearchResult<Category> {}
 export interface ICategoryRepository
 	extends ISearchableRepository<
 		Category,
-		CategoryId,
+		CastMemberId,
 		CategoryFilter,
 		CategorySearchParams,
 		CategorySearchResult

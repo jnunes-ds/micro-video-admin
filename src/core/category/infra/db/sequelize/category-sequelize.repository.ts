@@ -6,7 +6,7 @@ import {
 } from '@/core/category/domain/category.repository';
 import { CategoryModel } from './category.model';
 import {SortDirection} from "@core/@shared/domain/repository/search_params";
-import {Category, CategoryId} from "@core/category/domain/category.aggregate";
+import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
 import {CategoryModelMapper} from "@core/category/infra/db/sequelize/category_model_mapper";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 
@@ -48,7 +48,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 		}
 	}
 
-	async delete(category_id: CategoryId): Promise<void> {
+	async delete(category_id: CastMemberId): Promise<void> {
 		const id = category_id.id;
 
 		const affectedRows = await this.categoryModel.destroy({
@@ -60,7 +60,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 		}
 	}
 
-	async findByIds(ids: CategoryId[]): Promise<Category[]> {
+	async findByIds(ids: CastMemberId[]): Promise<Category[]> {
 		const models = await this.categoryModel.findAll({
 			where: {
 				category_id: {
@@ -72,8 +72,8 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 	}
 
 	async existsById(
-		ids: CategoryId[],
-	): Promise<{ exists: CategoryId[]; not_exists: CategoryId[] }> {
+		ids: CastMemberId[],
+	): Promise<{ exists: CastMemberId[]; not_exists: CastMemberId[] }> {
 		if (!ids.length) {
 			throw new Error(
 				'ids must be an array with at least one element',
@@ -89,7 +89,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 			},
 		});
 		const existsCategoryIds = existsCategoryModels.map(
-			(m) => new CategoryId(m.category_id),
+			(m) => new CastMemberId(m.category_id),
 		);
 		const notExistsCategoryIds = ids.filter(
 			(id) => !existsCategoryIds.some((e) => e.equals(id)),
@@ -100,7 +100,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 		};
 	}
 
-	async findById(entity_id: CategoryId): Promise<Category | null> {
+	async findById(entity_id: CastMemberId): Promise<Category | null> {
 		const model = await this.categoryModel.findByPk(entity_id.id);
 
 		return model ? CategoryModelMapper.toEntity(model) : null;

@@ -1,4 +1,4 @@
-import {Category, CategoryId} from "@core/category/domain/category.aggregate";
+import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
 
@@ -16,7 +16,7 @@ export class CategoryModelMapper {
 
 	static toEntity(model: CategoryModel): Category {
 		const category = new Category({
-			category_id: new CategoryId(model.category_id),
+			category_id: new CastMemberId(model.category_id),
 			name: model.name,
 			description: model.description,
 			is_active: model.is_active,
