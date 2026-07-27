@@ -116,7 +116,7 @@ export class CastMemberSequelizeRepository implements ICastMemberRepository {
 			where['name'] = {[Op.like]: `%${props.filter.name}`}
 		}
 
-		if (props.filter.type) {
+		if (props.filter?.type) {
 			where['type'] = props.filter.type;
 		}
 
@@ -138,7 +138,7 @@ export class CastMemberSequelizeRepository implements ICastMemberRepository {
 	}
 
 	private formatSort(sort: string, sort_dir: SortDirection) {
-		const dialect = this.castMemberModel.sequelize.getDialect() as 'mysql';
+		const dialect = this.castMemberModel.sequelize?.getDialect() as 'mysql';
 		if (this.orderBy[dialect] && this.orderBy[sort]) {
 			return this.orderBy[dialect][sort](sort_dir);
 		}

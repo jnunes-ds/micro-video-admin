@@ -3,7 +3,7 @@ import {IsBoolean, IsNotEmpty, IsOptional, IsString, validateSync} from "class-v
 export type UpdateCategoryInputConstructorProps = {
 	id: string;
 	name?: string;
-	description?: string;
+	description?: string | null;
 	is_active?: boolean;
 }
 
@@ -18,7 +18,7 @@ export class UpdateCategoryInput {
 
 	@IsString()
 	@IsOptional()
-	description?: string;
+	description?: string | null;
 
 	@IsBoolean()
 	@IsOptional()

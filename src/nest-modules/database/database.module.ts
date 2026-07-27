@@ -12,7 +12,7 @@ const models =[CategoryModel];
 	imports: [
 		SequelizeModule.forRootAsync({
 			useFactory: (configService: ConfigService<CONFIG_SCHEMA_TYPE>) => {
-				const dbVendor: Dialect = configService.get('DB_VENDOR');
+				const dbVendor: Dialect | undefined = configService.get('DB_VENDOR');
 				if (dbVendor === 'sqlite') {
 					return {
 						dialect: dbVendor,

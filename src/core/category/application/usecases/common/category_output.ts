@@ -12,7 +12,7 @@ export type CategoryOutput = {
 export class CategoryOutputMapper {
 	static toOutput(entity: Category): CategoryOutput {
 		const {category_id, ...otherProps} = entity.toJSON();
-		return {
+		return <CategoryOutput>{
 			id: entity.category_id.id,
 			...otherProps
 		}

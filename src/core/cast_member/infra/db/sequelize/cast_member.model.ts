@@ -1,10 +1,10 @@
 import {Column, DataType, Model, PrimaryKey, Table} from "sequelize-typescript";
-import {CastMemberType} from "@core/cast_member/domain/cast-member-type.vo";
+import {CastMemberType, CastMemberTypes} from "@core/cast_member/domain/cast-member-type.vo";
 
 export type CastMemberModelProps = {
 	cast_member_id: string;
 	name: string;
-	type: CastMemberType;
+	type: CastMemberTypes;
 	created_at: Date;
 };
 
@@ -18,7 +18,7 @@ export class CastMemberModel extends Model<CastMemberModelProps> {
 	declare name: string;
 
 	@Column({type: DataType.SMALLINT, allowNull: false})
-	declare type: CastMemberType;
+	declare type: CastMemberTypes;
 
 	@Column({type: DataType.DATE(3), allowNull: false})
 	declare created_at: Date;

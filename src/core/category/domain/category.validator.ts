@@ -14,7 +14,7 @@ export class CategoryRules {
 
 class CategoryValidator extends ClassValidatorFields<{}> {
 	validate(notification: Notification, data: Category, fields?: string[]): boolean {
-		const newFields = fields.length ? fields : ['name'];
+		const newFields = fields?.length ? fields : ['name'];
 		return super.validate(notification, new CategoryRules(data), newFields);
 	}
 }
