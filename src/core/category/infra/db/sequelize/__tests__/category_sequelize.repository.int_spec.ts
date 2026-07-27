@@ -21,7 +21,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 		await repository.insert(category);
 
 		const model = await CategoryModel.findByPk(category.category_id.id);
-		expect(model.toJSON()).toMatchObject(category.toJSON());
+		expect(model?.toJSON()).toMatchObject(category.toJSON());
 	});
 
 	it('should find a category by id', async () => {
@@ -31,7 +31,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 		const category = Category.fake().aCategory().build();
 		await repository.insert(category);
 		foundedCategory = await repository.findById(category.category_id);
-		expect(foundedCategory.toJSON()).toMatchObject(category.toJSON());
+		expect(foundedCategory?.toJSON()).toMatchObject(category.toJSON());
 	});
 
 	it('should return all categories', async () => {
@@ -58,7 +58,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 		await repository.update(category);
 
 		const foundedCategory = await repository.findById(category.category_id);
-		expect(category.toJSON()).toStrictEqual(foundedCategory.toJSON());
+		expect(category.toJSON()).toStrictEqual(foundedCategory?.toJSON());
 	});
 
 	it('should throw an error on delete when the category is not found', async () => {

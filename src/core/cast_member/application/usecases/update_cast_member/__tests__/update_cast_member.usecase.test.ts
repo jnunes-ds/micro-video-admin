@@ -7,6 +7,9 @@ import {CastMemberSequelizeRepository} from "@core/cast_member/infra/db/sequeliz
 import {CastMemberModel} from "@core/cast_member/infra/db/sequelize/cast_member.model";
 import {CastMemberTypes} from "@core/cast_member/domain/cast-member-type.vo";
 import {CastMember, CastMemberId} from "@core/cast_member/domain/cast_member.aggregate";
+import {
+	UpdateCastMemberInput
+} from "@core/cast_member/application/usecases/update_cast_member/update_cast_member.input";
 
 
 describe('UpdateCast<e,erUsecase Integration Tests', () => {
@@ -116,24 +119,24 @@ describe('UpdateCast<e,erUsecase Integration Tests', () => {
 		];
 
 		for (const i of arrange) {
-			output = await usecase.execute({
+			output = await usecase.execute(new UpdateCastMemberInput({
 				cast_member_id: i.input.cast_member_id,
 				...("name" in i.input && { name: i.input.name }),
 				...("type" in i.input && { type: i.input.type }),
-			});
+			}));
 			const entityUpdated = await repository.findById(new CastMemberId(i.input.cast_member_id));
 			expect(output).toStrictEqual({
 				cast_member_id: i.expected.cast_member_id,
 				name: i.expected.name,
 				type: i.expected.type,
-				created_at: entityUpdated.created_at,
+				created_at: entityUpdated?.created_at,
 			});
 
-			expect(entityUpdated.toJSON()).toStrictEqual({
+			expect(entityUpdated?.toJSON()).toStrictEqual({
 				cast_member_id: entity.cast_member_id.id,
 				name: i.expected.name,
 				type: i.expected.type,
-				created_at: entityUpdated.created_at,
+				created_at: entityUpdated?.created_at,
 			});
 		}
 	});

@@ -23,22 +23,22 @@ describe('CreateCategoryUsecase Integration Tests', () => {
 		let entity = await repository.findById(new CastMemberId(output.id));
 
 		expect(output).toStrictEqual({
-			id: entity.category_id.id,
+			id: entity?.category_id.id,
 			name: 'test',
 			description: null,
 			is_active: true,
-			created_at: entity.created_at,
+			created_at: entity?.created_at,
 		});
 
 		input = {name: 'test2', description: 'some description'}
 		output = await usecase.execute(input);
 		entity = await repository.findById(new CastMemberId(output.id));
 		expect(output).toStrictEqual({
-			id: entity.category_id.id,
+			id: entity?.category_id.id,
 			name: 'test2',
 			description: 'some description',
 			is_active: true,
-			created_at: entity.created_at,
+			created_at: entity?.created_at,
 		})
 	});
 });

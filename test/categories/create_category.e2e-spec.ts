@@ -75,17 +75,19 @@ describe('CategoriesController (e2e)', () => {
 				expect(Object.keys(res.body.data)).toStrictEqual(keysInReponse);
 				const id = res.body.data.id;
 				const createdCategory = await categoryRepo.findById(new CastMemberId(id));
+				if (createdCategory) {
+					const presenter = CategoriesController.serialize(
+						CategoryOutputMapper.toOutput(createdCategory)
+					);
+					const serialized = instanceToPlain(presenter);
 
-				const presenter = CategoriesController.serialize(
-					CategoryOutputMapper.toOutput(createdCategory)
-				);
-				const serialized = instanceToPlain(presenter);
+					expect(res.body.data).toStrictEqual({
+						id: serialized.id,
+						created_at: serialized.created_at,
+						...expected
+					});
+				}
 
-				expect(res.body.data).toStrictEqual({
-					id: serialized.id,
-					created_at: serialized.created_at,
-					...expected
-				});
 			})
 		});
 

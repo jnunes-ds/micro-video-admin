@@ -14,7 +14,9 @@ describe('CategoryModelMapper Integration Test', () => {
 		expect.assertions(2)
 		const model = CategoryModel.build({
 			category_id: '850704d1-806c-4a35-81c2-e535f36a07ae',
-			name: 'a'.repeat(256)
+			name: 'a'.repeat(256),
+			is_active: false,
+			created_at: new Date()
 		});
 		try {
 			CategoryModelMapper.toEntity(model);

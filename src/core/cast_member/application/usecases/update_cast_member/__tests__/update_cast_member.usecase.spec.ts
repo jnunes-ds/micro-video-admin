@@ -6,6 +6,9 @@ import {
 import {CastMemberInMemoryRepository} from "@core/cast_member/infra/db/in_memory/cast_member_in_memory.repository";
 import {CastMemberTypes} from "@core/cast_member/domain/cast-member-type.vo";
 import {CastMember, CastMemberId} from "@core/cast_member/domain/cast_member.aggregate";
+import {
+	UpdateCastMemberInput
+} from "@core/cast_member/application/usecases/update_cast_member/update_cast_member.input";
 
 
 describe('UpdateCastMemberUsecase Unit Tests', () => {
@@ -94,7 +97,6 @@ describe('UpdateCastMemberUsecase Unit Tests', () => {
 			{
 				input: {
 					cast_member_id: entity.cast_member_id.id,
-					name: 'test',
 					type: CastMemberTypes.ACTOR
 				},
 				expected: {
@@ -119,11 +121,11 @@ describe('UpdateCastMemberUsecase Unit Tests', () => {
 		];
 
 		for (const i of arrange) {
-			output = await usecase.execute({
+			output = await usecase.execute(new UpdateCastMemberInput({
 				cast_member_id: i.input.cast_member_id,
 				...("name" in i.input && { name: i.input.name }),
 				...("type" in i.input && { type: i.input.type })
-			});
+			}));
 
 			expect(output).toStrictEqual({
 				cast_member_id: i.expected.cast_member_id,
