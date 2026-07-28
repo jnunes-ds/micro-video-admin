@@ -25,6 +25,13 @@ export class LoadEntityError extends BaseValidationError {
 	}
 }
 
+export class SearchValidationError extends BaseValidationError {
+	constructor(public error: FieldsErrors[]) {
+		super(error, 'Search Validation Error');
+		this.name = 'SearchValidationError';
+	}
+}
+
 // crie o InvalidArgumentError
 export class InvalidArgumentError extends Error {
 	constructor(message = 'Invalid Argument Error') {

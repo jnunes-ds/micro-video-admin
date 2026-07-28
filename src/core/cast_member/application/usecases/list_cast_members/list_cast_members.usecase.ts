@@ -11,14 +11,21 @@ import {
 	CastMemberOutput,
 	CastMemberOutputMapper
 } from "@core/cast_member/application/usecases/common/cast_member_output";
+import {CastMemberTypes} from "@core/cast_member/domain/cast-member-type.vo";
 
 
 export class ListCastMembersUsecase
 	implements IUseCase<ListCategoriesInput, ListCategoriesOutput> {
 	constructor(private readonly repository: ICastMemberRepository) {}
 
-	async execute(input: ListCategoriesInput): Promise<ListCategoriesOutput> {
-		const params = new CastMemberSearchParams(input);
+	async execute({filter, ...rest}: ListCategoriesInput): Promise<ListCategoriesOutput> {
+		const params = CastMemberSearchParams.create({
+			...rest,
+			...(filter && { filter: {
+					...('name' in filter && {name: filter.name}),
+					...('type' in filter && {type: filter.type})
+				} }),
+		});
 		const searchResult = await this.repository.search(params);
 		return this.toOutput(searchResult);
 	}
@@ -30,6 +37,11 @@ export class ListCastMembersUsecase
 	}
 }
 
-export type ListCategoriesInput = SearchParamsConstructorProps<CastMemberFilter>;
+export type ListCategoriesInput = Omit<SearchParamsConstructorProps<CastMemberFilter>, 'filter'> & {
+	filter?: {
+		name?: string;
+		type?: CastMemberTypes;
+	};
+};
 
 export type ListCategoriesOutput = PaginationOutput<CastMemberOutput>;

@@ -82,7 +82,7 @@ export class SearchParams<Filter = string> extends ValueObject {
 		return this._filter;
 	}
 
-	private set filter(value: Filter | null) {
+	protected set filter(value: Filter | null) {
 		this._filter =
 			value === null || value === undefined || value === '' ? null : (`${value}` as any);
 	}
