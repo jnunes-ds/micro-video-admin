@@ -9,3 +9,27 @@ Content-Type: application/json
 
 ### Get categories
 GET http://localhost:3000/categories
+
+### Create Cast Member
+POST http://localhost:3000/cast-members
+Content-Type: application/json
+
+{
+  "name": "Virgulino",
+  "type": 2
+}
+
+### Get Cast Members
+GET http://localhost:3000/cast-members
+
+### UPDATE Cast Member
+PATCH localhost:3000/cast-members/013f4c0a-6ebf-4562-8290-b10a811f87d4
+Content-Type: application/json
+
+{
+  "cast_member_id": "013f4c0a-6ebf-4562-8290-b10a811f87d4",
+  "name": "Zé do Bó"
+}
+
+### DELETE Cast Member
+DELETE http://localhost:3000/cast-members/1e177315-df0e-40e5-90c7-1baf2d3c15f6

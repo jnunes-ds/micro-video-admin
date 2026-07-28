@@ -3,10 +3,11 @@ import {SequelizeModule} from "@nestjs/sequelize";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {ConfigService} from "@nestjs/config";
 import {CONFIG_SCHEMA_TYPE} from "@/nest-modules/config/config.module";
+import {CastMemberModel} from "@core/cast_member/infra/db/sequelize/cast_member.model";
 
 type Dialect = CONFIG_SCHEMA_TYPE['DB_VENDOR'];
 
-const models =[CategoryModel];
+const models =[CategoryModel, CastMemberModel];
 
 @Module({
 	imports: [

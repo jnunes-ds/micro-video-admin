@@ -15,10 +15,10 @@ import {CastMemberTypes} from "@core/cast_member/domain/cast-member-type.vo";
 
 
 export class ListCastMembersUsecase
-	implements IUseCase<ListCategoriesInput, ListCategoriesOutput> {
+	implements IUseCase<ListCastmembersInput, ListCastmembersOutput> {
 	constructor(private readonly repository: ICastMemberRepository) {}
 
-	async execute({filter, ...rest}: ListCategoriesInput): Promise<ListCategoriesOutput> {
+	async execute({filter, ...rest}: ListCastmembersInput): Promise<ListCastmembersOutput> {
 		const params = CastMemberSearchParams.create({
 			...rest,
 			...(filter && { filter: {
@@ -30,18 +30,18 @@ export class ListCastMembersUsecase
 		return this.toOutput(searchResult);
 	}
 
-	private toOutput(searchResult: CastMemberSearchResult): ListCategoriesOutput {
+	private toOutput(searchResult: CastMemberSearchResult): ListCastmembersOutput {
 		const {items: _items} = searchResult;
 		const items = _items.map(item => CastMemberOutputMapper.toOutput(item));
 		return PaginationOutputMapper.toOutput(items, searchResult);
 	}
 }
 
-export type ListCategoriesInput = Omit<SearchParamsConstructorProps<CastMemberFilter>, 'filter'> & {
+export type ListCastmembersInput = Omit<SearchParamsConstructorProps<CastMemberFilter>, 'filter'> & {
 	filter?: {
 		name?: string;
 		type?: CastMemberTypes;
 	};
 };
 
-export type ListCategoriesOutput = PaginationOutput<CastMemberOutput>;
+export type ListCastmembersOutput = PaginationOutput<CastMemberOutput>;
