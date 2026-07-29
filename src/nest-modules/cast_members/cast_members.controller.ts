@@ -29,6 +29,7 @@ import {UpdateCastmemberDto} from "@/nest-modules/cast_members/dto/update-cast-m
 import {SearchCastMembersDto} from "@/nest-modules/cast_members/dto/search-cast-member.dto";
 import {CastMemberCollectionPresenter, CastMemberPresenter} from "@/nest-modules/cast_members/cast_members.presenter";
 import {CastMemberOutput} from "@core/cast_member/application/usecases/common/cast_member_output";
+import {GetCastMemberUsecase} from "@core/cast_member/application/usecases/get_cast_member/get_cast_member.usecase";
 
 @Controller('cast-members')
 export class CastMembersController {
@@ -42,12 +43,21 @@ export class CastMembersController {
   @Inject(DeleteCastMemberUsecase)
   private deleteUsecase: DeleteCastMemberUsecase;
 
+  @Inject(GetCastMemberUsecase)
+  private getUsecase: GetCastMemberUsecase;
+
   @Inject(ListCastMembersUsecase)
   private listUsecase: ListCastMembersUsecase;
 
   @Post()
   async create(@Body() createCastmemberDto: CreateCastMemberDto) {
     const output = await this.createUsecase.execute(createCastmemberDto);
+    return CastMembersController.serialize(output);
+  }
+
+  @Get(':id')
+  async findOne(@Param('id', new ParseUUIDPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})) id: string) {
+    const output = await this.getUsecase.execute({id});
     return CastMembersController.serialize(output);
   }
 

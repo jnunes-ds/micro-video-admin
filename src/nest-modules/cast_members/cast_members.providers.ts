@@ -16,6 +16,7 @@ import {
 import {
 	DeleteCastMemberUsecase
 } from "@core/cast_member/application/usecases/delete_cast_member/delete_cast_member.usecase";
+import {GetCastMemberUsecase} from "@core/cast_member/application/usecases/get_cast_member/get_cast_member.usecase";
 
 export type ObjectProvider = Exclude<Provider, Function | string | symbol>;
 
@@ -51,6 +52,7 @@ export const REPOSITORIES: Repositories = {
 enum UseCasesKeysEnum  {
 	CREATE_CAST_MEMBER_USE_CASE = 'CREATE_CAST_MEMBER_USE_CASE',
 	UPDATE_CAST_MEMBER_USE_CASE = 'UPDATE_CAST_MEMBER_USE_CASE',
+	GET_CAST_MEMBER_USE_CASE = 'GET_CAST_MEMBER_USE_CASE',
 	LIST_CAST_MEMBERS_USE_CASE = 'LIST_CAST_MEMBERS_USE_CASE',
 	DELETE_CAST_MEMBER_USE_CASE = 'DELETE_CAST_MEMBER_USE_CASE'
 }
@@ -66,6 +68,11 @@ export const USE_CASES: Usecases = {
 	UPDATE_CAST_MEMBER_USE_CASE: {
 		provide: UpdateCastMemberUsecase,
 		useFactory: (castMemberRepo: ICastMemberRepository) => new UpdateCastMemberUsecase(castMemberRepo),
+		inject: [REPOSITORIES.CAST_MEMBER_REPOSITORY['provide']]
+	},
+	GET_CAST_MEMBER_USE_CASE: {
+		provide: GetCastMemberUsecase,
+		useFactory: (castMemberRepo: ICastMemberRepository) => new GetCastMemberUsecase(castMemberRepo),
 		inject: [REPOSITORIES.CAST_MEMBER_REPOSITORY['provide']]
 	},
 	LIST_CAST_MEMBERS_USE_CASE: {

@@ -19,7 +19,10 @@ Content-Type: application/json
   "type": 2
 }
 
-### Get Cast Members
+### GET Cast Member by id
+GET http://localhost:3000/cast-members/013f4c0a-6ebf-4562-8290-b10a811f87d4
+
+### LIST Cast Members
 GET http://localhost:3000/cast-members
 
 ### UPDATE Cast Member
