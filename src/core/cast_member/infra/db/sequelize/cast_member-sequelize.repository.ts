@@ -10,6 +10,7 @@ import { Op, literal } from 'sequelize';
 import {CastMemberModel} from "@core/cast_member/infra/db/sequelize/cast_member.model";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {InvalidArgumentError, LoadEntityError} from "@core/@shared/domain/validators/validation.error";
+import {CastMemberOutput} from "@core/cast_member/application/usecases/common/cast_member_output";
 
 export class CastMemberSequelizeRepository implements ICastMemberRepository {
 	sortableFields: string[] = ['name', 'created_at'];
@@ -169,5 +170,13 @@ export class CastMemberModelMapper {
 		}
 
 		return castMember;
+	}
+
+	static toOutput(entity: CastMember): CastMemberOutput {
+		const {cast_member_id, ...otherProps} = entity.toJSON();
+		return <CastMemberOutput>{
+			cast_member_id: entity.cast_member_id.id,
+			...otherProps
+		}
 	}
 }
