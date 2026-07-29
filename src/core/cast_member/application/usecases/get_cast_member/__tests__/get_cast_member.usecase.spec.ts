@@ -43,7 +43,7 @@ describe('GetCastMemberUsecase Unit Tests', () => {
 		expect(output).toStrictEqual({
 			cast_member_id: seventhItem.cast_member_id.id,
 			name: 'name-7',
-			type: seventhItem.type,
+			type: seventhItem.type.type,
 			created_at: seventhItem.created_at,
 		});
 	});
