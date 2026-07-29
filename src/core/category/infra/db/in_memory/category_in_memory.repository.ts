@@ -5,7 +5,7 @@ import {
 	ICategoryRepository
 } from "@core/category/domain/category.repository";
 import {InMemorySearchableRepository} from "@core/@shared/infra/db/in_memory/in_memory.repository";
-import {Category} from "@core/category/domain/category.entity";
+import {Category} from "@core/category/domain/category.aggregate";
 import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {SortDirection} from "@core/@shared/domain/repository/search_params";
 
@@ -18,7 +18,7 @@ export class CategoryInMemoryRepository
 
 	protected async applyFilter(
 		items: Category[],
-		filter: CategoryFilter
+		filter: CategoryFilter | null
 	): Promise<Category[]> {
 		if (!filter) {
 			return items;

@@ -3,7 +3,7 @@ import {instanceToPlain} from 'class-transformer';
 import {ICategoryRepository} from '@/core/category/domain/category.repository';
 import {CategoryOutputMapper} from '@/core/category/application/usecases/common/category_output';
 import {startApp} from "@/nest-modules/shared/testing/helpers/start_app.helper";
-import {Category} from "@core/category/domain/category.entity";
+import {Category} from "@core/category/domain/category.aggregate";
 import {GetCategoryFixture} from "@/nest-modules/categories/testing/category_fixture";
 import {CategoriesController} from "@/nest-modules/categories/categories.controller";
 import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers";

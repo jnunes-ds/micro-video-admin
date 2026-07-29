@@ -3,7 +3,7 @@ import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/cat
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {CreateCategoryInput} from "@core/category/application/usecases/create_category/create_category.input";
-import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
+import {CastMemberId} from "@core/cast_member/domain/cast_member.aggregate";
 
 
 describe('CreateCategoryUsecase Integration Tests', () => {
@@ -20,25 +20,25 @@ describe('CreateCategoryUsecase Integration Tests', () => {
 	it('should create a category', async () => {
 		let input: CreateCategoryInput = {name: 'test'};
 		let output = await usecase.execute(input);
-		let entity = await repository.findById(new Uuid(output.id));
+		let entity = await repository.findById(new CastMemberId(output.id));
 
 		expect(output).toStrictEqual({
-			id: entity.category_id.id,
+			id: entity?.category_id.id,
 			name: 'test',
 			description: null,
 			is_active: true,
-			created_at: entity.created_at,
+			created_at: entity?.created_at,
 		});
 
 		input = {name: 'test2', description: 'some description'}
 		output = await usecase.execute(input);
-		entity = await repository.findById(new Uuid(output.id));
+		entity = await repository.findById(new CastMemberId(output.id));
 		expect(output).toStrictEqual({
-			id: entity.category_id.id,
+			id: entity?.category_id.id,
 			name: 'test2',
 			description: 'some description',
 			is_active: true,
-			created_at: entity.created_at,
+			created_at: entity?.created_at,
 		})
 	});
 });

@@ -2,9 +2,8 @@ import {GetCategoryUsecase} from "@core/category/application/usecases/get_catego
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
-import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category} from "@core/category/domain/category.entity";
+import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
 
 
 describe('GetCategoryUsecase Integration Tests', () => {
@@ -19,11 +18,11 @@ describe('GetCategoryUsecase Integration Tests', () => {
 	});
 
 	it('should throws an error when entity is not found', async () => {
-		const uuid = new Uuid();
+		const categoryId = new CastMemberId();
 
 		await expect(
-			() => usecase.execute({id: uuid.id })
-		).rejects.toThrow(new NotFoundError(uuid, Category));
+			() => usecase.execute({id: categoryId.id })
+		).rejects.toThrow(new NotFoundError(categoryId, Category));
 	});
 
 	it('should get a category by id', async () => {

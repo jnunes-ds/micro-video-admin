@@ -2,9 +2,8 @@ import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
-import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category} from "@core/category/domain/category.entity";
+import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
 
 
 describe('UpdateCategoryUsecase Integration Tests', () => {
@@ -19,11 +18,11 @@ describe('UpdateCategoryUsecase Integration Tests', () => {
 	});
 
 	it('should throws an error when entity is not found', async () => {
-		const uuid = new Uuid();
+		const categoryId = new CastMemberId();
 
 		await expect(
-			() => usecase.execute({id: uuid.id, name: 'fake'})
-		).rejects.toThrow(new NotFoundError(uuid, Category));
+			() => usecase.execute({id: categoryId.id, name: 'fake'})
+		).rejects.toThrow(new NotFoundError(categoryId, Category));
 	});
 
 	it('should update a category', async () => {
@@ -130,21 +129,21 @@ describe('UpdateCategoryUsecase Integration Tests', () => {
 				...("description" in i.input && { description: i.input.description }),
 				...("is_active" in i.input && { is_active: i.input.is_active }),
 			});
-			const entityUpdated = await repository.findById(new Uuid(i.input.id));
+			const entityUpdated = await repository.findById(new CastMemberId(i.input.id));
 			expect(output).toStrictEqual({
 				id: i.expected.id,
 				name: i.expected.name,
 				description: i.expected.description,
 				is_active: i.expected.is_active,
-				created_at: entityUpdated.created_at,
+				created_at: entityUpdated?.created_at,
 			});
 
-			expect(entityUpdated.toJSON()).toStrictEqual({
+			expect(entityUpdated?.toJSON()).toStrictEqual({
 				category_id: entity.category_id.id,
 				name: i.expected.name,
 				description: i.expected.description,
 				is_active: i.expected.is_active,
-				created_at: entityUpdated.created_at,
+				created_at: entityUpdated?.created_at,
 			});
 		}
 	});

@@ -1,5 +1,4 @@
-import {Category} from "@core/category/domain/category.entity";
-import {HttpStatus} from "@nestjs/common";
+import {Category} from "@core/category/domain/category.aggregate";
 
 const _keysInResponse = [
 	'id',

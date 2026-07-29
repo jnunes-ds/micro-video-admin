@@ -1,8 +1,7 @@
 import {CategoryModel} from "../category.model";
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
-import {Category} from "@core/category/domain/category.entity";
-import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
+import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {CategoryModelMapper} from "@core/category/infra/db/sequelize/category_model_mapper";
 import {CategorySearchParams, CategorySearchResult} from "@core/category/domain/category.repository";
@@ -22,17 +21,17 @@ describe('CategorySequelizeRepository Integration Test', () => {
 		await repository.insert(category);
 
 		const model = await CategoryModel.findByPk(category.category_id.id);
-		expect(model.toJSON()).toMatchObject(category.toJSON());
+		expect(model?.toJSON()).toMatchObject(category.toJSON());
 	});
 
 	it('should find a category by id', async () => {
-		let foundedCategory = await repository.findById(new Uuid());
+		let foundedCategory = await repository.findById(new CastMemberId());
 		expect(foundedCategory).toBeNull();
 
 		const category = Category.fake().aCategory().build();
 		await repository.insert(category);
 		foundedCategory = await repository.findById(category.category_id);
-		expect(foundedCategory.toJSON()).toMatchObject(category.toJSON());
+		expect(foundedCategory?.toJSON()).toMatchObject(category.toJSON());
 	});
 
 	it('should return all categories', async () => {
@@ -59,7 +58,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 		await repository.update(category);
 
 		const foundedCategory = await repository.findById(category.category_id);
-		expect(category.toJSON()).toStrictEqual(foundedCategory.toJSON());
+		expect(category.toJSON()).toStrictEqual(foundedCategory?.toJSON());
 	});
 
 	it('should throw an error on delete when the category is not found', async () => {
@@ -100,7 +99,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 			});
 			searchOutput.items.forEach(item => {
 				expect(item).toBeInstanceOf(Category);
-				expect(item.category_id).toBeInstanceOf(Uuid);
+				expect(item.category_id).toBeInstanceOf(CastMemberId);
 				expect(item.name).toBe('Movie');
 				expect(item.description).toBeNull();
 				expect(item.is_active).toBeTruthy();

@@ -1,8 +1,9 @@
 import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_category/update_category.usecase";
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
-import {InvalidUuidError, Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
+import {InvalidUuidError} from "@core/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category} from "@core/category/domain/category.entity";
+import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
+import {UpdateCategoryInput} from "@core/category/application/usecases/update_category/update_category.input";
 
 
 describe('UpdateCategoryUsecase Unit Tests', () => {
@@ -19,11 +20,11 @@ describe('UpdateCategoryUsecase Unit Tests', () => {
 			() => usecase.execute({id: 'fake id', name: 'fake'})
 		).rejects.toThrow(new InvalidUuidError());
 
-		const uuid = new Uuid();
+		const categoryId = new CastMemberId();
 
 		await expect(
-			() => usecase.execute({id: uuid.id, name: 'fake'})
-		).rejects.toThrow(new NotFoundError(uuid, Category));
+			() => usecase.execute({id: categoryId.id, name: 'fake'})
+		).rejects.toThrow(new NotFoundError(categoryId, Category));
 	});
 
 	it('should update a category', async () => {
@@ -124,12 +125,12 @@ describe('UpdateCategoryUsecase Unit Tests', () => {
 		];
 
 		for (const i of arrange) {
-			output = await usecase.execute({
+			output = await usecase.execute(new UpdateCategoryInput({
 				id: i.input.id,
 				...("name" in i.input && { name: i.input.name }),
 				...("description" in i.input && { description: i.input.description }),
 				...("is_active" in i.input && { is_active: i.input.is_active }),
-			});
+			}));
 
 			expect(output).toStrictEqual({
 				id: i.expected.id,

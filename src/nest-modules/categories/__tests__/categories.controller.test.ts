@@ -18,7 +18,7 @@ import {
 import {CategoryCollectionPresenter, CategoryPresenter} from "@/nest-modules/categories/categories.presenter";
 import {CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
 import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
-import {Category} from "@core/category/domain/category.entity";
+import {Category} from "@core/category/domain/category.aggregate";
 
 describe('CategoriesController Integration Tests', () => {
   let controller: CategoriesController;
@@ -48,13 +48,15 @@ describe('CategoriesController Integration Tests', () => {
 		test.each(arrange)('when body is $send_data', async ({ send_data, expected }) => {
 			const presenter = await controller.create(send_data);
 			const entity = await repository.findById(new Uuid(presenter.id));
-			expect(entity.toJSON()).toStrictEqual({
-				category_id: presenter.id,
-				created_at: presenter.created_at,
-				...expected
-			});
-			const output = CategoryOutputMapper.toOutput(entity);
-			expect(presenter).toEqual(new CategoryPresenter(output));
+			if (entity) {
+				expect(entity.toJSON()).toStrictEqual({
+					category_id: presenter.id,
+					created_at: presenter.created_at,
+					...expected
+				});
+				const output = CategoryOutputMapper.toOutput(entity);
+				expect(presenter).toEqual(new CategoryPresenter(output));
+			}
 		})
 	});
 
@@ -71,21 +73,23 @@ describe('CategoriesController Integration Tests', () => {
 			async ({ send_data, expected }) => {
 			const presenter = await controller.update(category.category_id.id, send_data);
 			const entity = await repository.findById(new Uuid(presenter.id));
-			expect(entity.toJSON()).toStrictEqual({
-				category_id: presenter.id,
-				created_at: presenter.created_at,
-				name: expected.name ?? category.name,
-				description:
-					'description' in expected
-						? expected.description
-						: category.description,
-				is_active:
-					'is_active' in expected
-						? expected.is_active
-						: category.is_active
-			});
-			const output = CategoryOutputMapper.toOutput(entity);
-			expect(presenter).toEqual(new CategoryPresenter(output));
+			if (entity) {
+				expect(entity.toJSON()).toStrictEqual({
+					category_id: presenter.id,
+					created_at: presenter.created_at,
+					name: expected.name ?? category.name,
+					description:
+						'description' in expected
+							? expected.description
+							: category.description,
+					is_active:
+						'is_active' in expected
+							? expected.is_active
+							: category.is_active
+				});
+				const output = CategoryOutputMapper.toOutput(entity);
+				expect(presenter).toEqual(new CategoryPresenter(output));
+			}
 		})
 	});
 

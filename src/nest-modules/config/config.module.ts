@@ -71,7 +71,7 @@ export class ConfigModule extends NestConfigModule {
 		return super.forRoot({
 			isGlobal: true,
 			envFilePath: [
-				...(Array.isArray(envFilePath) ? envFilePath : [envFilePath]),
+				...(Array.isArray(envFilePath) ? envFilePath : envFilePath ? [envFilePath] : []),
 				join(process.cwd(), 'envs', `.env.${process.env.NODE_ENV}`),
 				join(process.cwd(), 'envs', `.env`),
 			],

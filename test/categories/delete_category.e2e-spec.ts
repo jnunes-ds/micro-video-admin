@@ -2,7 +2,7 @@ import request from 'supertest';
 import { ICategoryRepository } from '@/core/category/domain/category.repository';
 import {startApp} from "@/nest-modules/shared/testing/helpers/start_app.helper";
 import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers";
-import {Category} from "@core/category/domain/category.entity";
+import {Category} from "@core/category/domain/category.aggregate";
 import {HttpStatus} from "@nestjs/common";
 
 describe('CategoriesController (e2e)', () => {

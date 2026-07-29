@@ -3,16 +3,17 @@ import {SequelizeModule} from "@nestjs/sequelize";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {ConfigService} from "@nestjs/config";
 import {CONFIG_SCHEMA_TYPE} from "@/nest-modules/config/config.module";
+import {CastMemberModel} from "@core/cast_member/infra/db/sequelize/cast_member.model";
 
 type Dialect = CONFIG_SCHEMA_TYPE['DB_VENDOR'];
 
-const models =[CategoryModel];
+const models =[CategoryModel, CastMemberModel];
 
 @Module({
 	imports: [
 		SequelizeModule.forRootAsync({
 			useFactory: (configService: ConfigService<CONFIG_SCHEMA_TYPE>) => {
-				const dbVendor: Dialect = configService.get('DB_VENDOR');
+				const dbVendor: Dialect | undefined = configService.get('DB_VENDOR');
 				if (dbVendor === 'sqlite') {
 					return {
 						dialect: dbVendor,

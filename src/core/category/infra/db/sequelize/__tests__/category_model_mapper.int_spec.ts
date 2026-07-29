@@ -2,8 +2,7 @@ import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {CategoryModelMapper} from "@core/category/infra/db/sequelize/category_model_mapper";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
-import {Category} from "@core/category/domain/category.entity";
-import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
+import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
 
 
 describe('CategoryModelMapper Integration Test', () => {
@@ -15,7 +14,9 @@ describe('CategoryModelMapper Integration Test', () => {
 		expect.assertions(2)
 		const model = CategoryModel.build({
 			category_id: '850704d1-806c-4a35-81c2-e535f36a07ae',
-			name: 'a'.repeat(256)
+			name: 'a'.repeat(256),
+			is_active: false,
+			created_at: new Date()
 		});
 		try {
 			CategoryModelMapper.toEntity(model);
@@ -49,7 +50,7 @@ describe('CategoryModelMapper Integration Test', () => {
 
 		expect(entity.toJSON()).toStrictEqual(
 			new Category({
-				category_id: new Uuid(category_id),
+				category_id: new CastMemberId(category_id),
 				name,
 				description,
 				is_active,
@@ -66,7 +67,7 @@ describe('CategoryModelMapper Integration Test', () => {
 		const created_at = new Date();
 
 		const entity = new Category({
-			category_id: new Uuid(category_id),
+			category_id: new CastMemberId(category_id),
 			name,
 			description,
 			is_active,
