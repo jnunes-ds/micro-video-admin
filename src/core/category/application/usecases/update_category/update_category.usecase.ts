@@ -2,7 +2,7 @@ import {IUseCase} from "@core/@shared/application/usecase.interface";
 import {UpdateCategoryInput} from "@core/category/application/usecases/update_category/update_category.input";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {CategoryOutput, CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
 
@@ -11,7 +11,7 @@ export class UpdateCategoryUsecase
 	constructor(private categoryRepo: ICategoryRepository) {}
 
 	async execute(input: UpdateCategoryInput): Promise<UpdateCategoryOutput> {
-		const categoryId = new CastMemberId(input.id);
+		const categoryId = new CategoryId(input.id);
 		const category = await this.categoryRepo.findById(categoryId);
 
 		if (!category) {
