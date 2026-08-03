@@ -1,6 +1,8 @@
 import {AggregateRoot} from "@core/@shared/domain/aggregate_root";
 import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {CategoryId} from "@core/category/domain/category.aggregate";
+import {GenreValidatorFactory} from "@core/genre/domain/genre.validator";
+import {GenreFakeBuilder} from "@core/genre/domain/genre_fake.builder";
 
 export type GenreConstructorProps = {
 	gende_id?: GenreId;
@@ -41,7 +43,7 @@ export class Genre extends AggregateRoot {
 				props.categories_id.map((category_id) => [category_id.id, category_id])
 			)
 		});
-		// validate
+		genre.validate();
 		return genre;
 	}
 
@@ -86,6 +88,16 @@ export class Genre extends AggregateRoot {
 			is_active: this.is_active,
 			created_at: this.created_at
 		}
+	}
+
+	public validate() {
+		const validator = GenreValidatorFactory.create();
+		return validator.validate(this.notification, this);
+
+	}
+
+	public static fake() {
+		return GenreFakeBuilder;
 	}
 
 	private categories_id_from_map_to_array(categoriesId: Map<string, CategoryId>): string[] {
