@@ -2,7 +2,7 @@ import {GetCategoryUsecase} from "@core/category/application/usecases/get_catego
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {InvalidUuidError} from "@core/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 
 
 describe('GetCategoryUsecase Unit Tests', () => {
@@ -19,7 +19,7 @@ describe('GetCategoryUsecase Unit Tests', () => {
 			() => usecase.execute({id: 'fake id'})
 		).rejects.toThrow(new InvalidUuidError());
 
-		const categoryId = new CastMemberId();
+		const categoryId = new CategoryId();
 
 		await expect(
 			() => usecase.execute({id: categoryId.id })

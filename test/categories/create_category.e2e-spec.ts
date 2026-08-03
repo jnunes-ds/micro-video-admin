@@ -7,7 +7,7 @@ import {CategoriesController} from "@/nest-modules/categories/categories.control
 import {CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
 import {instanceToPlain} from "class-transformer";
 import {HttpStatus} from "@nestjs/common";
-import { CastMemberId } from '@core/category/domain/category.aggregate';
+import { CategoryId } from '@core/category/domain/category.aggregate';
 
 describe('CategoriesController (e2e)', () => {
 	const appHelper = startApp();
@@ -74,7 +74,7 @@ describe('CategoriesController (e2e)', () => {
 				expect(Object.keys(res.body)).toStrictEqual(['data']);
 				expect(Object.keys(res.body.data)).toStrictEqual(keysInReponse);
 				const id = res.body.data.id;
-				const createdCategory = await categoryRepo.findById(new CastMemberId(id));
+				const createdCategory = await categoryRepo.findById(new CategoryId(id));
 				if (createdCategory) {
 					const presenter = CategoriesController.serialize(
 						CategoryOutputMapper.toOutput(createdCategory)

@@ -3,7 +3,7 @@ import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/cat
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 
 
 describe('GetCategoryUsecase Integration Tests', () => {
@@ -18,7 +18,7 @@ describe('GetCategoryUsecase Integration Tests', () => {
 	});
 
 	it('should throws an error when entity is not found', async () => {
-		const categoryId = new CastMemberId();
+		const categoryId = new CategoryId();
 
 		await expect(
 			() => usecase.execute({id: categoryId.id })

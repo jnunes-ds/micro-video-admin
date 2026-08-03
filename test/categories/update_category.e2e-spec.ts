@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { instanceToPlain } from 'class-transformer';
 import {startApp} from "@/nest-modules/shared/testing/helpers/start_app.helper";
-import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {UpdateCategoryFixture} from "@/nest-modules/categories/testing/category_fixture";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers";
@@ -116,7 +116,7 @@ describe('CategoriesController (e2e)', () => {
 					expect(Object.keys(res.body)).toStrictEqual(['data']);
 					expect(Object.keys(res.body.data)).toStrictEqual(keyInResponse);
 					const id = res.body.data.id;
-					const categoryUpdated = await categoryRepo.findById(new CastMemberId(id));
+					const categoryUpdated = await categoryRepo.findById(new CategoryId(id));
 					const presenter = CategoriesController.serialize(
 						CategoryOutputMapper.toOutput(categoryUpdated!),
 					);

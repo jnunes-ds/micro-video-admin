@@ -2,7 +2,7 @@ import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {InvalidUuidError} from "@core/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
-import {Category, CastMemberId} from "@core/category/domain/category.aggregate";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {UpdateCategoryInput} from "@core/category/application/usecases/update_category/update_category.input";
 
 
@@ -20,7 +20,7 @@ describe('UpdateCategoryUsecase Unit Tests', () => {
 			() => usecase.execute({id: 'fake id', name: 'fake'})
 		).rejects.toThrow(new InvalidUuidError());
 
-		const categoryId = new CastMemberId();
+		const categoryId = new CategoryId();
 
 		await expect(
 			() => usecase.execute({id: categoryId.id, name: 'fake'})

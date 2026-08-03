@@ -1,4 +1,4 @@
-import {Category, CastMemberId} from "../category.aggregate";
+import {Category, CategoryId} from "../category.aggregate";
 
 describe('Category Unit Tests', () => {
 
@@ -49,10 +49,10 @@ describe('Category Unit Tests', () => {
 	});
 
 	describe('category_id field', () => {
-		const arrange: {category_id: CastMemberId}[] = [{category_id: null as never}, {category_id: undefined as never}, {category_id: new CastMemberId()}];
+		const arrange: {category_id: CategoryId}[] = [{category_id: null as never}, {category_id: undefined as never}, {category_id: new CategoryId()}];
 		test.each(arrange)('id = %j', ({category_id}) => {
 			const category = Category.fake().aCategory().withCategoryId(category_id).build();
-			expect(category.category_id).toBeInstanceOf(CastMemberId);
+			expect(category.category_id).toBeInstanceOf(CategoryId);
 		});
 	});
 
@@ -64,7 +64,7 @@ describe('Category Unit Tests', () => {
 				.withDescription(null)
 				.build();
 
-			expect(category.category_id).toBeInstanceOf(CastMemberId);
+			expect(category.category_id).toBeInstanceOf(CategoryId);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
 			expect(category.is_active).toBeTruthy();
@@ -78,7 +78,7 @@ describe('Category Unit Tests', () => {
 				.withDescription('Movie description')
 				.build();
 
-			expect(category.category_id).toBeInstanceOf(CastMemberId);
+			expect(category.category_id).toBeInstanceOf(CategoryId);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBe('Movie description');
 			expect(category.is_active).toBeTruthy();
@@ -93,7 +93,7 @@ describe('Category Unit Tests', () => {
 				.activate()
 				.build();
 
-			expect(category.category_id).toBeInstanceOf(CastMemberId);
+			expect(category.category_id).toBeInstanceOf(CategoryId);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
 			expect(category.is_active).toBeTruthy();
@@ -108,7 +108,7 @@ describe('Category Unit Tests', () => {
 				.deactivate()
 				.build();
 
-			expect(category.category_id).toBeInstanceOf(CastMemberId);
+			expect(category.category_id).toBeInstanceOf(CategoryId);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
 			expect(category.is_active).toBeFalsy();
@@ -125,7 +125,7 @@ describe('Category Unit Tests', () => {
 				.withCreatedAt(created_at)
 				.build();
 
-			expect(category.category_id).toBeInstanceOf(CastMemberId);
+			expect(category.category_id).toBeInstanceOf(CategoryId);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
 			expect(category.is_active).toBeTruthy();
@@ -140,7 +140,7 @@ describe('Category Unit Tests', () => {
 				is_active: false,
 				created_at
 			});
-			expect(category.category_id).toBeInstanceOf(CastMemberId);
+			expect(category.category_id).toBeInstanceOf(CategoryId);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBe('Movie description');
 			expect(category.is_active).toBeFalsy();
@@ -157,7 +157,7 @@ describe('Category Unit Tests', () => {
 				.activate()
 				.build();
 
-			expect(category.category_id).toBeInstanceOf(CastMemberId);
+			expect(category.category_id).toBeInstanceOf(CategoryId);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
 			expect(category.is_active).toBeTruthy();
@@ -172,7 +172,7 @@ describe('Category Unit Tests', () => {
 				.activate()
 				.build();
 
-			expect(category.category_id).toBeInstanceOf(CastMemberId);
+			expect(category.category_id).toBeInstanceOf(CategoryId);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBe('Movie description');
 			expect(category.is_active).toBeTruthy();
@@ -187,7 +187,7 @@ describe('Category Unit Tests', () => {
 				.activate()
 				.build();
 
-			expect(category.category_id).toBeInstanceOf(CastMemberId);
+			expect(category.category_id).toBeInstanceOf(CategoryId);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
 			expect(category.is_active).toBeTruthy();
@@ -199,7 +199,7 @@ describe('Category Unit Tests', () => {
 				name: 'Movie',
 				is_active: false
 			});
-			expect(category.category_id).toBeInstanceOf(CastMemberId);
+			expect(category.category_id).toBeInstanceOf(CategoryId);
 			expect(category.name).toBe('Movie');
 			expect(category.description).toBeNull();
 			expect(category.is_active).toBeFalsy();
