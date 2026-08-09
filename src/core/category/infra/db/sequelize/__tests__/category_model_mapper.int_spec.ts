@@ -1,6 +1,6 @@
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
-import {CategoryModelMapper} from "@core/category/infra/db/sequelize/category_model_mapper";
+import {CategoryModelMapper} from "@core/category/infra/db/sequelize/category.model.mapper";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
 import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 
