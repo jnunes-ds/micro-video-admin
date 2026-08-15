@@ -1,7 +1,7 @@
 import {DataType} from "sequelize-typescript";
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
-import {GenreCategoryModel, GenreModel} from "@core/genre/infra/sequelize/genre.model";
+import {GenreCategoryModel, GenreModel, GenreModelProps} from "@core/genre/infra/sequelize/genre.model";
 
 describe('GenreModel Integration Test', () => {
 	setupSequelize({
@@ -76,7 +76,7 @@ describe('GenreModel Integration Test', () => {
 
 	test('creation', async () => {
 		//arrange
-		const arrange = {
+		const arrange: Omit<GenreModelProps, 'categories_id'> = {
 			genre_id: '850704d1-806c-4a35-81c2-e535f36a07ae',
 			name: 'test',
 			is_active: true,
@@ -84,7 +84,7 @@ describe('GenreModel Integration Test', () => {
 		};
 
 		//act
-		const genre = await GenreModel.create(arrange);
+		const genre = await GenreModel.create(arrange as GenreModelProps);
 
 		//assert
 		expect(genre.toJSON()).toStrictEqual(arrange);
@@ -104,7 +104,7 @@ describe('GenreModel Integration Test', () => {
 			name: 'test',
 			is_active: true,
 			created_at: new Date(),
-		});
+		} as GenreModelProps);
 
 		//act
 		const genreCategory = await GenreCategoryModel.create({
