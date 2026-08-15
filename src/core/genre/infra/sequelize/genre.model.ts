@@ -5,6 +5,7 @@ export type GenreModelProps = {
 	genre_id: string;
 	name: string;
 	is_active: boolean;
+	categories_id: GenreCategoryModel[],
 	created_at: Date;
 }
 

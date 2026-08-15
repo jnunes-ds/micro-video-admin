@@ -1,5 +1,8 @@
-import {CategoryId} from "@core/category/domain/category.aggregate";
+import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {SearchParams, SearchParamsConstructorProps} from "@core/@shared/domain/repository/search_params";
+import {ISearchableRepository} from "@core/@shared/domain/repository/repository_interface";
+import {CategoryFilter, CategorySearchParams, CategorySearchResult} from "@core/category/domain/category.repository";
+import {Genre, GenreId} from "@core/genre/domain/genre.aggregate";
 
 
 export type GenreFilter = {
@@ -53,3 +56,11 @@ export class GenreSearchParams extends SearchParams<GenreFilter> {
 		this._filter = Object.keys(filter).length === 0 ? null : filter;
 	}
 }
+
+export interface IGenreRepository
+	extends ISearchableRepository<
+		Genre,
+		GenreId,
+		GenreFilter,
+		GenreSearchParams
+	> {}
