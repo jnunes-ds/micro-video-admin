@@ -12,7 +12,7 @@ import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 
 describe('GenreSequelizeRepository Integration Test', () => {
 	setupSequelize({
-		models: [GenreModel, GenreCategoryModel, CategoryModel]
+		models: [GenreModel, GenreCategoryModel, CategoryModel],
 	});
 
 	let repository: GenreSequelizeRepository;
