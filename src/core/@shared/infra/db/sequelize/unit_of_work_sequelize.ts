@@ -41,7 +41,8 @@ export class UnitOfWorkSequelize implements IUnitOfWork{
 				return result;
 			});
 		} catch (e) {
-			if (isAutoTransaction) this.transaction?.rollback();
+			// a managed transaction (sequelize.transaction(fn)) already rolled itself
+			// back when workFn threw, so rolling back again would throw over the real error
 			this.transaction = null;
 			throw e;
 		}
