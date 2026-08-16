@@ -1,4 +1,4 @@
-import {Op} from "sequelize";
+	import {literal, Op} from "sequelize";
 import {GenreFilter, GenreSearchParams, IGenreRepository} from "@core/genre/domain/genre.repository";
 import {SortDirection} from "@core/@shared/domain/repository/search_params";
 import {GenreCategoryModel, GenreModel} from "@core/genre/infra/sequelize/genre.model";
@@ -150,42 +150,102 @@ export class GenreSequelizeRepository implements IGenreRepository {
 	async search(props: GenreSearchParams): Promise<SearchResult<Genre>> {
 		const offset = (props.page - 1) * props.per_page;
 		const limit = props.per_page;
+		const genreCategoryRelation =
+			this.genreModel.associations.categories_id.target;
+		const genreTableName = this.genreModel.getTableName();
+		const genreCategoryTableName = genreCategoryRelation.getTableName();
+		const genreAlias = this.genreModel.name;
 
-		const where: any = {};
+		const wheres: any[] = [];
 
-		if (props.filter?.name) {
-			where.name = {[Op.like]: `%${props.filter.name}%`};
-		}
-
-		if (props.filter?.categories_id?.length) {
-			const genreIds = await this._filterGenreIdsByCategoriesId(props.filter.categories_id);
-
-			if (!genreIds.length) {
-				return new SearchResult({
-					items: [],
-					current_page: props.page,
-					per_page: props.per_page,
-					total: 0
+		if (props?.filter) {
+			if (props.filter?.name) {
+				wheres.push({
+					field: 'name',
+					value: `%${props.filter?.name}%`,
+					get condition() {
+						return {
+							[this.field]: {
+								[Op.like]: this.value
+							}
+						}
+					},
+					rawCondition: `${genreAlias}.name Like :name`
 				});
 			}
 
-			where.genre_id = {[Op.in]: genreIds};
+			if (props.filter?.categories_id) {
+				wheres.push({
+					field: 'categories_id',
+					value: props.filter.categories_id.map(c => c.id),
+					get condition() {
+						return {
+							['$categories_id.category_id$']: {
+								[Op.in]: this.value
+							}
+						}
+					},
+					rawCondition: `${genreCategoryTableName}.category_id IN (:categories_id)`
+				});
+			}
 		}
 
-		const {rows: models, count} = await this.genreModel.findAndCountAll({
-			...(Object.keys(where).length && {where}),
-			...(props.sort && this.sortableFields.includes(props.sort)
-				? {order: this.formatSort(props.sort, props.sort_dir!)}
-				: {order: [['created_at', 'desc']]}),
-			include: ['categories_id'],
-			transaction: this.uow.getTransaction(),
+		const orderBy: string = props.sort && this.sortableFields.includes(props.sort)
+			? this.formatSort(props.sort, props.sort_dir!)
+			: `${genreAlias}.\`created_at\` DESC`;
+
+		const count: number = await this.genreModel.count({
 			distinct: true,
-			offset,
-			limit
+			include: props.filter?.categories_id && ['categories_id'].filter(i => i),
+			where: wheres.length ? { [Op.and]: wheres.map(w => w.condition) } : {},
+			transaction: this.uow.getTransaction()
+		});
+
+		const columnOrder = orderBy
+			.replace('binary', '')
+			.trim()
+			.split(' ')[0];
+
+		const query = [
+			'SELECT',
+			`DISTINCT ${genreAlias}.\`genre_id\`,${columnOrder} FROM ${genreTableName} as ${genreAlias}`,
+			props.filter?.categories_id
+				? `INNER JOIN ${genreCategoryTableName} ON ${genreAlias}.\`genre_id\` = ${genreCategoryTableName}.\`genre_id\``
+				: '',
+			wheres.length
+				? `WHERE ${wheres.map(w => w.rawCondition).join(' AND ')}`
+				: '',
+			`ORDER BY ${orderBy}`,
+			`LIMIT ${limit}`,
+			`OFFSET ${offset}`
+		];
+
+		const [idResult] = await this.genreModel.sequelize!.query(
+			query.join(' '),
+			{
+				replacements: wheres.reduce(
+					(acc, w) => ({ ...acc, [w.field]: w.value }),
+					{}
+				),
+				transaction: this.uow.getTransaction()
+			}
+		);
+
+		const models = await this.genreModel.findAll({
+			where: {
+				genre_id: {
+					[Op.in]: idResult.map(
+						(id: {genre_id: string}) => id.genre_id,
+					) as string[]
+				},
+			},
+			include: ['categories_id'],
+			order: literal(orderBy),
+			transaction: this.uow.getTransaction()
 		});
 
 		return new SearchResult({
-			items: models.map((model) => GenreModelMapper.toEntity(model)),
+			items: models.map(m => GenreModelMapper.toEntity(m)),
 			current_page: props.page,
 			per_page: props.per_page,
 			total: count
