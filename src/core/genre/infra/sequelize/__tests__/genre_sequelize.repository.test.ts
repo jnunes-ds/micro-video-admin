@@ -24,6 +24,14 @@ describe('GenreSequelizeRepository Integration Test', () => {
 		uow = new UnitOfWorkSequelize(sequelizeHelper.sequelize);
 		repository = new GenreSequelizeRepository(GenreModel, uow);
 		categoryRepository = new CategorySequelizeRepository(CategoryModel);
+		repository.orderBy = {
+			mysql: {
+				name: (sort_dir: SortDirection) => `binary ${GenreModel.name}.name ${sort_dir}`
+			},
+			sqlite: {
+				name: (sort_dir: SortDirection) => `${GenreModel.name}.name ${sort_dir}`
+			}
+		} as any;
 	});
 
 	it('should have Genre as the entity', () => {
@@ -504,14 +512,16 @@ describe('GenreSequelizeRepository Integration Test', () => {
 		});
 
 		it('should order by created_at DESC when search params are null', async () => {
-			const category = Category.fake().aCategory().build();
-			await categoryRepository.insert(category);
+			const categories = Category.fake().theCategories(3).build();
+			await categoryRepository.bulkInsert(categories);
 
 			const created_at = new Date();
 			const genres = Genre.fake()
 				.theGenres(16)
 				.withName('Movie')
-				.addCategoryId(category.category_id)
+				.addCategoryId(categories[0].category_id)
+				.addCategoryId(categories[1].category_id)
+				.addCategoryId(categories[2].category_id)
 				.withCreatedAt(index => new Date(created_at.getTime() + index * 100))
 				.build();
 
