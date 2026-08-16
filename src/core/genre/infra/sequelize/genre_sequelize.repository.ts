@@ -6,6 +6,7 @@ import {Genre, GenreId} from "@core/genre/domain/genre.aggregate";
 import {GenreModelMapper} from "@core/genre/infra/sequelize/genre.model.mapper";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {SearchResult} from "@core/@shared/domain/repository/search_result";
+import {UnitOfWorkSequelize} from "@core/@shared/infra/db/sequelize/unit_of_work_sequelize";
 
 export class GenreSequelizeRepository implements IGenreRepository {
 	sortableFields: string [] = [ 'name', 'created_at'];
@@ -15,17 +16,24 @@ export class GenreSequelizeRepository implements IGenreRepository {
 		}
 	};
 
-	constructor(private genreModel: typeof GenreModel) {}
+	constructor(
+		private genreModel: typeof GenreModel,
+		private uow: UnitOfWorkSequelize
+	) {}
 
 	async insert(entity: Genre): Promise<void> {
 		await this.genreModel.create(GenreModelMapper.toModelProps(entity), {
-			include: ['categories_id']
+			include: ['categories_id'],
+			transaction: this.uow.getTransaction()
 		});
 	}
 
 	async bulkInsert(entities: Genre[]): Promise<void> {
 		const models = entities.map(e => GenreModelMapper.toModelProps(e));
-		await this.genreModel.bulkCreate(models, {include: ['categories_id']});
+		await this.genreModel.bulkCreate(models, {
+			include: ['categories_id'],
+			transaction: this.uow.getTransaction()
+		});
 	}
 
 	async findById(entity_id: GenreId): Promise<Genre | null> {
@@ -34,7 +42,10 @@ export class GenreSequelizeRepository implements IGenreRepository {
 	}
 
 	async findAll(): Promise<Genre[]> {
-		const models = await this.genreModel.findAll({include: ['categories_id']});
+		const models = await this.genreModel.findAll({
+			include: ['categories_id'],
+			transaction: this.uow.getTransaction()
+		});
 		return models.map((model) => GenreModelMapper.toEntity(model));
 	}
 
@@ -46,6 +57,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
 				},
 			},
 			include: ['categories_id'],
+			transaction: this.uow.getTransaction()
 		});
 		return models.map((m) => GenreModelMapper.toEntity(m));
 	}
@@ -61,6 +73,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
 
 		const existsGenreModels = await this.genreModel.findAll({
 			attributes: ['genre_id'],
+			transaction: this.uow.getTransaction(),
 			where: {
 				genre_id: {
 					[Op.in]: ids.map((id) => id.id),
@@ -97,6 +110,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
 		const {categories_id, ...props} = GenreModelMapper.toModelProps(aggregate);
 
 		await this.genreModel.update(props, {
+			transaction: this.uow.getTransaction(),
 			where: {
 				genre_id: aggregate.gende_id.id
 			}
@@ -116,15 +130,21 @@ export class GenreSequelizeRepository implements IGenreRepository {
 
 		await genreCategoryRelation.destroy({where: {genre_id: id}});
 
-		const affectedRows = await this.genreModel.destroy({where: {genre_id: id}});
+		const affectedRows = await this.genreModel.destroy({
+			transaction: this.uow.getTransaction(),
+			where: {genre_id: id}
+		});
 
 		if (affectedRows !== 1) {
 			throw new NotFoundError(id, this.getEntity());
 		}
 	}
 
-	private _get(id: string) {
-		return this.genreModel.findByPk(id, {include: ['categories_id']});
+	private _get(id: string): Promise<GenreModel | null> {
+		return this.genreModel.findByPk(id, {
+			include: ['categories_id'],
+			transaction: this.uow.getTransaction()
+		});
 	}
 
 	async search(props: GenreSearchParams): Promise<SearchResult<Genre>> {
@@ -158,6 +178,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
 				? {order: this.formatSort(props.sort, props.sort_dir!)}
 				: {order: [['created_at', 'desc']]}),
 			include: ['categories_id'],
+			transaction: this.uow.getTransaction(),
 			distinct: true,
 			offset,
 			limit
