@@ -3,6 +3,7 @@ import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {CategoryId} from "@core/category/domain/category.aggregate";
 import {GenreValidatorFactory} from "@core/genre/domain/genre.validator";
 import {GenreFakeBuilder} from "@core/genre/domain/genre_fake.builder";
+import {EntityId} from "@core/@shared/domain/entity";
 
 export type GenreConstructorProps = {
 	genre_id?: GenreId;
@@ -18,7 +19,7 @@ export type GenreCreateCommand = {
 	is_active?: boolean;
 }
 
-export class GenreId extends Uuid {}
+export class GenreId extends EntityId {}
 
 export class Genre extends AggregateRoot {
 	genre_id: GenreId;
