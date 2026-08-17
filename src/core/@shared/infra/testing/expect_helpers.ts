@@ -1,12 +1,6 @@
-
-
-// type Expected = {
-// 	validator: ClassValidatorFields<any>;
-// 	data: any;
-// } | (() => any);
-
 import {Notification} from "@core/@shared/domain/validators/notification";
 import {FieldsErrors} from "@core/@shared/domain/validators/validator_fields.interface";
+import {ValueObject} from "@core/@shared/domain/value_object";
 
 expect.extend({
 	notificationContainsErrorMessages(
@@ -38,6 +32,20 @@ expect.extend({
 					)}. Current: ${JSON.stringify(expected.toJSON())}`,
 			};
 	},
+	toBeValueObject(
+		expect: ValueObject,
+		received: ValueObject,
+	) {
+		return expect.equals(received)
+			? { pass: true, message: () => '' }
+			: {
+				pass: false,
+				message: () =>
+					`The values object are not equal. Expected: ${JSON.stringify(
+						expect,
+					)} | Received: ${JSON.stringify(received)}`
+			}
+	}
 });
 
 function isValid() {
