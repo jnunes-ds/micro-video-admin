@@ -75,7 +75,7 @@ describe('GenreModelMapper Integration Test', () => {
 
 		expect(entity.toJSON()).toStrictEqual(
 			new Genre({
-				gende_id: new GenreId(genre_id),
+				genre_id: new GenreId(genre_id),
 				name,
 				categories_id: new Map([
 					[category1.category_id, new CategoryId(category1.category_id)],
@@ -94,7 +94,7 @@ describe('GenreModelMapper Integration Test', () => {
 		const created_at = new Date();
 
 		const entity = new Genre({
-			gende_id: new GenreId(genre_id),
+			genre_id: new GenreId(genre_id),
 			name: 'test',
 			categories_id: new Map([
 				[category_id_1.id, category_id_1],

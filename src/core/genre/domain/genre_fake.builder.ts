@@ -78,8 +78,8 @@ export class GenreFakeBuilder<TBuild = any> {
 					)
 					: [new CategoryId()];
 
-				const genre = new Genre({
-					gende_id: !this._genre_id
+				return new Genre({
+					genre_id: !this._genre_id
 						? undefined
 						: this.callFactory(this._genre_id, index),
 					name: this.callFactory(this._name, index),
@@ -94,7 +94,6 @@ export class GenreFakeBuilder<TBuild = any> {
 						created_at: this.callFactory(this._created_at, index),
 					}),
 				});
-				return genre;
 			});
 		// @ts-ignore
 		return this.countObjs === 1 ? (genres[0] as any) : genres;

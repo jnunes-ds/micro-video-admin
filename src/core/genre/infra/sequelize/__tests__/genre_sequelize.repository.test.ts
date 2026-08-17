@@ -51,8 +51,8 @@ describe('GenreSequelizeRepository Integration Test', () => {
 		await repository.insert(genre);
 		await uow.commit();
 
-		const foundedGenre = await repository.findById(genre.gende_id);
-		expect(foundedGenre!.gende_id).toBeValueObject(genre.gende_id);
+		const foundedGenre = await repository.findById(genre.genre_id);
+		expect(foundedGenre!.genre_id).toBeValueObject(genre.genre_id);
 		expect(foundedGenre!.toJSON()).toStrictEqual(genre.toJSON());
 	});
 
@@ -69,8 +69,8 @@ describe('GenreSequelizeRepository Integration Test', () => {
 		await repository.insert(genre);
 		await uow.commit();
 
-		const foundedGenre = await repository.findById(genre.gende_id);
-		expect(foundedGenre!.gende_id).toBeValueObject(genre.gende_id);
+		const foundedGenre = await repository.findById(genre.genre_id);
+		expect(foundedGenre!.genre_id).toBeValueObject(genre.genre_id);
 		expect(foundedGenre!.toJSON()).toStrictEqual({
 			...genre.toJSON(),
 			categories_id: expect.arrayContaining(genre.toJSON().categories_id)
@@ -100,9 +100,9 @@ describe('GenreSequelizeRepository Integration Test', () => {
 		expect(foundedGenres).toHaveLength(3);
 		genres.forEach(genre => {
 			const foundedGenre = foundedGenres.find(g =>
-				g.gende_id.equals(genre.gende_id)
+				g.genre_id.equals(genre.genre_id)
 			);
-			expect(foundedGenre!.gende_id).toBeValueObject(genre.gende_id);
+			expect(foundedGenre!.genre_id).toBeValueObject(genre.genre_id);
 		});
 	});
 
@@ -119,20 +119,20 @@ describe('GenreSequelizeRepository Integration Test', () => {
 		await repository.insert(genre);
 		await uow.commit();
 
-		const byId = await repository.findById(genre.gende_id);
-		expect(byId!.gende_id).toBeValueObject(genre.gende_id);
+		const byId = await repository.findById(genre.genre_id);
+		expect(byId!.genre_id).toBeValueObject(genre.genre_id);
 
 		const [fromFindAll] = await repository.findAll();
-		expect(fromFindAll.gende_id).toBeValueObject(genre.gende_id);
+		expect(fromFindAll.genre_id).toBeValueObject(genre.genre_id);
 
-		const [fromFindByIds] = await repository.findByIds([genre.gende_id]);
-		expect(fromFindByIds.gende_id).toBeValueObject(genre.gende_id);
+		const [fromFindByIds] = await repository.findByIds([genre.genre_id]);
+		expect(fromFindByIds.genre_id).toBeValueObject(genre.genre_id);
 
-		const {exists} = await repository.existsById([genre.gende_id]);
-		expect(exists[0]).toBeValueObject(genre.gende_id);
+		const {exists} = await repository.existsById([genre.genre_id]);
+		expect(exists[0]).toBeValueObject(genre.genre_id);
 
 		const searchOutput = await repository.search(GenreSearchParams.create({}));
-		expect(searchOutput.items[0].gende_id).toBeValueObject(genre.gende_id);
+		expect(searchOutput.items[0].genre_id).toBeValueObject(genre.genre_id);
 	});
 
 	it('should return null when the genre is not found by id', async () => {
@@ -153,8 +153,8 @@ describe('GenreSequelizeRepository Integration Test', () => {
 		await repository.insert(genre);
 		await uow.commit();
 
-		const foundedGenre = await repository.findById(genre.gende_id);
-		expect(foundedGenre!.gende_id).toBeValueObject(genre.gende_id);
+		const foundedGenre = await repository.findById(genre.genre_id);
+		expect(foundedGenre!.genre_id).toBeValueObject(genre.genre_id);
 		expect(foundedGenre!.toJSON()).toStrictEqual(genre.toJSON());
 	});
 
@@ -171,8 +171,8 @@ describe('GenreSequelizeRepository Integration Test', () => {
 		await repository.insert(genre);
 
 		// still uncommitted: the read joins the open transaction and sees the genre
-		const foundedGenre = await repository.findById(genre.gende_id);
-		expect(foundedGenre!.gende_id).toBeValueObject(genre.gende_id);
+		const foundedGenre = await repository.findById(genre.genre_id);
+		expect(foundedGenre!.genre_id).toBeValueObject(genre.genre_id);
 
 		await uow.commit();
 	});
@@ -209,17 +209,17 @@ describe('GenreSequelizeRepository Integration Test', () => {
 		await uow.commit();
 
 		const foundedGenres = await repository.findByIds([
-			genres[0].gende_id,
-			genres[1].gende_id,
+			genres[0].genre_id,
+			genres[1].genre_id,
 			new GenreId()
 		]);
 
 		expect(foundedGenres).toHaveLength(2);
 		[genres[0], genres[1]].forEach(genre => {
 			const foundedGenre = foundedGenres.find(g =>
-				g.gende_id.equals(genre.gende_id)
+				g.genre_id.equals(genre.genre_id)
 			);
-			expect(foundedGenre!.gende_id).toBeValueObject(genre.gende_id);
+			expect(foundedGenre!.genre_id).toBeValueObject(genre.genre_id);
 		});
 	});
 
@@ -245,12 +245,12 @@ describe('GenreSequelizeRepository Integration Test', () => {
 
 			const notExistentId = new GenreId();
 			const {exists, not_exists} = await repository.existsById([
-				genre.gende_id,
+				genre.genre_id,
 				notExistentId
 			]);
 
 			expect(exists).toHaveLength(1);
-			expect(exists[0]).toBeValueObject(genre.gende_id);
+			expect(exists[0]).toBeValueObject(genre.genre_id);
 			expect(not_exists).toHaveLength(1);
 			expect(not_exists[0]).toBeValueObject(notExistentId);
 		});
@@ -261,7 +261,7 @@ describe('GenreSequelizeRepository Integration Test', () => {
 
 		await uow.start();
 		await expect(repository.update(genre)).rejects.toThrow(
-			new NotFoundError(genre.gende_id.id, Genre)
+			new NotFoundError(genre.genre_id.id, Genre)
 		);
 		await uow.rollback();
 	});
@@ -290,8 +290,8 @@ describe('GenreSequelizeRepository Integration Test', () => {
 		await repository.update(genre);
 		await uow.commit();
 
-		const foundedGenre = await repository.findById(genre.gende_id);
-		expect(foundedGenre!.gende_id).toBeValueObject(genre.gende_id);
+		const foundedGenre = await repository.findById(genre.genre_id);
+		expect(foundedGenre!.genre_id).toBeValueObject(genre.genre_id);
 		expect(foundedGenre!.toJSON()).toStrictEqual({
 			...genre.toJSON(),
 			categories_id: expect.arrayContaining(genre.toJSON().categories_id)
@@ -329,12 +329,12 @@ describe('GenreSequelizeRepository Integration Test', () => {
 		await uow.commit();
 
 		await uow.start();
-		await repository.delete(genre.gende_id);
+		await repository.delete(genre.genre_id);
 		await uow.commit();
 
-		await expect(repository.findById(genre.gende_id)).resolves.toBeNull();
+		await expect(repository.findById(genre.genre_id)).resolves.toBeNull();
 		await expect(
-			GenreCategoryModel.count({where: {genre_id: genre.gende_id.id}})
+			GenreCategoryModel.count({where: {genre_id: genre.genre_id.id}})
 		).resolves.toBe(0);
 	});
 
@@ -352,9 +352,9 @@ describe('GenreSequelizeRepository Integration Test', () => {
 			await repository.insert(genre);
 			await uow.rollback();
 
-			await expect(repository.findById(genre.gende_id)).resolves.toBeNull();
+			await expect(repository.findById(genre.genre_id)).resolves.toBeNull();
 			await expect(
-				GenreCategoryModel.count({where: {genre_id: genre.gende_id.id}})
+				GenreCategoryModel.count({where: {genre_id: genre.genre_id.id}})
 			).resolves.toBe(0);
 		});
 
@@ -395,7 +395,7 @@ describe('GenreSequelizeRepository Integration Test', () => {
 			await repository.update(genre);
 			await uow.rollback();
 
-			const foundedGenre = await repository.findById(genre.gende_id);
+			const foundedGenre = await repository.findById(genre.genre_id);
 			expect(foundedGenre!.name).toBe('Movie');
 			expect(foundedGenre!.categories_id.size).toBe(1);
 			expect(
@@ -417,17 +417,17 @@ describe('GenreSequelizeRepository Integration Test', () => {
 			await uow.commit();
 
 			await uow.start();
-			await repository.delete(genre.gende_id);
+			await repository.delete(genre.genre_id);
 			await uow.rollback();
 
-			const foundedGenre = await repository.findById(genre.gende_id);
-			expect(foundedGenre!.gende_id).toBeValueObject(genre.gende_id);
+			const foundedGenre = await repository.findById(genre.genre_id);
+			expect(foundedGenre!.genre_id).toBeValueObject(genre.genre_id);
 			expect(foundedGenre!.toJSON()).toStrictEqual(genre.toJSON());
 			expect(
 				foundedGenre!.categories_id.get(category.category_id.id)
 			).toBeValueObject(category.category_id);
 			await expect(
-				GenreCategoryModel.count({where: {genre_id: genre.gende_id.id}})
+				GenreCategoryModel.count({where: {genre_id: genre.genre_id.id}})
 			).resolves.toBe(1);
 		});
 
@@ -444,8 +444,8 @@ describe('GenreSequelizeRepository Integration Test', () => {
 				await repository.insert(genre);
 			});
 
-			const foundedGenre = await repository.findById(genre.gende_id);
-			expect(foundedGenre!.gende_id).toBeValueObject(genre.gende_id);
+			const foundedGenre = await repository.findById(genre.genre_id);
+			expect(foundedGenre!.genre_id).toBeValueObject(genre.genre_id);
 		});
 
 		it('should roll back the work done inside uow.do when it throws', async () => {
@@ -464,7 +464,7 @@ describe('GenreSequelizeRepository Integration Test', () => {
 				})
 			).rejects.toThrow('workFn error');
 
-			await expect(repository.findById(genre.gende_id)).resolves.toBeNull();
+			await expect(repository.findById(genre.genre_id)).resolves.toBeNull();
 		});
 
 		it('should throw an error on commit and rollback when no transaction was started', async () => {
@@ -503,7 +503,7 @@ describe('GenreSequelizeRepository Integration Test', () => {
 			});
 			searchOutput.items.forEach(item => {
 				expect(item).toBeInstanceOf(Genre);
-				expect(item.gende_id).toBeInstanceOf(GenreId);
+				expect(item.genre_id).toBeInstanceOf(GenreId);
 				expect(item.name).toBe('Movie');
 				expect(item.is_active).toBeTruthy();
 				expect(item.created_at).toEqual(created_at);
@@ -644,7 +644,7 @@ describe('GenreSequelizeRepository Integration Test', () => {
 						per_page: 2,
 						filter: {categories_id: [categories[0].category_id]}
 					}),
-					expected: {ids: [genres[0].gende_id, genres[1].gende_id], total: 2}
+					expected: {ids: [genres[0].genre_id, genres[1].genre_id], total: 2}
 				},
 				{
 					params: GenreSearchParams.create({
@@ -657,7 +657,7 @@ describe('GenreSequelizeRepository Integration Test', () => {
 							]
 						}
 					}),
-					expected: {ids: [genres[0].gende_id, genres[1].gende_id], total: 3}
+					expected: {ids: [genres[0].genre_id, genres[1].genre_id], total: 3}
 				},
 				{
 					params: GenreSearchParams.create({
@@ -670,7 +670,7 @@ describe('GenreSequelizeRepository Integration Test', () => {
 							]
 						}
 					}),
-					expected: {ids: [genres[2].gende_id], total: 3}
+					expected: {ids: [genres[2].genre_id], total: 3}
 				}
 			];
 
@@ -679,7 +679,7 @@ describe('GenreSequelizeRepository Integration Test', () => {
 				expect(searchOutput.total).toBe(item.expected.total);
 				expect(searchOutput.items).toHaveLength(item.expected.ids.length);
 				item.expected.ids.forEach((genre_id, index) => {
-					expect(searchOutput.items[index].gende_id).toBeValueObject(genre_id);
+					expect(searchOutput.items[index].genre_id).toBeValueObject(genre_id);
 				});
 			}
 		});

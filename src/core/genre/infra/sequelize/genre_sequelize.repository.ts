@@ -94,7 +94,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
 
 
 	async update(aggregate: Genre): Promise<void> {
-		const id = aggregate.gende_id.id;
+		const id = aggregate.genre_id.id;
 
 		const model = await this._get(id);
 
@@ -112,7 +112,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
 		await this.genreModel.update(props, {
 			transaction: this.uow.getTransaction(),
 			where: {
-				genre_id: aggregate.gende_id.id
+				genre_id: aggregate.genre_id.id
 			}
 		});
 

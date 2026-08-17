@@ -1,5 +1,6 @@
 import {Genre, GenreId} from "../genre.aggregate";
-import {CategoryId} from "../../../category/domain/category.aggregate";
+import {CategoryId} from "@core/category/domain/category.aggregate";
+
 
 describe('Genre Unit Tests', () => {
 
@@ -87,7 +88,7 @@ describe('Genre Unit Tests', () => {
 
 	it('should returns the entity_id', () => {
 		const genre = Genre.fake().aGenre().build();
-		expect(genre.entity_id).toBe(genre.gende_id);
+		expect(genre.entity_id).toBe(genre.genre_id);
 	});
 
 	it('should returns all genre info with a JSON format', () => {
@@ -102,7 +103,7 @@ describe('Genre Unit Tests', () => {
 			.build();
 
 		expect(genre.toJSON()).toStrictEqual({
-			genre_id: genre.gende_id.id,
+			genre_id: genre.genre_id.id,
 			name: 'Drama',
 			categories_id: [categoryId.id],
 			is_active: false,
@@ -118,7 +119,7 @@ describe('Genre Unit Tests', () => {
 		];
 		test.each(arrange)('id = %j', ({gende_id}) => {
 			const genre = Genre.fake().aGenre().withGenreId(gende_id).build();
-			expect(genre.gende_id).toBeInstanceOf(GenreId);
+			expect(genre.genre_id).toBeInstanceOf(GenreId);
 		});
 	});
 
@@ -130,7 +131,7 @@ describe('Genre Unit Tests', () => {
 				categories_id: new Map([[categoryId.id, categoryId]]),
 			});
 
-			expect(genre.gende_id).toBeInstanceOf(GenreId);
+			expect(genre.genre_id).toBeInstanceOf(GenreId);
 			expect(genre.name).toBe('Drama');
 			expect(genre.categories_id).toEqual(
 				new Map([[categoryId.id, categoryId]]),
@@ -147,7 +148,7 @@ describe('Genre Unit Tests', () => {
 				is_active: false,
 			});
 
-			expect(genre.gende_id).toBeInstanceOf(GenreId);
+			expect(genre.genre_id).toBeInstanceOf(GenreId);
 			expect(genre.name).toBe('Drama');
 			expect(genre.is_active).toBeFalsy();
 			expect(genre.created_at).toBeInstanceOf(Date);
@@ -158,14 +159,14 @@ describe('Genre Unit Tests', () => {
 			const gende_id = new GenreId();
 			const categoryId = new CategoryId();
 			const genre = new Genre({
-				gende_id,
+				genre_id: gende_id,
 				name: 'Drama',
 				categories_id: new Map([[categoryId.id, categoryId]]),
 				is_active: false,
 				created_at,
 			});
 
-			expect(genre.gende_id).toBe(gende_id);
+			expect(genre.genre_id).toBe(gende_id);
 			expect(genre.name).toBe('Drama');
 			expect(genre.categories_id).toEqual(
 				new Map([[categoryId.id, categoryId]]),
@@ -183,7 +184,7 @@ describe('Genre Unit Tests', () => {
 				categories_id: [categoryId],
 			});
 
-			expect(genre.gende_id).toBeInstanceOf(GenreId);
+			expect(genre.genre_id).toBeInstanceOf(GenreId);
 			expect(genre.name).toBe('Drama');
 			expect(genre.categories_id).toEqual(
 				new Map([[categoryId.id, categoryId]]),
@@ -217,7 +218,7 @@ describe('Genre Unit Tests', () => {
 				is_active: false,
 			});
 
-			expect(genre.gende_id).toBeInstanceOf(GenreId);
+			expect(genre.genre_id).toBeInstanceOf(GenreId);
 			expect(genre.name).toBe('Drama');
 			expect(genre.is_active).toBeFalsy();
 			expect(genre.created_at).toBeInstanceOf(Date);
