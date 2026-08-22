@@ -69,5 +69,4 @@ describe("DeleteGenreUseacase Integration Tests", () => {
 		const genres = await genreRepo.findAll();
 		expect(genres.length).toEqual(1);
 	});
-
 });
