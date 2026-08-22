@@ -63,7 +63,7 @@ describe('GenresController Integration tests', () => {
   });
 
   describe('create genres', () => {
-    it('should create a genre', async () => {
+    test('create a genre', async () => {
       const category = Category.fake().aCategory().build();
       await categoryRepo.insert(category);
 
@@ -88,7 +88,7 @@ describe('GenresController Integration tests', () => {
   });
 
   describe('update genres', () => {
-    it('should update a genre', async () => {
+    test('update a genre', async () => {
       const category1 = Category.fake().aCategory().build();
       const category2 = Category.fake().aCategory().build();
       await categoryRepo.bulkInsert([category1, category2]);
@@ -121,7 +121,7 @@ describe('GenresController Integration tests', () => {
     });
   });
 
-  it('genre deletion', async () => {
+  test('genre deletion', async () => {
     const category = Category.fake().aCategory().build();
     await categoryRepo.insert(category);
     const genre = Genre.fake().aGenre().addCategoryId(category.category_id).build();
@@ -131,7 +131,7 @@ describe('GenresController Integration tests', () => {
     await expect(genreRepo.findById(genre.genre_id)).resolves.toBeNull();
   });
 
-  it('if we can get a genre', async () => {
+  test('if we can get a genre', async () => {
     const category = Category.fake().aCategory().build();
     await categoryRepo.insert(category);
 
@@ -151,7 +151,7 @@ describe('GenresController Integration tests', () => {
   });
 
   describe('search method', () => {
-    it('should return genres using pagination, sort and filter', async () => {
+    test('if return genres using pagination, sort and filter', async () => {
       const category = Category.fake().aCategory().build();
       await categoryRepo.insert(category);
 
