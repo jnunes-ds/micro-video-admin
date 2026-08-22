@@ -17,7 +17,7 @@ describe('UpdateCategoryUsecase Integration Tests', () => {
 		usecase = new UpdateCategoryUsecase(repository);
 	});
 
-	it('should throws an error when entity is not found', async () => {
+	test('if throws an error when entity is not found', async () => {
 		const categoryId = new CategoryId();
 
 		await expect(
@@ -25,7 +25,7 @@ describe('UpdateCategoryUsecase Integration Tests', () => {
 		).rejects.toThrow(new NotFoundError(categoryId, Category));
 	});
 
-	it('should update a category', async () => {
+	test('if update a category', async () => {
 		const spyUpdate = jest.spyOn(repository, 'update');
 		const entity = Category.fake()
 			.aCategory()

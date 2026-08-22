@@ -22,7 +22,7 @@ describe('CreateCastMemberUsecase Integration Tests', () => {
 		usecase = new CreateCastMemberUsecase(repository);
 	});
 
-	it('should create a cast member', async () => {
+	test('create cast member', async () => {
 		let input: CreateCastMemberInput = {name: 'test', type: CastMemberTypes.ACTOR};
 		let output = await usecase.execute(input);
 		let entity = await repository.findById(new CastMemberId(output.cast_member_id));

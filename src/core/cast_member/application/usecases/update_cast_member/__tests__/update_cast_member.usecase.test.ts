@@ -23,7 +23,7 @@ describe('UpdateCast<e,erUsecase Integration Tests', () => {
 		usecase = new UpdateCastMemberUsecase(repository);
 	});
 
-	it('should throws an error when entity is not found', async () => {
+	test('if throws an error when entity is not found', async () => {
 		const castMemberId = new CastMemberId();
 
 		await expect(
@@ -31,7 +31,7 @@ describe('UpdateCast<e,erUsecase Integration Tests', () => {
 		).rejects.toThrow(new NotFoundError(castMemberId, CastMember));
 	});
 
-	it('should update a cast member', async () => {
+	test('update cast member', async () => {
 		const spyUpdate = jest.spyOn(repository, 'update');
 		const entity = CastMember.fake()
 			.anActor()

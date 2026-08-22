@@ -19,7 +19,7 @@ describe('DeleteCastMemberUsecase Integration Tests', () => {
 		usecase = new DeleteCastMemberUsecase(repository);
 	});
 
-	it('should throws an error when entity is not found', async () => {
+	test('if throws an error when entity is not found', async () => {
 		const castMemberId = new CastMemberId();
 
 		await expect(
@@ -27,7 +27,7 @@ describe('DeleteCastMemberUsecase Integration Tests', () => {
 		).rejects.toThrow(new NotFoundError(castMemberId, CastMember));
 	});
 
-	it('should delete a cast member', async () => {
+	test('delete cast member', async () => {
 		const castMember = CastMember.fake().anActor().build();
 		await repository.insert(castMember);
 		await usecase.execute({ id: castMember.cast_member_id.id });

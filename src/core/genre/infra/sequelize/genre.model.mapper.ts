@@ -21,7 +21,7 @@ export class GenreModelMapper {
 
 		const genre = new Genre({
 			...rest,
-			gende_id: new GenreId(id),
+			genre_id: new GenreId(id),
 			categories_id: new Map(categoriesId.map(c => [c.id, c])),
 		});
 
@@ -42,7 +42,7 @@ export class GenreModelMapper {
 			...rest,
 			categories_id: categories_id.map(
 				category_id => new GenreCategoryModel({
-					genre_id: aggregate.gende_id.id,
+					genre_id: aggregate.genre_id.id,
 					category_id
 				})
 			)

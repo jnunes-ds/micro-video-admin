@@ -3,6 +3,7 @@ import {AggregateRoot} from "@core/@shared/domain/aggregate_root";
 import {CastMemberType} from "@core/cast_member/domain/cast-member-type.vo";
 import {CastMemberFakeBuilder} from "@core/cast_member/domain/cast_member_fake_builder";
 import CastMemberValidatorFactory from "@core/cast_member/domain/validators/cast_member.validator";
+import {EntityId} from "@core/@shared/domain/entity";
 
 export type CastMemberConstructorProps = {
 	cast_member_id?: CastMemberId;
@@ -23,7 +24,7 @@ export type CastMemberCreateCommand = {
 	type: CastMemberType;
 }
 
-export class CastMemberId extends Uuid {}
+export class CastMemberId extends EntityId {}
 
 export class CastMember extends AggregateRoot {
 	cast_member_id: CastMemberId;

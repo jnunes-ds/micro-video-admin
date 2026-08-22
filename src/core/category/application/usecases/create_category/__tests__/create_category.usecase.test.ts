@@ -17,7 +17,7 @@ describe('CreateCategoryUsecase Integration Tests', () => {
 		usecase = new CreatecategoryUsecase(repository);
 	});
 
-	it('should create a category', async () => {
+	test('create category', async () => {
 		let input: CreateCategoryInput = {name: 'test'};
 		let output = await usecase.execute(input);
 		let entity = await repository.findById(new CastMemberId(output.id));

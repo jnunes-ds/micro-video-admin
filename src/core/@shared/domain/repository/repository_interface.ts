@@ -1,7 +1,10 @@
-import {Entity} from "@core/@shared/domain/entity";
+import {Entity, EntityId} from "@core/@shared/domain/entity";
 import {ValueObject} from "@core/@shared/domain/value_object";
 import {SearchParams} from "@core/@shared/domain/repository/search_params";
 import {SearchResult} from "@core/@shared/domain/repository/search_result";
+import {Genre, GenreId} from "@core/genre/domain/genre.aggregate";
+import {Op} from "sequelize";
+import {GenreModelMapper} from "@core/genre/infra/sequelize/genre.model.mapper";
 
 
 export interface IRepository<
@@ -14,6 +17,11 @@ export interface IRepository<
 	delete(entity_id: Id): Promise<void>;
 
 	findById(entity_id: Id): Promise<E | null>;
+	findByIds(ids: EntityId[]): Promise<E[]>;
+	existsById(ids: EntityId[]): Promise<{
+		exists: EntityId[];
+		not_exists: EntityId[];
+	}>;
 	findAll(): Promise<E[]>;
 
 	getEntity(): new (...args: any[]) => E;
@@ -24,7 +32,7 @@ export interface ISearchableRepository<
 	Id extends ValueObject,
 	Filter = string,
 	SearchInput = SearchParams<Filter>,
-	SearchOutput = SearchResult,
+	SearchOutput = SearchResult<E>,
 > extends IRepository<E, Id> {
 	sortableFields: string[];
 	search(props: SearchInput): Promise<SearchOutput>;

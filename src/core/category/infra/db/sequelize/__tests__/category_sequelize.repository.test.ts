@@ -16,7 +16,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 		repository = new CategorySequelizeRepository(CategoryModel);
 	});
 
-	it('should insert a new category', async () => {
+	test('insert new category', async () => {
 		const category = Category.fake().aCategory().build();
 		await repository.insert(category);
 
@@ -24,7 +24,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 		expect(model?.toJSON()).toMatchObject(category.toJSON());
 	});
 
-	it('should find a category by id', async () => {
+	test('if find a category by id', async () => {
 		let foundedCategory = await repository.findById(new CategoryId());
 		expect(foundedCategory).toBeNull();
 
@@ -34,7 +34,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 		expect(foundedCategory?.toJSON()).toMatchObject(category.toJSON());
 	});
 
-	it('should return all categories', async () => {
+	test('return all categories', async () => {
 		const categories = Category.fake().theCategories(3).build();
 		await repository.bulkInsert(categories);
 		const categoriesList = await repository.findAll();
@@ -43,14 +43,14 @@ describe('CategorySequelizeRepository Integration Test', () => {
 		expect(JSON.stringify(categories)).toBe(JSON.stringify(categoriesList));
 	});
 
-	it('should throw an error on update when the category is not found', async () => {
+	test('if throw an error on update when the category is not found', async () => {
 		const category = Category.fake().aCategory().build();
 		await expect(repository.update(category)).rejects.toThrow(
 			new NotFoundError(category.category_id.id, Category)
 		);
 	});
 
-	it('should update a category', async () => {
+	test('update category', async () => {
 		const category = Category.fake().aCategory().withName('Movie').build();
 		await repository.insert(category);
 
@@ -61,14 +61,14 @@ describe('CategorySequelizeRepository Integration Test', () => {
 		expect(category.toJSON()).toStrictEqual(foundedCategory?.toJSON());
 	});
 
-	it('should throw an error on delete when the category is not found', async () => {
+	test('if throw an error on delete when the category is not found', async () => {
 		const category = Category.fake().aCategory().build();
 		await expect(repository.delete(category.category_id)).rejects.toThrow(
 			new NotFoundError(category.category_id.id, Category)
 		);
 	});
 
-	it('should delete a category', async () => {
+	test('delete category', async () => {
 		const category = Category.fake().aCategory().build();
 		await repository.insert(category);
 
@@ -77,7 +77,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 	});
 
 	describe('search method tests', () => {
-		it('should only apply paginate when other params are null', async () => {
+		test('if only apply paginate when other params are null', async () => {
 			const created_at = new Date();
 			const categories = Category.fake()
 				.theCategories(16)
@@ -108,7 +108,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 
 		});
 
-		it('should order by created_at DESC when search params are null', async () => {
+		test('if order by created_at DESC when search params are null', async () => {
 			const created_at = new Date();
 			const categories = Category.fake()
 				.theCategories(16)
@@ -126,7 +126,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 			})
 		});
 
-		it('should apply paginate and filter', async () => {
+		test('if apply paginate and filter', async () => {
 			const categories = [
 				Category.fake()
 					.aCategory()
@@ -187,7 +187,7 @@ describe('CategorySequelizeRepository Integration Test', () => {
 			);
 		});
 
-		it('should apply paginate and sort', async () => {
+		test('if apply paginate and sort', async () => {
 			expect(repository.sortableFields).toStrictEqual(['name', 'created_at']);
 
 			const categories = [

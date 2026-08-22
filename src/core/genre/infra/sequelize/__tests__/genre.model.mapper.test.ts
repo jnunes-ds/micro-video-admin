@@ -10,7 +10,7 @@ describe('GenreModelMapper Integration Test', () => {
 		models: [GenreModel, GenreCategoryModel, CategoryModel]
 	});
 
-	it('should throws an error when genre name is not valid', () => {
+	test('if throws an error when genre name is not valid', () => {
 		const model = GenreModel.build({
 			genre_id: '850704d1-806c-4a35-81c2-e535f36a07ae',
 			name: 'a'.repeat(256),
@@ -22,7 +22,7 @@ describe('GenreModelMapper Integration Test', () => {
 		expect(() => GenreModelMapper.toEntity(model)).toThrow(Error);
 	});
 
-	it('should throws an error when genre has no categories_id', () => {
+	test('if throws an error when genre has no categories_id', () => {
 		const model = GenreModel.build({
 			genre_id: '850704d1-806c-4a35-81c2-e535f36a07ae',
 			name: 'test',
@@ -34,7 +34,7 @@ describe('GenreModelMapper Integration Test', () => {
 		expect(() => GenreModelMapper.toEntity(model)).toThrow(Error);
 	});
 
-	it('should convert a genre model to a genre entity', async () => {
+	test('if convert a genre model to a genre entity', async () => {
 		const category1 = await CategoryModel.create({
 			category_id: '5490020a-e866-4229-9adc-aa44b83234c4',
 			name: 'category1',
@@ -75,7 +75,7 @@ describe('GenreModelMapper Integration Test', () => {
 
 		expect(entity.toJSON()).toStrictEqual(
 			new Genre({
-				gende_id: new GenreId(genre_id),
+				genre_id: new GenreId(genre_id),
 				name,
 				categories_id: new Map([
 					[category1.category_id, new CategoryId(category1.category_id)],
@@ -87,14 +87,14 @@ describe('GenreModelMapper Integration Test', () => {
 		);
 	});
 
-	it('should convert a genre entity to a genre model props', () => {
+	test('if convert a genre entity to a genre model props', () => {
 		const genre_id = '850704d1-806c-4a35-81c2-e535f36a07ae';
 		const category_id_1 = new CategoryId();
 		const category_id_2 = new CategoryId();
 		const created_at = new Date();
 
 		const entity = new Genre({
-			gende_id: new GenreId(genre_id),
+			genre_id: new GenreId(genre_id),
 			name: 'test',
 			categories_id: new Map([
 				[category_id_1.id, category_id_1],

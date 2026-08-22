@@ -3,9 +3,10 @@ import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {CategoryId} from "@core/category/domain/category.aggregate";
 import {GenreValidatorFactory} from "@core/genre/domain/genre.validator";
 import {GenreFakeBuilder} from "@core/genre/domain/genre_fake.builder";
+import {EntityId} from "@core/@shared/domain/entity";
 
 export type GenreConstructorProps = {
-	gende_id?: GenreId;
+	genre_id?: GenreId;
 	name: string;
 	categories_id: Map<string, CategoryId>;
 	is_active?: boolean;
@@ -18,10 +19,10 @@ export type GenreCreateCommand = {
 	is_active?: boolean;
 }
 
-export class GenreId extends Uuid {}
+export class GenreId extends EntityId {}
 
 export class Genre extends AggregateRoot {
-	gende_id: GenreId;
+	genre_id: GenreId;
 	name: string;
 	categories_id: Map<string, CategoryId>;
 	is_active: boolean;
@@ -29,7 +30,7 @@ export class Genre extends AggregateRoot {
 
 	constructor(props: GenreConstructorProps) {
 		super();
-		this.gende_id = props.gende_id ?? new GenreId();
+		this.genre_id = props.genre_id ?? new GenreId();
 		this.name = props.name;
 		this.categories_id = props.categories_id;
 		this.is_active = props.is_active ?? true;
@@ -77,12 +78,12 @@ export class Genre extends AggregateRoot {
 	}
 
 	get entity_id(): GenreId {
-		return this.gende_id;
+		return this.genre_id;
 	}
 
 	public toJSON() {
 		return {
-			genre_id: this.gende_id.id,
+			genre_id: this.genre_id.id,
 			name: this.name,
 			categories_id: this.categories_id_from_map_to_array(this.categories_id),
 			is_active: this.is_active,

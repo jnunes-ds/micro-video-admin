@@ -44,8 +44,8 @@ describe('GenreFakeBuilder Unit Test', () => {
 			fakerMany.build();
 
 			expect(mockFactory).toHaveBeenCalledTimes(2);
-			expect(fakerMany.build()[0].gende_id).toBe(genreId);
-			expect(fakerMany.build()[1].gende_id).toBe(genreId);
+			expect(fakerMany.build()[0].genre_id).toBe(genreId);
+			expect(fakerMany.build()[1].genre_id).toBe(genreId);
 		});
 	});
 
@@ -239,7 +239,7 @@ describe('GenreFakeBuilder Unit Test', () => {
 		const faker = GenreFakeBuilder.aGenre();
 		let genre = faker.build();
 
-		expect(genre.gende_id).toBeInstanceOf(GenreId);
+		expect(genre.genre_id).toBeInstanceOf(GenreId);
 		expect(typeof genre.name === 'string').toBeTruthy();
 		expect(genre.categories_id).toBeInstanceOf(Map);
 		expect(genre.categories_id.size).toBe(1);
@@ -257,7 +257,7 @@ describe('GenreFakeBuilder Unit Test', () => {
 			.withCreatedAt(created_at)
 			.build();
 
-		expect(genre.gende_id.id).toBe(genre_id.id);
+		expect(genre.genre_id.id).toBe(genre_id.id);
 		expect(genre.name).toBe('name test');
 		expect(genre.categories_id).toEqual(
 			new Map([[categoryId.id, categoryId]]),
@@ -271,7 +271,7 @@ describe('GenreFakeBuilder Unit Test', () => {
 		let genres = faker.build();
 
 		genres.forEach((genre) => {
-			expect(genre.gende_id).toBeInstanceOf(GenreId);
+			expect(genre.genre_id).toBeInstanceOf(GenreId);
 			expect(typeof genre.name === 'string').toBeTruthy();
 			expect(genre.categories_id).toBeInstanceOf(Map);
 			expect(genre.categories_id.size).toBe(1);
@@ -291,7 +291,7 @@ describe('GenreFakeBuilder Unit Test', () => {
 			.build();
 
 		genres.forEach((genre) => {
-			expect(genre.gende_id.id).toBe(genre_id.id);
+			expect(genre.genre_id.id).toBe(genre_id.id);
 			expect(genre.name).toBe('name test');
 			expect(genre.categories_id).toEqual(
 				new Map([[categoryId.id, categoryId]]),
