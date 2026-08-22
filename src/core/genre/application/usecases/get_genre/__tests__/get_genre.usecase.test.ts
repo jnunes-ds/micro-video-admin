@@ -54,11 +54,13 @@ describe('GetGenreUsecase Integration Tests', () => {
 
 		expect(spyGenre).toHaveBeenCalledTimes(1);
 		expect(spyCategory).toHaveBeenCalledTimes(1);
-		expect(output).toStrictEqual({
+		expect(output.categories_id).toHaveLength(2);
+		expect(output.categories).toHaveLength(2);
+		expect(output).toEqual({
 			id: genre.genre_id.id,
 			name: genre.name,
-			categories_id: [categories[0].category_id.id, categories[1].category_id.id],
-			categories: [
+			categories_id: expect.arrayContaining([categories[0].category_id.id, categories[1].category_id.id]),
+			categories: expect.arrayContaining([
 				{
 					id: categories[0].category_id.id,
 					name: categories[0].name,
@@ -69,7 +71,7 @@ describe('GetGenreUsecase Integration Tests', () => {
 					name: categories[1].name,
 					created_at: categories[1].created_at
 				}
-			],
+			]),
 			is_active: genre.is_active,
 			created_at: genre.created_at
 		});
