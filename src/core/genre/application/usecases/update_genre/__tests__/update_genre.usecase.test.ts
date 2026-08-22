@@ -1,5 +1,5 @@
 import {UnitOfWorkSequelize} from "@core/@shared/infra/db/sequelize/unit_of_work_sequelize";
-import {UpdateGenreUsecase} from "@core/genre/application/update_genre/update_genre.usecase";
+import {UpdateGenreUsecase} from "@core/genre/application/usecases/update_genre/update_genre.usecase";
 import {GenreSequelizeRepository} from "@core/genre/infra/sequelize/genre_sequelize.repository";
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {

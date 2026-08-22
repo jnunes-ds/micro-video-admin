@@ -1,6 +1,6 @@
 import {IUseCase} from "@core/@shared/application/usecase.interface";
-import {UpdateGenreInput} from "@core/genre/application/update_genre/update_genre.input";
-import {GenreOutput, GenreOutputMapper} from "@core/genre/application/common/genre_output";
+import {UpdateGenreInput} from "@core/genre/application/usecases/update_genre/update_genre.input";
+import {GenreOutput, GenreOutputMapper} from "@core/genre/application/usecases/common/genre_output";
 import {IUnitOfWork} from "@core/@shared/domain/repository/unit_of_work.interface";
 import {IGenreRepository} from "@core/genre/domain/genre.repository";
 import {ICategoryRepository} from "@core/category/domain/category.repository";

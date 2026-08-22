@@ -2,14 +2,14 @@ import {IUnitOfWork} from "@core/@shared/domain/repository/unit_of_work.interfac
 import {IGenreRepository} from "@core/genre/domain/genre.repository";
 import {Genre} from "@core/genre/domain/genre.aggregate";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
-import {GenreOutput, GenreOutputMapper} from "@core/genre/application/common/genre_output";
+import {GenreOutput, GenreOutputMapper} from "@core/genre/application/usecases/common/genre_output";
 import {IUseCase} from "@core/@shared/application/usecase.interface";
-import {CreateGenreInput} from "@core/genre/application/create_genre/create_genre.input";
+import {CreateGenreInput} from "@core/genre/application/usecases/create_genre/create_genre.input";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {
     CategoriesIdsExistsInStorageValidator
 } from "@core/category/application/validations/categories_ids_exists_in_storage.validator";
-import {Notification} from "../../../@shared/domain/validators/notification";
+import {Notification} from "@core/@shared/domain/validators/notification";
 
 export type CreateGenreOutput = GenreOutput;
 

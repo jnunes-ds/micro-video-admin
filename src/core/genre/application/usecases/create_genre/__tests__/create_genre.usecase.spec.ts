@@ -1,4 +1,4 @@
-import {CreateGenreUsecase} from "@core/genre/application/create_genre/create_genre.usecase";
+import {CreateGenreUsecase} from "@core/genre/application/usecases/create_genre/create_genre.usecase";
 import {GenreInMemoryRepository} from "@core/genre/infra/in_memory/genre_in_memory.repository";
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {

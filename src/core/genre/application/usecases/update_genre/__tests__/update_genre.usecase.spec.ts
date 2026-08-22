@@ -1,4 +1,4 @@
-import {UpdateGenreUsecase} from "@core/genre/application/update_genre/update_genre.usecase";
+import {UpdateGenreUsecase} from "@core/genre/application/usecases/update_genre/update_genre.usecase";
 import {GenreInMemoryRepository} from "@core/genre/infra/in_memory/genre_in_memory.repository";
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {UnitOfWorkFakeInMemory} from "@core/@shared/infra/db/in_memory/fake_unit_of_work_in_memory";
