@@ -14,7 +14,7 @@ import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers
   ],
   exports: [
     CATEGORY_PROVIDERS.REPOSITORIES.CATEGORY_REPOSITORY.provide,
-    CATEGORY_PROVIDERS.VALIDATORS.CATEGORIES_IDS_EXISTS_IN_STORAGE_VALIDATOR.provide,
+    CATEGORY_PROVIDERS.VALIDATORS.CATEGORIES_IDS_EXISTS_IN_DATABASE_VALIDATOR.provide,
   ]
 })
 export class CategoriesModule {}
