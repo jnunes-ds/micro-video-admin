@@ -38,13 +38,13 @@ describe('UpdateGenreUsecase integration tests', () => {
 	});
 
 	describe('execute method', () => {
-		it('should throw an error when genre not found', async () => {
+		test('if throw an error when genre not found', async () => {
 			await expect(
 				usecase.execute({ id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479', name: 'test' })
 			).rejects.toThrow(new NotFoundError('f47ac10b-58cc-4372-a567-0e02b2c3d479', Genre));
 		});
 
-		it('should throw an entity validation error when categories id not exists', async () => {
+		test('if throw an entity validation error when categories id not exists', async () => {
 			expect.assertions(3);
 			const category = Category.create({ name: 'c1' });
 			await categoryRepo.insert(category);
@@ -81,7 +81,7 @@ describe('UpdateGenreUsecase integration tests', () => {
 			}
 		});
 
-		it('should update a genre', async () => {
+		test('update genre', async () => {
 			const category1 = Category.fake().aCategory().build();
 			const category2 = Category.fake().aCategory().build();
 			await categoryRepo.bulkInsert([category1, category2]);
@@ -141,7 +141,7 @@ describe('UpdateGenreUsecase integration tests', () => {
 			expect(output.is_active).toBe(true);
 		});
 
-		it('should rollback transaction on error', async () => {
+		test('rollback transaction on error', async () => {
 			const category1 = Category.fake().aCategory().build();
 			const category2 = Category.fake().aCategory().build();
 			await categoryRepo.bulkInsert([category1, category2]);
