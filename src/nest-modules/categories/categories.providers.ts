@@ -9,6 +9,7 @@ import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_
 import {ListCategoriesUsecase} from "@core/category/application/usecases/list_categories/list_categories.usecase";
 import {GetCategoryUsecase} from "@core/category/application/usecases/get_category/get_category.usecase";
 import {DeleteCategoryUsecase} from "@core/category/application/usecases/delete_category/delete_category.usecase";
+import {CategoriesIdsExistsInStorageValidator} from "@core/category/application/validations/categories_ids_exists_in_storage.validator";
 
 export type ObjectProvider = Exclude<Provider, Function | string | symbol>;
 
@@ -79,7 +80,22 @@ export const USE_CASES: Usecases = {
 	}
 };
 
+enum ValidatorKeysEnum {
+	CATEGORIES_IDS_EXISTS_IN_STORAGE_VALIDATOR = 'CATEGORIES_IDS_EXISTS_IN_STORAGE_VALIDATOR'
+}
+
+type Validators = Providers<ValidatorKeysEnum>;
+
+export const VALIDATORS: Validators = {
+	CATEGORIES_IDS_EXISTS_IN_STORAGE_VALIDATOR: {
+		provide: CategoriesIdsExistsInStorageValidator,
+		useFactory: (categoryRepo: ICategoryRepository) => new CategoriesIdsExistsInStorageValidator(categoryRepo),
+		inject: [REPOSITORIES.CATEGORY_REPOSITORY['provide']]
+	}
+};
+
 export const CATEGORY_PROVIDERS = {
 	REPOSITORIES,
 	USE_CASES,
-}
+	VALIDATORS
+};

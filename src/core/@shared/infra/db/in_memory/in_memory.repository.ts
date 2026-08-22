@@ -1,4 +1,4 @@
-import {Entity} from "@core/@shared/domain/entity";
+import {Entity, EntityId} from "@core/@shared/domain/entity";
 import {ValueObject} from "@core/@shared/domain/value_object";
 import {IRepository, ISearchableRepository} from "@core/@shared/domain/repository/repository_interface";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
@@ -41,6 +41,37 @@ export abstract class InMemoryRepository<
 	async findById(entity_id: Id): Promise<E | null> {
 		const item = this.items.find(item => item.entity_id.equals(entity_id));
 		return typeof item === "undefined" ? null : item;
+	}
+
+	async findByIds(ids: EntityId[]): Promise<E[]> {
+		return this.items.filter(item => {
+			return ids.some(id => item.entity_id.equals(id));
+		});
+	}
+
+	async existsById(ids: EntityId[]): Promise<{ exists: EntityId[]; not_exists: EntityId[] }> {
+		if (!ids.length) {
+			return {
+				exists: [],
+				not_exists: []
+			};
+		}
+		const existsId = new Set<string>();
+		const notExistsId = new Set<string>();
+
+		ids.forEach(id => {
+			const item = this.items.find(entity => entity.entity_id.equals(id));
+			if (item) {
+				existsId.add(id.id);
+			} else {
+				notExistsId.add(id.id);
+			}
+		});
+
+		return {
+			exists: Array.from(existsId).map(id => new EntityId(id)),
+			not_exists: Array.from(notExistsId).map(id => new EntityId(id))
+		};
 	}
 
 	async findAll(): Promise<E[]> {
