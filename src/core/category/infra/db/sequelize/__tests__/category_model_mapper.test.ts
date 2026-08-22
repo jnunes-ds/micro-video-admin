@@ -10,7 +10,7 @@ describe('CategoryModelMapper Integration Test', () => {
 		models: [CategoryModel]
 	});
 
-	it('should throws an error when category is not found', () => {
+	test('if throws an error when category is not found', () => {
 		expect.assertions(2)
 		const model = CategoryModel.build({
 			category_id: '850704d1-806c-4a35-81c2-e535f36a07ae',
@@ -31,7 +31,7 @@ describe('CategoryModelMapper Integration Test', () => {
 		}
 	});
 
-	it('should convert a category class into a category entity', () => {
+	test('if convert a category class into a category entity', () => {
 		const category_id = '850704d1-806c-4a35-81c2-e535f36a07ae';
 		const name = 'Movie';
 		const description = 'some description';
@@ -59,7 +59,7 @@ describe('CategoryModelMapper Integration Test', () => {
 		)
 	});
 
-	it('should convert a category entity into a category class', () => {
+	test('if convert a category entity into a category class', () => {
 		const category_id = '850704d1-806c-4a35-81c2-e535f36a07ae';
 		const name = 'Movie';
 		const description = 'some description';

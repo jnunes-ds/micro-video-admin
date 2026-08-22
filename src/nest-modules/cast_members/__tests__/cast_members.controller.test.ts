@@ -47,7 +47,7 @@ describe('CastMembersController Integration Tests', () => {
 		);
 	});
 
-	it('should be defined', () => {
+	test("if it's defined", () => {
 		expect(controller).toBeDefined();
 		expect(controller['createUsecase']).toBeInstanceOf(CreateCastMemberUsecase);
 		expect(controller['updateUsecase']).toBeInstanceOf(UpdateCastMemberUsecase);

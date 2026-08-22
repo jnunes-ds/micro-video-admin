@@ -5,7 +5,7 @@ import {ConfigService} from '@nestjs/config';
 import {MigrationsModule} from '@/nest-modules/database/migrations.module';
 
 describe('MigrationsModule Unit Tests', () => {
-	test('should provide a database connection built from the env config', async () => {
+	test('if provide a database connection built from the env config', async () => {
 		const module = await Test.createTestingModule({
 			imports: [MigrationsModule]
 		}).compile();
