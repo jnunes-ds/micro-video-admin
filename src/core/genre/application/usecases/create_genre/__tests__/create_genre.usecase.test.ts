@@ -40,7 +40,7 @@ describe("CreateGenreUsecase Integration Tests", () => {
         await sequelize.close();
     });
 
-    it("should throw an entity validation error when categories id not exists", async () => {
+    test("if throw an entity validation error when categories id not exists", async () => {
         expect.assertions(3);
         const spyValidateCategoriesId = jest.spyOn(categoriesIdsValidator, "validate");
         const categoriesId = [
@@ -67,7 +67,7 @@ describe("CreateGenreUsecase Integration Tests", () => {
         }
     });
 
-    it("should create a genre", async () => {
+    test("create a genre functionality works", async () => {
         const category1 = Category.create({ name: "c1" });
         const category2 = Category.create({ name: "c2" });
         await categoryRepo.bulkInsert([category1, category2]);
@@ -86,7 +86,7 @@ describe("CreateGenreUsecase Integration Tests", () => {
         expect(output.categories).toHaveLength(2);
     });
 
-    it('should rollback transaction', async () => {
+    test('rollback transaction', async () => {
         const category1 = Category.create({ name: "c1" });
         const category2 = Category.create({ name: "c2" });
         await categoryRepo.bulkInsert([category1, category2]);
