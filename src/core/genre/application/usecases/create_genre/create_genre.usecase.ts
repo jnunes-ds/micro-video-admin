@@ -7,8 +7,8 @@ import {IUseCase} from "@core/@shared/application/usecase.interface";
 import {CreateGenreInput} from "@core/genre/application/usecases/create_genre/create_genre.input";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {
-    CategoriesIdsExistsInStorageValidator
-} from "@core/category/application/validations/categories_ids_exists_in_storage.validator";
+    CategoriesIdsExistsInDatabaseValidator
+} from "@core/category/application/validations/categories_ids_exists_in_database.validator";
 import {Notification} from "@core/@shared/domain/validators/notification";
 
 export type CreateGenreOutput = GenreOutput;
@@ -22,7 +22,7 @@ export class CreateGenreUsecase implements IUseCase<
         private uow: IUnitOfWork,
         private genreRepo: IGenreRepository,
         private categoryRepo: ICategoryRepository,
-        private categoriesIdsExistsInStorage: CategoriesIdsExistsInStorageValidator
+        private categoriesIdsExistsInStorage: CategoriesIdsExistsInDatabaseValidator
     ) {}
 
     async execute(input: CreateGenreInput): Promise<CreateGenreOutput> {

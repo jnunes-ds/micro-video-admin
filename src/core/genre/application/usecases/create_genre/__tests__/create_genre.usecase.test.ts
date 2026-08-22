@@ -4,8 +4,8 @@ import {UnitOfWorkSequelize} from "@core/@shared/infra/db/sequelize/unit_of_work
 import {GenreSequelizeRepository} from "@core/genre/infra/sequelize/genre_sequelize.repository";
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {
-    CategoriesIdsExistsInStorageValidator
-} from "@core/category/application/validations/categories_ids_exists_in_storage.validator";
+    CategoriesIdsExistsInDatabaseValidator
+} from "@core/category/application/validations/categories_ids_exists_in_database.validator";
 import {GenreCategoryModel, GenreModel} from "@core/genre/infra/sequelize/genre.model";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
@@ -17,7 +17,7 @@ describe("CreateGenreUsecase Integration Tests", () => {
     let uow: UnitOfWorkSequelize;
     let genreRepo: GenreSequelizeRepository;
     let categoryRepo: CategorySequelizeRepository;
-    let categoriesIdsValidator: CategoriesIdsExistsInStorageValidator;
+    let categoriesIdsValidator: CategoriesIdsExistsInDatabaseValidator;
     let sequelize: Sequelize;
 
     beforeEach(async () => {
@@ -32,7 +32,7 @@ describe("CreateGenreUsecase Integration Tests", () => {
         uow = new UnitOfWorkSequelize(sequelize);
         genreRepo = new GenreSequelizeRepository(GenreModel, uow);
         categoryRepo = new CategorySequelizeRepository(CategoryModel);
-        categoriesIdsValidator = new CategoriesIdsExistsInStorageValidator(categoryRepo);
+        categoriesIdsValidator = new CategoriesIdsExistsInDatabaseValidator(categoryRepo);
         usecase = new CreateGenreUsecase(uow, genreRepo, categoryRepo, categoriesIdsValidator);
     });
 

@@ -3,7 +3,7 @@ import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {Either} from "@core/@shared/domain/either";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 
-export class CategoriesIdsExistsInStorageValidator {
+export class CategoriesIdsExistsInDatabaseValidator {
 	constructor(private categoryRepo: ICategoryRepository) {}
 
 	async validate(categories_id: string[]): Promise<Either<CategoryId[], NotFoundError[]>> {
