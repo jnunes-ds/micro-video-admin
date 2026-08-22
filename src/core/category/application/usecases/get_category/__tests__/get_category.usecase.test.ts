@@ -17,7 +17,7 @@ describe('GetCategoryUsecase Integration Tests', () => {
 		usecase = new GetCategoryUsecase(repository);
 	});
 
-	it('should throws an error when entity is not found', async () => {
+	test('if throws an error when entity is not found', async () => {
 		const categoryId = new CategoryId();
 
 		await expect(
@@ -25,7 +25,7 @@ describe('GetCategoryUsecase Integration Tests', () => {
 		).rejects.toThrow(new NotFoundError(categoryId, Category));
 	});
 
-	it('should get a category by id', async () => {
+	test('if get a category by id', async () => {
 		const items = Category.fake()
 			.theCategories(11)
 			.withName(index => `name-${index + 1}`)
