@@ -26,7 +26,7 @@
     "test:e2e:watch": "jest --config test/jest-e2e.config.ts --runInBand --watch --verbose"
   },
   "dependencies": {
-    "@nestjs/common": "^10.0.0",
+    "@nestjs/common": "^11.2.1",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.1.27",
     "@nestjs/mapped-types": "*",
@@ -48,7 +48,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@nestjs/cli": "^10.0.0",
+    "@nestjs/cli": "^11.0.24",
     "@nestjs/schematics": "^11.1.0",
     "@nestjs/testing": "^11.1.27",
     "@swc/cli": "^0.8.1",
