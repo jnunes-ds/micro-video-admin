@@ -10,6 +10,7 @@ import {GenreSearchParams} from "@core/genre/domain/genre.repository";
 import {SearchResult} from "@core/@shared/domain/repository/search_result";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {UnitOfWorkSequelize} from "@core/@shared/infra/db/sequelize/unit_of_work_sequelize";
+import {SortDirection} from "@core/@shared/domain/repository/search_params";
 
 describe('GenreSequelizeRepository Integration Test', () => {
 	const sequelizeHelper = setupSequelize({

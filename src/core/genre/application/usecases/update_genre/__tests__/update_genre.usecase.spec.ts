@@ -3,8 +3,8 @@ import {GenreInMemoryRepository} from "@core/genre/infra/in_memory/genre_in_memo
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {UnitOfWorkFakeInMemory} from "@core/@shared/infra/db/in_memory/fake_unit_of_work_in_memory";
 import {
-	CategoriesIdsExistsInStorageValidator
-} from "@core/category/application/validations/categories_ids_exists_in_storage.validator";
+	CategoriesIdsExistsInDatabaseValidator
+} from "@core/category/application/validations/categories_ids_exists_in_database.validator";
 import {Genre} from "@core/genre/domain/genre.aggregate";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
@@ -14,14 +14,14 @@ describe('UpdateGenreUsecase Unit Tests', () => {
 	let usecase: UpdateGenreUsecase;
 	let genreRepo: GenreInMemoryRepository;
 	let categoryRepo: CategoryInMemoryRepository;
-	let categoriesIdsExistsInStorageValidator: CategoriesIdsExistsInStorageValidator;
+	let categoriesIdsExistsInStorageValidator: CategoriesIdsExistsInDatabaseValidator;
 	let uow: UnitOfWorkFakeInMemory;
 
 	beforeEach(() => {
 		uow = new UnitOfWorkFakeInMemory();
 		genreRepo = new GenreInMemoryRepository();
 		categoryRepo = new CategoryInMemoryRepository();
-		categoriesIdsExistsInStorageValidator = new CategoriesIdsExistsInStorageValidator(categoryRepo);
+		categoriesIdsExistsInStorageValidator = new CategoriesIdsExistsInDatabaseValidator(categoryRepo);
 		usecase = new UpdateGenreUsecase(
 			uow,
 			genreRepo,
