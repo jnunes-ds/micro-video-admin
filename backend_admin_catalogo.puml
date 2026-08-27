@@ -3,8 +3,6 @@
 AddRelTag("async", $lineStyle = DashedLine())
 SHOW_PERSON_PORTRAIT()
 
-title "Codeflix: Projeto Prático do Curso Full Cycle"
-
 System_Boundary(gateway, "Codeflix") {
     System(kafka_connect,"Kafka Connect", "Serviço de replicação de dados do catálogo")
     System(frontend_catalogo_admin,"Frontend: Admin do Catálogo de Vídeos","SPA que gerencia os vídeos, incluindo as categorias e gêneros")
