@@ -1,0 +1,188 @@
+import {EntityId} from "@core/@shared/domain/entity";
+import {CategoryId} from "@core/category/domain/category.aggregate";
+import {GenreId} from "@core/genre/domain/genre.aggregate";
+import {CastMemberId} from "@core/cast_member/domain/cast_member.aggregate";
+import {AggregateRoot} from "@core/@shared/domain/aggregate_root";
+import {ValueObject} from "@core/@shared/domain/value_object";
+import {Rating} from "@core/video/domain/rating.vo";
+
+export type VideoConstructorProps = {
+	video_id?: VideoId;
+	title: string;
+	description: string;
+	year_launched: number;
+	duration: number;
+	rating: Rating;
+	is_opened: boolean;
+	is_published: boolean;
+
+	categories_id: Map<string, CategoryId>;
+	genres_id: Map<string, GenreId>;
+	cast_members_id: Map<string, CastMemberId>;
+	created_at?: Date;
+};
+
+export type VideoCreateCommand = {
+	title: string;
+	description: string;
+	year_launched: number;
+	duration: number;
+	rating: Rating;
+	is_opened: boolean;
+
+	categories_id: CategoryId[];
+	genres_id: GenreId[];
+	cast_members_id: CastMemberId[];
+};
+
+export class VideoId extends EntityId {}
+
+export class Video extends AggregateRoot {
+	video_id: VideoId;
+	title: string;
+	description: string;
+	year_launched: number;
+	duration: number;
+	rating: Rating;
+	is_opened: boolean;
+	is_published: boolean;
+
+	categories_id: Map<string, CategoryId>;
+	genres_id: Map<string, GenreId>;
+	cast_members_id: Map<string, CastMemberId>;
+	created_at: Date;
+
+	constructor(props: VideoConstructorProps) {
+		super();
+		this.video_id = props.video_id ?? new VideoId();
+		this.title = props.title;
+		this.description = props.description;
+		this.year_launched = props.year_launched;
+		this.duration = props.duration;
+		this.rating = props.rating;
+		this.is_opened = props.is_opened;
+		this.is_published = props.is_published;
+
+		this.categories_id = props.categories_id;
+		this.genres_id = props.genres_id;
+		this.cast_members_id = props.cast_members_id;
+		this.created_at = props.created_at ?? new Date();
+	}
+
+	static create(props: VideoCreateCommand) {
+		const video = new Video({
+			...props,
+			categories_id: Video.createMapOfIdsFromIdsArray(props.categories_id),
+			genres_id: Video.createMapOfIdsFromIdsArray(props.genres_id),
+			cast_members_id: Video.createMapOfIdsFromIdsArray(props.cast_members_id),
+			is_published: false,
+		});
+		// video.validate;
+
+		return video;
+	}
+
+	changeTitle(title: string): void {
+		this.title = title;
+		// this.validate;
+	}
+
+	changeDescription(description: string): void {
+		this.description = description;
+	}
+
+	changeYearLaunched(yearLaunched: number): void {
+		this.year_launched = yearLaunched;
+	}
+
+	changeDuration(duration: number): void {
+		this.duration = duration;
+	}
+
+	changeRating(rating: Rating): void {
+		this.rating = rating;
+	}
+
+	markAsOpened(): void {
+		this.is_opened = true;
+	}
+
+	markAsNotOpened(): void {
+		this.is_opened = false;
+	}
+
+	addCategoryId(categoryId: CategoryId): void {
+		this.categories_id.set(categoryId.id, categoryId);
+	}
+
+	removeCategoryId(categoryId: CategoryId): void {
+		this.categories_id.delete(categoryId.id);
+	}
+
+	syncCategoriesId(categoriesId: CategoryId[]): void {
+		if (!categoriesId.length) {
+			throw new Error('Categories id is empty');
+		}
+		this.categories_id = Video.createMapOfIdsFromIdsArray(categoriesId);
+	}
+
+	addGenreId(genreId: GenreId): void {
+		this.genres_id.set(genreId.id, genreId);
+	}
+
+	removeGenreId(genreId: GenreId): void {
+		this.genres_id.delete(genreId.id);
+	}
+
+	syncGentesId(genresId: GenreId[]): void {
+		if (!genresId.length) {
+			throw new Error('Genres Id is empty');
+		}
+		this.genres_id = Video.createMapOfIdsFromIdsArray(genresId);
+	}
+
+	addCastMemberId(castMemberId: CastMemberId): void {
+		this.cast_members_id.set(castMemberId.id, castMemberId);
+	}
+
+	removeCastMemberId(castMemberId: CastMemberId): void {
+		this.cast_members_id.delete(castMemberId.id);
+	}
+
+	syncCastMembersId(castMembersId: CastMemberId[]): void {
+		if (!castMembersId.length) {
+			throw new Error('Cast Members Id is empty');
+		}
+		this.cast_members_id = Video.createMapOfIdsFromIdsArray(castMembersId);
+	}
+
+	get entity_id(): ValueObject {
+		return this.video_id;
+	}
+
+	toJSON() {
+		return {
+			video_id: this.video_id ?? new VideoId(),
+			title: this.title,
+			description: this.description,
+			year_launched: this.year_launched,
+			duration: this.duration,
+			rating: this.rating.value,
+			is_opened: this.is_opened,
+			is_published: this.is_published,
+
+			categories_id: Video.createArrayOfStringedIdsFromIdsMap(this.categories_id),
+			genres_id: Video.createArrayOfStringedIdsFromIdsMap(this.genres_id),
+			cast_members_id: Video.createArrayOfStringedIdsFromIdsMap(this.cast_members_id),
+			created_at: this.created_at ?? new Date(),
+		}
+	}
+
+	private static createMapOfIdsFromIdsArray(ids: EntityId[]): Map<string, EntityId> {
+		return new Map(ids.map(id => [id.id, id]))
+	}
+
+	private static createArrayOfStringedIdsFromIdsMap(idsMap: Map<string, EntityId>): string[] {
+		return  Array.from(idsMap.values()).map(id => id.id)
+	}
+}
