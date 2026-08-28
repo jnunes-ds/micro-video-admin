@@ -11,6 +11,7 @@ import {ThumbnailHalf} from "@core/video/domain/thumbnail_half.vo";
 import {Trailer} from "@core/video/domain/trailer.vo";
 import {VideoMedia} from "@core/video/domain/video_media.vo"
 import VideoValidatorFactory from "@core/video/domain/video.validator";
+import {AudioVideoMediaStatus} from "@core/@shared/domain/value_objects/audio_video_media.vo";
 
 export type VideoConstructorProps = {
 	video_id?: VideoId;
@@ -107,14 +108,15 @@ export class Video extends AggregateRoot {
 			cast_members_id: Video.createMapOfIdsFromIdsArray(props.cast_members_id),
 			is_published: false,
 		});
-		video.validate();
+		video.validate(['title']);
+		video.markAsPublished();
 
 		return video;
 	}
 
 	changeTitle(title: string): void {
 		this.title = title;
-		this.validate();
+		this.validate(['title']);
 	}
 
 	changeDescription(description: string): void {
@@ -188,6 +190,39 @@ export class Video extends AggregateRoot {
 
 	get entity_id(): ValueObject {
 		return this.video_id;
+	}
+
+	replaceBanner(banner: Banner): void {
+		this.banner = banner;
+	}
+
+	replaceThumbnail(thumbnail: Thumbnail): void {
+		this.thumbnail = thumbnail
+	}
+
+	replaceThumbnailHalf(thumbnailHalf: ThumbnailHalf): void {
+		this.thumbnail_half = thumbnailHalf;
+	}
+
+	replaceTrailer(trailer: Trailer): void {
+		this.trailer = trailer;
+		this.markAsPublished();
+	}
+
+	replaceVideo(video: VideoMedia): void {
+		this.video = video;
+		this.markAsPublished();
+	}
+
+	private markAsPublished(): void {
+		if (
+			this.trailer &&
+			this.video &&
+			this.trailer.status === AudioVideoMediaStatus.COMPLETED &&
+			this.video.status === AudioVideoMediaStatus.COMPLETED
+		) {
+			this.is_published = true;
+		}
 	}
 
 	toJSON() {
