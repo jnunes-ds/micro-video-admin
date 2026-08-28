@@ -8,6 +8,8 @@ import {Rating} from "@core/video/domain/rating.vo";
 import {Banner} from "@core/video/domain/banner.vo";
 import {Thumbnail} from "@core/video/domain/thumbnail.vo";
 import {ThumbnailHalf} from "@core/video/domain/thumbnail_half.vo";
+import {Trailer} from "@core/video/domain/trailer.vo";
+import {VideoMedia} from "@core/video/domain/video_media.vo";
 
 export type VideoConstructorProps = {
 	video_id?: VideoId;
@@ -22,6 +24,8 @@ export type VideoConstructorProps = {
 	banner?: Banner;
 	thumbnail?: Thumbnail;
 	thumbnail_half?: ThumbnailHalf;
+	trailer?: Trailer;
+	video?: VideoMedia;
 
 	categories_id: Map<string, CategoryId>;
 	genres_id: Map<string, GenreId>;
@@ -40,6 +44,8 @@ export type VideoCreateCommand = {
 	banner?: Banner;
 	thumbnail?: Thumbnail;
 	thumbnail_half?: ThumbnailHalf;
+	trailer?: Trailer;
+	video?: VideoMedia;
 
 	categories_id: CategoryId[];
 	genres_id: GenreId[];
@@ -61,6 +67,8 @@ export class Video extends AggregateRoot {
 	banner: Banner | null;
 	thumbnail: Thumbnail | null;
 	thumbnail_half: ThumbnailHalf | null;
+	trailer: Trailer | null;
+	video: VideoMedia | null;
 
 	categories_id: Map<string, CategoryId>;
 	genres_id: Map<string, GenreId>;
@@ -81,6 +89,8 @@ export class Video extends AggregateRoot {
 		this.banner = props.banner ?? null;
 		this.thumbnail = props.thumbnail ?? null;
 		this.thumbnail_half = props.thumbnail_half ?? null;
+		this.trailer = props.trailer || null;
+		this.video = props.video || null;
 
 		this.categories_id = props.categories_id;
 		this.genres_id = props.genres_id;
@@ -192,6 +202,8 @@ export class Video extends AggregateRoot {
 			banner: this.banner ? this.banner.toJSON() : null,
 			thumbnail: this.thumbnail ? this.thumbnail.toJSON() : null,
 			thumbnail_half: this.thumbnail_half ? this.thumbnail_half.toJSON() : null,
+			trailer: this.trailer ? this.trailer.toJSON() : null,
+			video: this.video ? this.video.toJSON() : null,
 			categories_id: Video.createArrayOfStringedIdsFromIdsMap(this.categories_id),
 			genres_id: Video.createArrayOfStringedIdsFromIdsMap(this.genres_id),
 			cast_members_id: Video.createArrayOfStringedIdsFromIdsMap(this.cast_members_id),
