@@ -9,7 +9,8 @@ import {Banner} from "@core/video/domain/banner.vo";
 import {Thumbnail} from "@core/video/domain/thumbnail.vo";
 import {ThumbnailHalf} from "@core/video/domain/thumbnail_half.vo";
 import {Trailer} from "@core/video/domain/trailer.vo";
-import {VideoMedia} from "@core/video/domain/video_media.vo";
+import {VideoMedia} from "@core/video/domain/video_media.vo"
+import VideoValidatorFactory from "@core/video/domain/video.validator";
 
 export type VideoConstructorProps = {
 	video_id?: VideoId;
@@ -106,14 +107,14 @@ export class Video extends AggregateRoot {
 			cast_members_id: Video.createMapOfIdsFromIdsArray(props.cast_members_id),
 			is_published: false,
 		});
-		// video.validate;
+		video.validate();
 
 		return video;
 	}
 
 	changeTitle(title: string): void {
 		this.title = title;
-		// this.validate;
+		this.validate();
 	}
 
 	changeDescription(description: string): void {
@@ -209,6 +210,11 @@ export class Video extends AggregateRoot {
 			cast_members_id: Video.createArrayOfStringedIdsFromIdsMap(this.cast_members_id),
 			created_at: this.created_at ?? new Date(),
 		}
+	}
+
+	validate(fields?: string[]) {
+		const validator = VideoValidatorFactory.create();
+		return validator.validate(this.notification, this, fields);
 	}
 
 	private static createMapOfIdsFromIdsArray(ids: EntityId[]): Map<string, EntityId> {
