@@ -5,6 +5,9 @@ import {CastMemberId} from "@core/cast_member/domain/cast_member.aggregate";
 import {AggregateRoot} from "@core/@shared/domain/aggregate_root";
 import {ValueObject} from "@core/@shared/domain/value_object";
 import {Rating} from "@core/video/domain/rating.vo";
+import {Banner} from "@core/video/domain/banner.vo";
+import {Thumbnail} from "@core/video/domain/thumbnail.vo";
+import {ThumbnailHalf} from "@core/video/domain/thumbnail_half.vo";
 
 export type VideoConstructorProps = {
 	video_id?: VideoId;
@@ -15,6 +18,10 @@ export type VideoConstructorProps = {
 	rating: Rating;
 	is_opened: boolean;
 	is_published: boolean;
+
+	banner?: Banner;
+	thumbnail?: Thumbnail;
+	thumbnail_half?: ThumbnailHalf;
 
 	categories_id: Map<string, CategoryId>;
 	genres_id: Map<string, GenreId>;
@@ -29,6 +36,10 @@ export type VideoCreateCommand = {
 	duration: number;
 	rating: Rating;
 	is_opened: boolean;
+
+	banner?: Banner;
+	thumbnail?: Thumbnail;
+	thumbnail_half?: ThumbnailHalf;
 
 	categories_id: CategoryId[];
 	genres_id: GenreId[];
@@ -47,6 +58,10 @@ export class Video extends AggregateRoot {
 	is_opened: boolean;
 	is_published: boolean;
 
+	banner: Banner | null;
+	thumbnail: Thumbnail | null;
+	thumbnail_half: ThumbnailHalf | null;
+
 	categories_id: Map<string, CategoryId>;
 	genres_id: Map<string, GenreId>;
 	cast_members_id: Map<string, CastMemberId>;
@@ -62,6 +77,10 @@ export class Video extends AggregateRoot {
 		this.rating = props.rating;
 		this.is_opened = props.is_opened;
 		this.is_published = props.is_published;
+
+		this.banner = props.banner ?? null;
+		this.thumbnail = props.thumbnail ?? null;
+		this.thumbnail_half = props.thumbnail_half ?? null;
 
 		this.categories_id = props.categories_id;
 		this.genres_id = props.genres_id;
@@ -162,7 +181,7 @@ export class Video extends AggregateRoot {
 
 	toJSON() {
 		return {
-			video_id: this.video_id ?? new VideoId(),
+			video_id: this.video_id.id,
 			title: this.title,
 			description: this.description,
 			year_launched: this.year_launched,
@@ -170,7 +189,9 @@ export class Video extends AggregateRoot {
 			rating: this.rating.value,
 			is_opened: this.is_opened,
 			is_published: this.is_published,
-
+			banner: this.banner ? this.banner.toJSON() : null,
+			thumbnail: this.thumbnail ? this.thumbnail.toJSON() : null,
+			thumbnail_half: this.thumbnail_half ? this.thumbnail_half.toJSON() : null,
 			categories_id: Video.createArrayOfStringedIdsFromIdsMap(this.categories_id),
 			genres_id: Video.createArrayOfStringedIdsFromIdsMap(this.genres_id),
 			cast_members_id: Video.createArrayOfStringedIdsFromIdsMap(this.cast_members_id),
