@@ -1,4 +1,4 @@
-import { Video, VideoId, VideoConstructorProps } from '../video.aggregate';
+import { Video, VideoId } from '../video.aggregate';
 import { CategoryId } from '@core/category/domain/category.aggregate';
 import { GenreId } from '@core/genre/domain/genre.aggregate';
 import { CastMemberId } from '@core/cast_member/domain/cast_member.aggregate';
@@ -8,6 +8,7 @@ import { Thumbnail } from '../thumbnail.vo';
 import { ThumbnailHalf } from '../thumbnail_half.vo';
 import { Trailer } from '../trailer.vo';
 import { VideoMedia } from '../video_media.vo';
+import { VideoFakeBuilder } from '../video_fake.builder';
 
 describe('Video Aggregate Unit Tests', () => {
     let video: Video;
@@ -25,35 +26,25 @@ describe('Video Aggregate Unit Tests', () => {
 
     describe('constructor', () => {
         it('should create a video with default values', () => {
-            const props: VideoConstructorProps = {
-                title: 'title',
-                description: 'description',
-                year_launched: 2020,
-                duration: 90,
-                rating,
-                is_opened: true,
-                is_published: false,
-                categories_id: new Map([[categoryId.id, categoryId]]),
-                genres_id: new Map([[genreId.id, genreId]]),
-                cast_members_id: new Map([[castMemberId.id, castMemberId]]),
-            };
-
-            const video = new Video(props);
+            const builder = VideoFakeBuilder.aVideoWithoutMedias();
+            const video = builder.build();
 
             expect(video.video_id).toBeInstanceOf(VideoId);
-            expect(video.title).toBe(props.title);
-            expect(video.description).toBe(props.description);
-            expect(video.year_launched).toBe(props.year_launched);
-            expect(video.duration).toBe(props.duration);
-            expect(video.rating).toBe(props.rating);
-            expect(video.is_opened).toBe(props.is_opened);
-            expect(video.is_published).toBe(props.is_published);
-            expect(video.categories_id).toBe(props.categories_id);
-            expect(video.genres_id).toBe(props.genres_id);
-            expect(video.cast_members_id).toBe(props.cast_members_id);
+            expect(typeof video.title).toBe('string');
+            expect(typeof video.description).toBe('string');
+            expect(typeof video.year_launched).toBe('number');
+            expect(typeof video.duration).toBe('number');
+            expect(video.rating).toBeInstanceOf(Rating);
+            expect(typeof video.is_opened).toBe('boolean');
+            expect(video.is_published).toBe(false);
+            expect(video.categories_id.size).toBe(1);
+            expect(video.genres_id.size).toBe(1);
+            expect(video.cast_members_id.size).toBe(1);
             expect(video.banner).toBeNull();
             expect(video.thumbnail).toBeNull();
             expect(video.thumbnail_half).toBeNull();
+            expect(video.trailer).toBeNull();
+            expect(video.video).toBeNull();
             expect(video.created_at).toBeInstanceOf(Date);
         });
 
@@ -63,47 +54,72 @@ describe('Video Aggregate Unit Tests', () => {
             const banner = new Banner({ name: 'banner', location: 'loc' });
             const thumbnail = new Thumbnail({ name: 'thumb', location: 'loc' });
             const thumbnail_half = new ThumbnailHalf({ name: 'thumb_half', location: 'loc' });
+            const trailer = Trailer.create({ name: 'trailer', raw_location: 'loc' });
+            const videoMedia = VideoMedia.create({ name: 'video', raw_location: 'loc' });
 
-            const props: VideoConstructorProps = {
-                video_id: videoId,
-                title: 'title',
-                description: 'description',
-                year_launched: 2020,
-                duration: 90,
-                rating,
-                is_opened: true,
-                is_published: false,
-                banner,
-                thumbnail,
-                thumbnail_half,
-                categories_id: new Map([[categoryId.id, categoryId]]),
-                genres_id: new Map([[genreId.id, genreId]]),
-                cast_members_id: new Map([[castMemberId.id, castMemberId]]),
-                created_at,
-            };
+            const builder = VideoFakeBuilder.aVideoWithMedias()
+                .withVideoId(videoId)
+                .withTitle('title')
+                .withDescription('description')
+                .withYearLaunched(2020)
+                .withDuration(90)
+                .withRating(rating)
+                .withOpened(true)
+                .withBanner(banner)
+                .withThumbnail(thumbnail)
+                .withThumbnailHalf(thumbnail_half)
+                .withTrailer(trailer)
+                .withVideo(videoMedia)
+                .withCreatedAt(created_at)
+                .addCategoryId(categoryId)
+                .addGenreId(genreId)
+                .addCastMemberId(castMemberId);
 
-            const video = new Video(props);
+            const video = builder.build();
 
             expect(video.video_id).toBe(videoId);
+            expect(video.title).toBe('title');
+            expect(video.description).toBe('description');
+            expect(video.year_launched).toBe(2020);
+            expect(video.duration).toBe(90);
+            expect(video.rating).toBe(rating);
+            expect(video.is_opened).toBe(true);
+            expect(video.is_published).toBe(false);
             expect(video.banner).toBe(banner);
             expect(video.thumbnail).toBe(thumbnail);
             expect(video.thumbnail_half).toBe(thumbnail_half);
+            expect(video.trailer).toBe(trailer);
+            expect(video.video).toBe(videoMedia);
+            expect(video.categories_id.get(categoryId.id)).toBe(categoryId);
+            expect(video.genres_id.get(genreId.id)).toBe(genreId);
+            expect(video.cast_members_id.get(castMemberId.id)).toBe(castMemberId);
             expect(video.created_at).toBe(created_at);
         });
     });
 
     describe('create static method', () => {
         it('should create a video', () => {
+            const builder = VideoFakeBuilder.aVideoWithoutMedias()
+                .withTitle('title')
+                .withDescription('description')
+                .withYearLaunched(2020)
+                .withDuration(90)
+                .withRating(rating)
+                .withOpened(true)
+                .addCategoryId(categoryId)
+                .addGenreId(genreId)
+                .addCastMemberId(castMemberId);
+
             const video = Video.create({
-                title: 'title',
-                description: 'description',
-                year_launched: 2020,
-                duration: 90,
-                rating,
-                is_opened: true,
-                categories_id: [categoryId],
-                genres_id: [genreId],
-                cast_members_id: [castMemberId],
+                title: builder.title,
+                description: builder.description,
+                year_launched: builder.year_launched,
+                duration: builder.duration,
+                rating: builder.rating,
+                is_opened: builder.opened,
+                categories_id: builder.categories_id,
+                genres_id: builder.genres_id,
+                cast_members_id: builder.cast_members_id,
             });
 
             expect(video.video_id).toBeInstanceOf(VideoId);
@@ -122,17 +138,17 @@ describe('Video Aggregate Unit Tests', () => {
 
     describe('change methods', () => {
         beforeEach(() => {
-            video = Video.create({
-                title: 'title',
-                description: 'description',
-                year_launched: 2020,
-                duration: 90,
-                rating,
-                is_opened: true,
-                categories_id: [categoryId],
-                genres_id: [genreId],
-                cast_members_id: [castMemberId],
-            });
+            video = VideoFakeBuilder.aVideoWithoutMedias()
+                .withTitle('title')
+                .withDescription('description')
+                .withYearLaunched(2020)
+                .withDuration(90)
+                .withRating(rating)
+                .withOpened(true)
+                .addCategoryId(categoryId)
+                .addGenreId(genreId)
+                .addCastMemberId(castMemberId)
+                .build();
         });
 
         it('should change title', () => {
@@ -223,17 +239,17 @@ describe('Video Aggregate Unit Tests', () => {
 
     describe('categories management', () => {
         beforeEach(() => {
-            video = Video.create({
-                title: 'title',
-                description: 'description',
-                year_launched: 2020,
-                duration: 90,
-                rating,
-                is_opened: true,
-                categories_id: [categoryId],
-                genres_id: [genreId],
-                cast_members_id: [castMemberId],
-            });
+            video = VideoFakeBuilder.aVideoWithoutMedias()
+                .withTitle('title')
+                .withDescription('description')
+                .withYearLaunched(2020)
+                .withDuration(90)
+                .withRating(rating)
+                .withOpened(true)
+                .addCategoryId(categoryId)
+                .addGenreId(genreId)
+                .addCastMemberId(castMemberId)
+                .build();
         });
 
         it('should add category id', () => {
@@ -264,17 +280,17 @@ describe('Video Aggregate Unit Tests', () => {
 
     describe('genres management', () => {
         beforeEach(() => {
-            video = Video.create({
-                title: 'title',
-                description: 'description',
-                year_launched: 2020,
-                duration: 90,
-                rating,
-                is_opened: true,
-                categories_id: [categoryId],
-                genres_id: [genreId],
-                cast_members_id: [castMemberId],
-            });
+            video = VideoFakeBuilder.aVideoWithoutMedias()
+                .withTitle('title')
+                .withDescription('description')
+                .withYearLaunched(2020)
+                .withDuration(90)
+                .withRating(rating)
+                .withOpened(true)
+                .addCategoryId(categoryId)
+                .addGenreId(genreId)
+                .addCastMemberId(castMemberId)
+                .build();
         });
 
         it('should add genre id', () => {
@@ -305,17 +321,17 @@ describe('Video Aggregate Unit Tests', () => {
 
     describe('cast members management', () => {
         beforeEach(() => {
-            video = Video.create({
-                title: 'title',
-                description: 'description',
-                year_launched: 2020,
-                duration: 90,
-                rating,
-                is_opened: true,
-                categories_id: [categoryId],
-                genres_id: [genreId],
-                cast_members_id: [castMemberId],
-            });
+            video = VideoFakeBuilder.aVideoWithoutMedias()
+                .withTitle('title')
+                .withDescription('description')
+                .withYearLaunched(2020)
+                .withDuration(90)
+                .withRating(rating)
+                .withOpened(true)
+                .addCategoryId(categoryId)
+                .addGenreId(genreId)
+                .addCastMemberId(castMemberId)
+                .build();
         });
 
         it('should add cast member id', () => {
@@ -347,19 +363,9 @@ describe('Video Aggregate Unit Tests', () => {
     describe('entity_id', () => {
         it('should return the video_id', () => {
             const videoId = new VideoId();
-            video = new Video({
-                video_id: videoId,
-                title: 'title',
-                description: 'description',
-                year_launched: 2020,
-                duration: 90,
-                rating,
-                is_opened: true,
-                is_published: false,
-                categories_id: new Map(),
-                genres_id: new Map(),
-                cast_members_id: new Map(),
-            });
+            video = VideoFakeBuilder.aVideoWithoutMedias()
+                .withVideoId(videoId)
+                .build();
 
             expect(video.entity_id).toBe(videoId);
         });
@@ -374,23 +380,22 @@ describe('Video Aggregate Unit Tests', () => {
             const trailer = Trailer.create({ name: 'trailer', raw_location: 'loc' });
             const videoMedia = VideoMedia.create({ name: 'video', raw_location: 'loc' });
             
-            video = new Video({
-                video_id: videoId,
-                title: 'title',
-                description: 'description',
-                year_launched: 2020,
-                duration: 90,
-                rating,
-                is_opened: true,
-                is_published: false,
-                banner,
-                trailer,
-                video: videoMedia,
-                categories_id: new Map([[categoryId.id, categoryId]]),
-                genres_id: new Map([[genreId.id, genreId]]),
-                cast_members_id: new Map([[castMemberId.id, castMemberId]]),
-                created_at,
-            });
+            video = VideoFakeBuilder.aVideoWithoutMedias()
+                .withVideoId(videoId)
+                .withTitle('title')
+                .withDescription('description')
+                .withYearLaunched(2020)
+                .withDuration(90)
+                .withRating(rating)
+                .withOpened(true)
+                .withBanner(banner)
+                .withTrailer(trailer)
+                .withVideo(videoMedia)
+                .addCategoryId(categoryId)
+                .addGenreId(genreId)
+                .addCastMemberId(castMemberId)
+                .withCreatedAt(created_at)
+                .build();
 
             const json = video.toJSON();
 
