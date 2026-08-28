@@ -6,6 +6,8 @@ import { Rating } from '../rating.vo';
 import { Banner } from '../banner.vo';
 import { Thumbnail } from '../thumbnail.vo';
 import { ThumbnailHalf } from '../thumbnail_half.vo';
+import { Trailer } from '../trailer.vo';
+import { VideoMedia } from '../video_media.vo';
 
 describe('Video Aggregate Unit Tests', () => {
     let video: Video;
@@ -169,6 +171,54 @@ describe('Video Aggregate Unit Tests', () => {
             video.markAsNotOpened();
             expect(video.is_opened).toBe(false);
         });
+
+        it('should replace banner', () => {
+            const banner = new Banner({ name: 'banner', location: 'loc' });
+            video.replaceBanner(banner);
+            expect(video.banner).toBe(banner);
+        });
+
+        it('should replace thumbnail', () => {
+            const thumbnail = new Thumbnail({ name: 'thumb', location: 'loc' });
+            video.replaceThumbnail(thumbnail);
+            expect(video.thumbnail).toBe(thumbnail);
+        });
+
+        it('should replace thumbnail half', () => {
+            const thumbnailHalf = new ThumbnailHalf({ name: 'thumb_half', location: 'loc' });
+            video.replaceThumbnailHalf(thumbnailHalf);
+            expect(video.thumbnail_half).toBe(thumbnailHalf);
+        });
+
+        it('should replace trailer and mark as published if completed', () => {
+            let trailer = Trailer.create({ name: 'trailer', raw_location: 'loc' });
+            video.replaceTrailer(trailer);
+            expect(video.trailer).toBe(trailer);
+            expect(video.is_published).toBe(false);
+
+            const videoMedia = VideoMedia.create({ name: 'video', raw_location: 'loc' }).complete('loc_encoded');
+            trailer = trailer.complete('loc_encoded');
+            
+            video.replaceVideo(videoMedia);
+            video.replaceTrailer(trailer);
+            expect(video.trailer).toBe(trailer);
+            expect(video.is_published).toBe(true);
+        });
+
+        it('should replace video and mark as published if completed', () => {
+            let videoMedia = VideoMedia.create({ name: 'video', raw_location: 'loc' });
+            video.replaceVideo(videoMedia);
+            expect(video.video).toBe(videoMedia);
+            expect(video.is_published).toBe(false);
+
+            const trailer = Trailer.create({ name: 'trailer', raw_location: 'loc' }).complete('loc_encoded');
+            videoMedia = videoMedia.complete('loc_encoded');
+            
+            video.replaceTrailer(trailer);
+            video.replaceVideo(videoMedia);
+            expect(video.video).toBe(videoMedia);
+            expect(video.is_published).toBe(true);
+        });
     });
 
     describe('categories management', () => {
@@ -321,6 +371,9 @@ describe('Video Aggregate Unit Tests', () => {
             const created_at = new Date();
             const banner = new Banner({ name: 'banner', location: 'loc' });
             
+            const trailer = Trailer.create({ name: 'trailer', raw_location: 'loc' });
+            const videoMedia = VideoMedia.create({ name: 'video', raw_location: 'loc' });
+            
             video = new Video({
                 video_id: videoId,
                 title: 'title',
@@ -331,6 +384,8 @@ describe('Video Aggregate Unit Tests', () => {
                 is_opened: true,
                 is_published: false,
                 banner,
+                trailer,
+                video: videoMedia,
                 categories_id: new Map([[categoryId.id, categoryId]]),
                 genres_id: new Map([[genreId.id, genreId]]),
                 cast_members_id: new Map([[castMemberId.id, castMemberId]]),
@@ -351,6 +406,8 @@ describe('Video Aggregate Unit Tests', () => {
                 banner: banner.toJSON(),
                 thumbnail: null,
                 thumbnail_half: null,
+                trailer: trailer.toJSON(),
+                video: videoMedia.toJSON(),
                 categories_id: [categoryId.id],
                 genres_id: [genreId.id],
                 cast_members_id: [castMemberId.id],
