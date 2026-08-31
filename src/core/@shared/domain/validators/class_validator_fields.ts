@@ -2,7 +2,7 @@ import { validateSync } from "class-validator";
 import {Notification} from "@core/@shared/domain/validators/notification";
 import {IValidatorFields} from "@core/@shared/domain/validators/validator_fields.interface";
 
-export abstract class ClassValidatorFields<PropsValidated>
+export abstract class ClassValidatorFields
 	implements IValidatorFields
 {
 	validate(notification: Notification, data: any, fields: string[]): boolean {
