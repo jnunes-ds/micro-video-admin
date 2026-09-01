@@ -16,6 +16,7 @@ export type CreateFromFileProps = {
 };
 
 export class Trailer extends AudioVideoMedia {
+	declare readonly __brand: 'trailer';
 	static max_size = 1024 * 1024 * 500; // 500MB
 	static mime_types = ['image/jpeg', 'image/png', 'image/gif'];
 

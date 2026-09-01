@@ -16,6 +16,7 @@ export type CreateFromFileProps = {
 };
 
 export class VideoMedia extends AudioVideoMedia {
+	declare readonly __brand: 'video_media';
 	static max_size = 1024 * 1024 * 1024 * 50; // 50GB
 	static mime_types = ['image/jpeg', 'image/png', 'image/gif'];
 
