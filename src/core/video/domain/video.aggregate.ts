@@ -12,6 +12,7 @@ import {Trailer} from "@core/video/domain/trailer.vo";
 import {VideoMedia} from "@core/video/domain/video_media.vo"
 import VideoValidatorFactory from "@core/video/domain/video.validator";
 import {AudioVideoMediaStatus} from "@core/@shared/domain/value_objects/audio_video_media.vo";
+import {VideoCreatedEvent} from "@core/video/domain/domain_events/video_created.event";
 
 export type VideoConstructorProps = {
 	video_id?: VideoId;
@@ -110,6 +111,29 @@ export class Video extends AggregateRoot {
 		});
 		video.validate(['title']);
 		video.markAsPublished();
+		video.applyEvent(
+			new VideoCreatedEvent({
+				video_id: video.video_id,
+				title: props.title,
+				description: props.description,
+				year_launched: props.year_launched,
+				duration: props.duration,
+				rating: props.rating,
+				is_opened: props.is_opened,
+				is_published: video.is_published,
+
+				banner: props.banner,
+				thumbnail: props.thumbnail,
+				thumbnail_half: props.thumbnail_half,
+				trailer: props.trailer,
+				video: props.video,
+
+				categories_id: props.categories_id,
+				genres_id: props.genres_id,
+				cast_members_id: props.cast_members_id,
+				created_at: video.created_at ?? new Date(),
+			})
+		);
 
 		return video;
 	}
