@@ -9,6 +9,13 @@ import { ThumbnailHalf } from '../thumbnail_half.vo';
 import { Trailer } from '../trailer.vo';
 import { VideoMedia } from '../video_media.vo';
 import { VideoFakeBuilder } from '../video_fake.builder';
+import {EntityId} from "@core/@shared/domain/entity";
+
+class StubVideo {
+    static createMapOfIdsFromIdsArray(ids: EntityId[]): Map<string, EntityId> {
+        return new Map(ids.map(id => [id.id, id]));
+    }
+}
 
 describe('Video Aggregate Unit Tests', () => {
     let video: Video;
@@ -22,6 +29,7 @@ describe('Video Aggregate Unit Tests', () => {
         genreId = new GenreId();
         castMemberId = new CastMemberId();
         rating = Rating.createRL();
+        Video.prototype.validate = jest.fn().mockImplementation(Video.prototype.validate);
     });
 
     describe('constructor', () => {
@@ -418,6 +426,106 @@ describe('Video Aggregate Unit Tests', () => {
                 cast_members_id: [castMemberId.id],
                 created_at,
             });
+        });
+    });
+
+    describe('create command', () => {
+        it('should create a video and no publish video media', () => {
+            const categories_id = [new CategoryId()];
+            const genres_id = [new GenreId()];
+            const cast_members_id = [new CastMemberId()];
+
+            const spyOnVideoCreated = jest.spyOn(Video.prototype, 'onVideoCreated');
+            const tryMarkAsPublished = jest.spyOn(
+              Video.prototype as any,
+              'tryMarkAsPublished'
+            );
+            const video = Video.create({
+                title: 'test title',
+                description: 'test description',
+                year_launched: 2020,
+                duration: 90,
+                rating: Rating.createRL(),
+                is_opened: true,
+                categories_id,
+                genres_id,
+                cast_members_id
+            });
+
+            expect(video.video_id).toBeInstanceOf(VideoId);
+            expect(video.title).toBe('test title');
+            expect(video.description).toBe('test description');
+            expect(video.year_launched).toBe(2020);
+            expect(video.duration).toBe(90);
+            expect(video.rating).toBeInstanceOf(Rating);
+            expect(video.is_opened).toBe(true);
+            expect(video.is_published).toBe(false);
+            expect(video.banner).toBeNull();
+            expect(video.thumbnail).toBeNull();
+            expect(video.thumbnail_half).toBeNull();
+            expect(video.trailer).toBeNull();
+            expect(video.video).toBeNull();
+            expect(video.categories_id).toEqual(StubVideo.createMapOfIdsFromIdsArray(categories_id));
+            expect(video.genres_id).toEqual(StubVideo.createMapOfIdsFromIdsArray(genres_id));
+            expect(video.cast_members_id).toEqual(StubVideo.createMapOfIdsFromIdsArray(cast_members_id));
+            expect(spyOnVideoCreated).toHaveBeenCalledTimes(1);
+            expect(tryMarkAsPublished).toHaveBeenCalledTimes(1);
+        });
+
+        it('should create a video and publish video media', () => {
+            const categories_id = [new CategoryId()];
+            const genres_id = [new GenreId()];
+            const cast_members_id = [new CastMemberId()];
+
+            const spyOnVideoCreated = jest.spyOn(Video.prototype, 'onVideoCreated');
+            const tryMarkAsPublished = jest.spyOn(
+              Video.prototype as any,
+              'tryMarkAsPublished'
+            );
+
+            const trailer = Trailer.create({
+                name: 'test name trailer',
+                raw_location: 'test raw_location trailer'
+            }).complete('test encoded_location trailer');
+
+            const videoMedia = VideoMedia.create({
+                name: 'test name video',
+                raw_location: 'test raw_location video'
+            }).complete('test encoded_location video');
+
+
+            const video = Video.create({
+                title: 'test title',
+                description: 'test description',
+                year_launched: 2020,
+                duration: 90,
+                rating: Rating.createRL(),
+                is_opened: true,
+                categories_id,
+                genres_id,
+                cast_members_id,
+                trailer,
+                video: videoMedia
+            });
+
+            expect(video.video_id).toBeInstanceOf(VideoId);
+            expect(video.title).toBe('test title');
+            expect(video.description).toBe('test description');
+            expect(video.year_launched).toBe(2020);
+            expect(video.duration).toBe(90);
+            expect(video.rating).toBeInstanceOf(Rating);
+            expect(video.is_opened).toBe(true);
+            expect(video.is_published).toBe(true);
+            expect(video.banner).toBeNull();
+            expect(video.thumbnail).toBeNull();
+            expect(video.thumbnail_half).toBeNull();
+            expect(video.trailer).toEqual(trailer);
+            expect(video.video).toEqual(videoMedia);
+            expect(video.categories_id).toEqual(StubVideo.createMapOfIdsFromIdsArray(categories_id));
+            expect(video.genres_id).toEqual(StubVideo.createMapOfIdsFromIdsArray(genres_id));
+            expect(video.cast_members_id).toEqual(StubVideo.createMapOfIdsFromIdsArray(cast_members_id));
+            expect(spyOnVideoCreated).toHaveBeenCalledTimes(1);
+            expect(tryMarkAsPublished).toHaveBeenCalledTimes(1);
         });
     });
 });
