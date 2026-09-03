@@ -10,4 +10,4 @@ export abstract class Entity {
 	 abstract toJSON(): any;
 }
 
-export class EntityId extends Uuid {};
+export class EntityId extends Uuid {}
