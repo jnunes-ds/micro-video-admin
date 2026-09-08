@@ -75,7 +75,7 @@ export class VideoModel extends Model<VideoModelsProps> {
 	@HasMany(() => VideoCastMemberModel, 'video_id')
 	declare cast_members_id: VideoCastMemberModel[];
 
-	@BelongsToMany(() => CategoryModel, () => VideoCastMemberModel)
+	@BelongsToMany(() => CastMemberModel, () => VideoCastMemberModel)
 	declare cast_members: CastMemberModel[];
 
 	@Column({ type: DataType.DATE(6), allowNull: false })

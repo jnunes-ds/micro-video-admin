@@ -23,7 +23,7 @@ export type ImageMediaModelProps = {
 	timestamps: false,
 	indexes: [{ fields: ['video_id', 'video_related_field'], unique: true }]
 })
-export class ImageMediaModel extends Model<ImageMediaModelProps> {
+export class AudioVideoMediaModel extends Model<ImageMediaModelProps> {
 	@PrimaryKey
 	@Column({ type: DataType.UUID, defaultValue: () => new Uuid() })
 	declare audio_video_media_id: string;
