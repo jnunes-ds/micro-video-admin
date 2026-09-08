@@ -3,17 +3,21 @@ import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {GenreModel} from "@core/genre/infra/sequelize/genre.model";
 import {CastMemberModel} from "@core/cast_member/infra/db/sequelize/cast_member.model";
 import {BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table} from "sequelize-typescript";
+import {ImageMediaModel} from "@core/video/infra/db/sequelize/image_media.model";
+import {AudioVideoMediaModel} from "@core/video/infra/db/sequelize/audio_video_media.model";
 
 export type VideoModelsProps = {
-	vide_id: string;
+	video_id: string;
 	title: string;
 	description: string;
 	year_launched: number;
 	duration: number;
 	rating: RatingValues;
-	is_opened: boolean;
+	is_open: boolean;
 	is_published: boolean;
 
+	image_medias: ImageMediaModel[];
+	audio_video_medias: AudioVideoMediaModel[];
 	categories_id: VideoCategoryModel[];
 	categories: CategoryModel[];
 	genres_id: VideoGenreModel[];
@@ -60,8 +64,14 @@ export class VideoModel extends Model<VideoModelsProps> {
 	@Column({ type: DataType.BOOLEAN, allowNull: false })
 	declare is_published: boolean;
 
+	@HasMany(() => ImageMediaModel, 'video_id')
+	declare image_medias: ImageMediaModel[];
+
+	@HasMany(() => AudioVideoMediaModel, 'video_id')
+	declare audio_video_medias: AudioVideoMediaModel[];
+
 	@HasMany(() => VideoCategoryModel, 'video_id')
-	declare categorories_id: VideoCategoryModel[];
+	declare categories_id: VideoCategoryModel[];
 
 	@BelongsToMany(() => CategoryModel, () => VideoCategoryModel)
 	declare categories: CategoryModel[];

@@ -1,4 +1,4 @@
-import {BelongsTo, Column, DataType, ForeignKey, Model, PrimaryKey, Table} from 'sequelize-typescript';
+import {Column, DataType, ForeignKey, Model, PrimaryKey, Table} from 'sequelize-typescript';
 import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {VideoModel} from "@core/video/infra/db/sequelize/video.models";
 
@@ -35,9 +35,6 @@ export class ImageMediaModel extends Model<ImageMediaModelProps> {
 	@ForeignKey(() => VideoModel)
 	@Column({ type: DataType.UUID, allowNull: false })
 	declare video_id: string;
-
-	@BelongsTo(() => VideoModel)
-	declare video: VideoModel;
 
 	@Column({
 		type: DataType.ENUM(
