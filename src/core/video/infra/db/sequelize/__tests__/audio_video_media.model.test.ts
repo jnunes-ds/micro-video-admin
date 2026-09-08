@@ -4,6 +4,7 @@ import {
 	AudioVideoMediaModel,
 	AudioVideoMediaRelatedField
 } from "@core/video/infra/db/sequelize/audio_video_media.model";
+import {AudioVideoMediaStatus} from "@core/@shared/domain/value_objects/audio_video_media.vo";
 
 describe("AudioVideoMediaModel Integration Tests", () => {
 	setupSequelizeForVideo();
@@ -61,6 +62,19 @@ describe("AudioVideoMediaModel Integration Tests", () => {
 			fieldName: 'encoded_location',
 			allowNull: true,
 			type: DataType.STRING(255)
+		});
+
+		const statusAttr = attributesMap.status;
+		expect(statusAttr).toMatchObject({
+			field: 'status',
+			fieldName: 'status',
+			allowNull: false,
+			type: DataType.ENUM(
+				AudioVideoMediaStatus.PROCESSING,
+				AudioVideoMediaStatus.FAILED,
+				AudioVideoMediaStatus.PENDING,
+				AudioVideoMediaStatus.COMPLETED
+			)
 		});
 
 		const videoIdAttr = attributesMap.video_id;
