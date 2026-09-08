@@ -43,7 +43,8 @@ export class AudioVideoMediaModel extends Model<ImageMediaModelProps> {
 			AudioVideoMediaStatus.FAILED,
 			AudioVideoMediaStatus.PENDING,
 			AudioVideoMediaStatus.COMPLETED,
-		)
+		),
+		allowNull: false
 	})
 	declare status: AudioVideoMediaStatus;
 
