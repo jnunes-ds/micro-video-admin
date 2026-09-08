@@ -2,7 +2,7 @@ import {Column, DataType, ForeignKey, Model, PrimaryKey, Table} from 'sequelize-
 import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {VideoModel} from "@core/video/infra/db/sequelize/video.models";
 
-export enum ImageMegiaRelatedField {
+export enum ImageMediaRelatedField {
 	BANNER = 'banner',
 	THUMBNAIL = 'thumbnail',
 	THUMBNAIL_HALF = 'thumbnail_half'
@@ -13,7 +13,7 @@ export type ImageMediaModelProps = {
 	name: string;
 	location: string;
 	video_id: string;
-	video_related_field: ImageMegiaRelatedField;
+	video_related_field: ImageMediaRelatedField;
 };
 
 @Table({
@@ -38,11 +38,11 @@ export class ImageMediaModel extends Model<ImageMediaModelProps> {
 
 	@Column({
 		type: DataType.ENUM(
-			ImageMegiaRelatedField.BANNER,
-			ImageMegiaRelatedField.THUMBNAIL,
-			ImageMegiaRelatedField.THUMBNAIL_HALF
+			ImageMediaRelatedField.BANNER,
+			ImageMediaRelatedField.THUMBNAIL,
+			ImageMediaRelatedField.THUMBNAIL_HALF
 		),
 		allowNull: false
 	})
-	declare video_related_field: ImageMegiaRelatedField;
+	declare video_related_field: ImageMediaRelatedField;
 }
