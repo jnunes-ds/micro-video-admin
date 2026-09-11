@@ -23,7 +23,7 @@ export type ImageMediaModelProps = {
 })
 export class ImageMediaModel extends Model<ImageMediaModelProps> {
 	@PrimaryKey
-	@Column({ type: DataType.UUID, defaultValue: () => new Uuid() })
+	@Column({ type: DataType.UUID, defaultValue: () => new Uuid().id })
 	declare image_media_id: string;
 
 	@Column({ type: DataType.STRING(255), allowNull: false })
