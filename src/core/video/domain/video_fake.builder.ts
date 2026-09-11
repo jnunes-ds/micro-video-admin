@@ -323,7 +323,7 @@ export class VideoFakeBuilder<TBuild = any> {
 					year_launched: this.callFactory(this._year_launched, index),
 					duration: this.callFactory(this._duration, index),
 					rating: this.callFactory(this._rating, index),
-					is_open: this.callFactory(this._opened, index),
+					is_opened: this.callFactory(this._opened, index),
 					is_published: false,
 					banner: this.callFactory(this._banner, index),
 					thumbnail: this.callFactory(this._thumbnail, index),

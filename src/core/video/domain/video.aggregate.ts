@@ -22,7 +22,7 @@ export type VideoConstructorProps = {
 	year_launched: number;
 	duration: number;
 	rating: Rating;
-	is_open: boolean;
+	is_opened: boolean;
 	is_published: boolean;
 
 	banner?: Banner; // name & location
@@ -43,7 +43,7 @@ export type VideoCreateCommand = {
 	year_launched: number;
 	duration: number;
 	rating: Rating;
-	is_open: boolean;
+	is_opened: boolean;
 
 	banner?: Banner;
 	thumbnail?: Thumbnail;
@@ -87,7 +87,7 @@ export class Video extends AggregateRoot {
 		this.year_launched = props.year_launched;
 		this.duration = props.duration;
 		this.rating = props.rating;
-		this.is_opened = props.is_open;
+		this.is_opened = props.is_opened;
 		this.is_published = props.is_published;
 
 		this.banner = props.banner ?? null;
@@ -122,7 +122,7 @@ export class Video extends AggregateRoot {
 				year_launched: props.year_launched,
 				duration: props.duration,
 				rating: props.rating,
-				is_open: props.is_open,
+				is_open: props.is_opened,
 				is_published: video.is_published,
 
 				banner: props.banner,

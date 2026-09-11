@@ -13,7 +13,7 @@ export type VideoModelsProps = {
 	year_launched: number;
 	duration: number;
 	rating: RatingValues;
-	is_open: boolean;
+	is_opened: boolean;
 	is_published: boolean;
 
 	image_medias: ImageMediaModel[];
@@ -59,7 +59,7 @@ export class VideoModel extends Model<VideoModelsProps> {
 	declare rating: RatingValues;
 
 	@Column({ type: DataType.BOOLEAN, allowNull: false })
-	declare is_open: boolean;
+	declare is_opened: boolean;
 
 	@Column({ type: DataType.BOOLEAN, allowNull: false })
 	declare is_published: boolean;

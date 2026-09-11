@@ -168,7 +168,7 @@ describe("VideoModel Unit Tests", () => {
 			'year_launched',
 			'duration',
 			'rating',
-			'is_open',
+			'is_opened',
 			'is_published',
 			'created_at',
 		]);
@@ -228,10 +228,10 @@ describe("VideoModel Unit Tests", () => {
 			),
 		});
 
-		const isOpenAttr = attributesMap.is_open;
+		const isOpenAttr = attributesMap.is_opened;
 		expect(isOpenAttr).toMatchObject({
-			field: 'is_open',
-			fieldName: 'is_open',
+			field: 'is_opened',
+			fieldName: 'is_opened',
 			allowNull: false,
 			type: DataType.BOOLEAN(),
 		});
@@ -406,7 +406,7 @@ describe("VideoModel Integration Tests", () => {
 			year_launched: 2020,
 			duration: 90,
 			rating: RatingValues.R10,
-			is_open: false,
+			is_opened: false,
 			is_published: false,
 			created_at: new Date(),
 		};
