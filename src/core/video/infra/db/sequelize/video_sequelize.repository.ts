@@ -19,7 +19,7 @@ export class VideoSequelizeRepository implements IVideoRepository {
 		'categories_id',
 		'genres_id',
 		'cast_members_id',
-		'images_media',
+		'image_medias',
 		'audio_video_medias'
 	];
 

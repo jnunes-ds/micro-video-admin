@@ -44,6 +44,7 @@ export class VideoSearchParams extends SearchParams<VideoFilter> {
 		return new VideoSearchParams({
 			...props,
 			filter: {
+				title: props.filter?.title,
 				categories_id,
 				genres_id,
 				cast_members_id
