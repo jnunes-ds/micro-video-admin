@@ -25,11 +25,11 @@ export type VideoConstructorProps = {
 	is_opened: boolean;
 	is_published: boolean;
 
-	banner?: Banner;
-	thumbnail?: Thumbnail;
-	thumbnail_half?: ThumbnailHalf;
-	trailer?: Trailer;
-	video?: VideoMedia;
+	banner?: Banner; // name & location
+	thumbnail?: Thumbnail; // name & location
+	thumbnail_half?: ThumbnailHalf; // name & location
+	trailer?: Trailer; // 4 - name, raw_location, encoded_location, status
+	video?: VideoMedia; // 4 - name, raw_location, encoded_location, status
 
 	categories_id: Map<string, CategoryId>;
 	genres_id: Map<string, GenreId>;
@@ -122,7 +122,7 @@ export class Video extends AggregateRoot {
 				year_launched: props.year_launched,
 				duration: props.duration,
 				rating: props.rating,
-				is_opened: props.is_opened,
+				is_open: props.is_opened,
 				is_published: video.is_published,
 
 				banner: props.banner,

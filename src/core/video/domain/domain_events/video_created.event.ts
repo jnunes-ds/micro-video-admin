@@ -18,7 +18,7 @@ export type VideoConstructorProps = {
 	year_launched: number;
 	duration: number;
 	rating: Rating;
-	is_opened: boolean;
+	is_open: boolean;
 	is_published: boolean;
 
 	banner?: Banner;
@@ -90,7 +90,7 @@ export class VideoCreatedEvent implements IDomainEvent {
 		this.year_launched = props.year_launched;
 		this.duration = props.duration;
 		this.rating = props.rating;
-		this.is_opened = props.is_opened;
+		this.is_opened = props.is_open;
 		this.is_published = props.is_published;
 
 		this.banner = props.banner ?? null;
