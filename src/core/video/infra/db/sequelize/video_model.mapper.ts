@@ -23,7 +23,7 @@ import {
 } from "@core/video/infra/db/sequelize/audio_video_media.model";
 
 export class VideoModelMapper {
-	static toEntity(model: VideoModel) {
+	static toEntity(model: VideoModel): Video {
 		const {
 			video_id: id,
 			categories_id = [],
@@ -147,7 +147,7 @@ export class VideoModelMapper {
 		return videoEntity;
 	}
 
-	static toModelProps(entity: Video) {
+	static toModelProps(entity: Video): VideoModel {
 		const {
 			banner,
 			thumbnail,
@@ -160,6 +160,7 @@ export class VideoModelMapper {
 			...otherData
 		} = entity.toJSON();
 
+		// @ts-expect-error
 		return {
 			...otherData,
 			image_medias: [
@@ -184,7 +185,7 @@ export class VideoModelMapper {
 							video_related_field: item.video_related_field,
 						} as any)
 					: null;
-			}).filter(Boolean),
+			}).filter(Boolean) as ImageMediaModel[],
 			audio_video_medias: [trailer, video]
 				.map((audio_video_media, index) => {
 					return audio_video_media
@@ -199,7 +200,7 @@ export class VideoModelMapper {
 										: AudioVideoMediaRelatedField.VIDEO
 							} as any)
 						: null
-				}).filter(Boolean),
+				}).filter(Boolean) as AudioVideoMediaModel[],
 			categories_id: categories_id.map(category_id =>
 				VideoCategoryModel.build({
 					video_id: entity.video_id.id,
