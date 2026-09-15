@@ -11,7 +11,7 @@ import { GetGenreUsecase } from '@core/genre/application/usecases/get_genre/get_
 import { DeleteGenreUsecase } from '@core/genre/application/usecases/delete_genre/delete_genre.usecase';
 import { IUnitOfWork } from '@core/@shared/domain/repository/unit_of_work.interface';
 import { ICategoryRepository } from '@core/category/domain/category.repository';
-import { CategoriesIdsExistsInDatabaseValidator } from '@core/category/application/validators/categories_ids_exists_in_database.validator';
+import { CategoriesIdExistsInDatabaseValidator } from '@core/category/application/validators/categories_ids_exists_in_database.validator';
 import { CATEGORY_PROVIDERS } from '@/nest-modules/categories/categories.providers';
 import { UnitOfWorkSequelize } from '@core/@shared/infra/db/sequelize/unit_of_work_sequelize';
 
@@ -63,7 +63,7 @@ export const USE_CASES: Usecases = {
       uow: IUnitOfWork,
       genreRepo: IGenreRepository,
       categoryRepo: ICategoryRepository,
-      categoriesIdsExistsInStorage: CategoriesIdsExistsInDatabaseValidator,
+      categoriesIdsExistsInStorage: CategoriesIdExistsInDatabaseValidator,
     ) =>
       new CreateGenreUsecase(
         uow,
@@ -85,7 +85,7 @@ export const USE_CASES: Usecases = {
       uow: IUnitOfWork,
       genreRepo: IGenreRepository,
       categoryRepo: ICategoryRepository,
-      categoriesIdsExistsInStorage: CategoriesIdsExistsInDatabaseValidator,
+      categoriesIdsExistsInStorage: CategoriesIdExistsInDatabaseValidator,
     ) =>
       new UpdateGenreUsecase(
         uow,

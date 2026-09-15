@@ -1,6 +1,6 @@
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {
-	CategoriesIdsExistsInDatabaseValidator
+	CategoriesIdExistsInDatabaseValidator
 } from "@core/category/application/validators/categories_ids_exists_in_database.validator";
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {Category, CategoryId} from "@core/category/domain/category.aggregate";
@@ -8,10 +8,10 @@ import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 
 describe('CategoriesIdsExistsInDatabaseValidator Unit Tests', () => {
 	let categoryRepo: ICategoryRepository;
-	let validator: CategoriesIdsExistsInDatabaseValidator;
+	let validator: CategoriesIdExistsInDatabaseValidator;
 	beforeEach(() => {
 		categoryRepo = new CategoryInMemoryRepository();
-		validator = new CategoriesIdsExistsInDatabaseValidator(categoryRepo);
+		validator = new CategoriesIdExistsInDatabaseValidator(categoryRepo);
 	});
 
 	it('should return many not found errors when categories ids does not exists in repository',
