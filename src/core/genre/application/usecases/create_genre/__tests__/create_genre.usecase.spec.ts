@@ -3,7 +3,7 @@ import {GenreInMemoryRepository} from "@core/genre/infra/in_memory/genre_in_memo
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {
 	CategoriesIdsExistsInDatabaseValidator
-} from "@core/category/application/validations/categories_ids_exists_in_database.validator";
+} from "@core/category/application/validators/categories_ids_exists_in_database.validator";
 import {UnitOfWorkFakeInMemory} from "@core/@shared/infra/db/in_memory/fake_unit_of_work_in_memory";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
 import {Category} from "@core/category/domain/category.aggregate";

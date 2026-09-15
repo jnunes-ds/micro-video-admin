@@ -1,7 +1,7 @@
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {
 	CategoriesIdsExistsInDatabaseValidator
-} from "@core/category/application/validations/categories_ids_exists_in_database.validator";
+} from "@core/category/application/validators/categories_ids_exists_in_database.validator";
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {Category, CategoryId} from "@core/category/domain/category.aggregate";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";

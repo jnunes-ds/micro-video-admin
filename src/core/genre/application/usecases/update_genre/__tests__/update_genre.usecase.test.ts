@@ -4,7 +4,7 @@ import {GenreSequelizeRepository} from "@core/genre/infra/sequelize/genre_sequel
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {
 	CategoriesIdsExistsInDatabaseValidator
-} from "@core/category/application/validations/categories_ids_exists_in_database.validator";
+} from "@core/category/application/validators/categories_ids_exists_in_database.validator";
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {GenreCategoryModel, GenreModel} from "@core/genre/infra/sequelize/genre.model";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";

@@ -9,7 +9,7 @@ import {UpdateCategoryUsecase} from "@core/category/application/usecases/update_
 import {ListCategoriesUsecase} from "@core/category/application/usecases/list_categories/list_categories.usecase";
 import {GetCategoryUsecase} from "@core/category/application/usecases/get_category/get_category.usecase";
 import {DeleteCategoryUsecase} from "@core/category/application/usecases/delete_category/delete_category.usecase";
-import {CategoriesIdsExistsInDatabaseValidator} from "@core/category/application/validations/categories_ids_exists_in_database.validator";
+import {CategoriesIdsExistsInDatabaseValidator} from "@core/category/application/validators/categories_ids_exists_in_database.validator";
 
 export type ObjectProvider = Exclude<Provider, Function | string | symbol>;
 

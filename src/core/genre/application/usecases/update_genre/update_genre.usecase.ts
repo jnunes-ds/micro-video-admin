@@ -6,7 +6,7 @@ import {IGenreRepository} from "@core/genre/domain/genre.repository";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {
 	CategoriesIdsExistsInDatabaseValidator
-} from "@core/category/application/validations/categories_ids_exists_in_database.validator";
+} from "@core/category/application/validators/categories_ids_exists_in_database.validator";
 import {Genre, GenreId} from "@core/genre/domain/genre.aggregate";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";

@@ -8,7 +8,7 @@ import {CreateGenreInput} from "@core/genre/application/usecases/create_genre/cr
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {
     CategoriesIdsExistsInDatabaseValidator
-} from "@core/category/application/validations/categories_ids_exists_in_database.validator";
+} from "@core/category/application/validators/categories_ids_exists_in_database.validator";
 import {Notification} from "@core/@shared/domain/validators/notification";
 
 export type CreateGenreOutput = GenreOutput;

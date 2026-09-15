@@ -4,7 +4,7 @@ import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/cate
 import {UnitOfWorkFakeInMemory} from "@core/@shared/infra/db/in_memory/fake_unit_of_work_in_memory";
 import {
 	CategoriesIdsExistsInDatabaseValidator
-} from "@core/category/application/validations/categories_ids_exists_in_database.validator";
+} from "@core/category/application/validators/categories_ids_exists_in_database.validator";
 import {Genre} from "@core/genre/domain/genre.aggregate";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
