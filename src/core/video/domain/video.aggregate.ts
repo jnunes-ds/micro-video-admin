@@ -14,6 +14,7 @@ import VideoValidatorFactory from "@core/video/domain/video.validator";
 import {AudioVideoMediaStatus} from "@core/@shared/domain/value_objects/audio_video_media.vo";
 import {VideoCreatedEvent} from "@core/video/domain/domain_events/video_created.event";
 import {VideoAudioMediaReplacedEvent} from "@core/video/domain/domain_events/video_audio_media_replaced.event";
+import {VideoFakeBuilder} from "@core/video/domain/video_fake.builder";
 
 export type VideoConstructorProps = {
 	video_id?: VideoId;
@@ -309,5 +310,9 @@ export class Video extends AggregateRoot {
 
 	private static createArrayOfStringedIdsFromIdsMap(idsMap: Map<string, EntityId>): string[] {
 		return  Array.from(idsMap.values()).map(id => id.id)
+	}
+
+	public static fake() {
+		return VideoFakeBuilder;
 	}
 }
