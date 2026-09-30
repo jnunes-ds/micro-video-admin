@@ -4,7 +4,7 @@ import {FileMediaInput} from "@core/video/application/common/file_media.input";
 const FIELDS = ['trailer', 'video'] as const;
 export type Fields = typeof FIELDS[number];
 
-export type UploadAudioVideoMediaInputConstructorPrps = {
+export type UploadAudioVideoMediaInputConstructorProps = {
 	video_id: string;
 	field: Fields;
 	file: FileMediaInput;
@@ -23,7 +23,7 @@ export class UploadAudioVideoMediaInput {
 	@ValidateNested()
 	file: FileMediaInput;
 
-	constructor(props: UploadAudioVideoMediaInputConstructorPrps) {
+	constructor(props: UploadAudioVideoMediaInputConstructorProps) {
 		if (!props) return;
 
 		this.video_id = props.video_id;
@@ -32,7 +32,7 @@ export class UploadAudioVideoMediaInput {
 	}
 }
 
-export class ValidateUploadImageMediasInput {
+export class ValidateUploadAudioVideoMediaInput {
 	static validate(input: UploadAudioVideoMediaInput) {
 		return validateSync(input);
 	}
