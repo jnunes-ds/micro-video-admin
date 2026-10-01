@@ -26,6 +26,7 @@
     "test:e2e:watch": "jest --config test/jest-e2e.config.ts --runInBand --watch --verbose"
   },
   "dependencies": {
+    "@google-cloud/storage": "^7.22.0",
     "@nestjs/common": "^11.2.1",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.1.27",
