@@ -6,14 +6,6 @@ export class UnitOfWorkFakeInMemory implements IUnitOfWork {
 
 	constructor() {}
 
-	getAggregateRoots(): AggregateRoot[] {
-		return [...this.aggregateRoots];
-	}
-
-	addAggregateRoot(aggregateRoot: AggregateRoot): void {
-		this.aggregateRoots.add(aggregateRoot);
-	}
-
 	async start(): Promise<void> {}
 
 	async commit(): Promise<void> {}
@@ -25,4 +17,12 @@ export class UnitOfWorkFakeInMemory implements IUnitOfWork {
 	}
 
 	getTransaction(): any {}
+
+	getAggregateRoots(): AggregateRoot[] {
+		return [...this.aggregateRoots];
+	}
+
+	addAggregateRoot(aggregateRoot: AggregateRoot): void {
+		this.aggregateRoots.add(aggregateRoot);
+	}
 }
