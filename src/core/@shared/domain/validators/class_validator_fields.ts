@@ -2,10 +2,10 @@ import { validateSync } from "class-validator";
 import {Notification} from "@core/@shared/domain/validators/notification";
 import {IValidatorFields} from "@core/@shared/domain/validators/validator_fields.interface";
 
-export abstract class ClassValidatorFields
+export abstract class ClassValidatorFields<T extends object>
 	implements IValidatorFields
 {
-	validate(notification: Notification, data: any, fields: string[]): boolean {
+	validate(notification: Notification, data: T , fields: string[]): boolean {
 		const errors = validateSync(data, {
 			groups: fields
 		});

@@ -12,7 +12,7 @@ export class VideoRules {
 	}
 }
 
-export class VideoValidator extends ClassValidatorFields {
+export class VideoValidator extends ClassValidatorFields<{}> {
 	validate(notification: Notification, data: any, fields?: string[]): boolean {
 		const newFields = fields?.length ? fields : ['title'];
 		return super.validate(notification, new VideoRules(data), newFields)
