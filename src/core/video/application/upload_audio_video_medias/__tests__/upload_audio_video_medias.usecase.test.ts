@@ -24,6 +24,9 @@ import {GoogleCloudStorage} from "@core/@shared/infra/storage/google_cloud.stora
 import {
 	UploadAudioVideoMediasUsecase
 } from "@core/video/application/upload_audio_video_medias/upload_audio_video_medias.usecase";
+import {ApplicationService} from "@core/@shared/application/application.service";
+import {DomainEventMediator} from "@core/@shared/domain/events/domain_event_mediator";
+import {EventEmitter2} from "eventemitter2";
 
 describe('UploadAudioVideoMediasUsecase Integration Tests', () => {
 	let uploadAudioVideoMediasUsecase: UploadAudioVideoMediasUsecase;
@@ -48,8 +51,10 @@ describe('UploadAudioVideoMediasUsecase Integration Tests', () => {
 		});
 		const bucketName = Config.bucketName();
 		googleCloudStorage = new GoogleCloudStorage(storageSdk, bucketName);
+		const domainEventMediator = new DomainEventMediator(new EventEmitter2());
+		const appService = new ApplicationService(uow, domainEventMediator);
 
-		uploadAudioVideoMediasUsecase = new UploadAudioVideoMediasUsecase(uow, videoRepo, googleCloudStorage);
+		uploadAudioVideoMediasUsecase = new UploadAudioVideoMediasUsecase(appService, videoRepo, googleCloudStorage);
 	});
 
 	test("if throw's error when video is not found", async () => {
