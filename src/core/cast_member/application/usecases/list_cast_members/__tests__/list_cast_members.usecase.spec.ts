@@ -13,7 +13,6 @@ describe('ListCastMembersUsecase Unit Tests', () => {
 
 	beforeEach(() => {
 		repository = new CastMemberInMemoryRepository();
-		//@ts-expect-error
 		usecase = new ListCastMembersUsecase(repository);
 	});
 

@@ -8,14 +8,16 @@ import {Trailer} from "@core/video/domain/trailer.vo";
 import {CreateFromFileProps, VideoMedia} from "@core/video/domain/video_media.vo";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
 import {UploadAudioVideoMediaInput} from "@core/video/application/upload_audio_video_medias/audio_video_media.input";
+import {DomainEventMediator} from "@core/@shared/domain/events/domain_event_mediator";
+import {ApplicationService} from "@core/@shared/application/application.service";
 
 export class UploadAudioVideoMediasUsecase
 	implements IUseCase<UploadAudioVideoMediaInput, UploadAudioVideoMediaOutput>
 {
 	constructor(
-		private uow: IUnitOfWork,
+		private appService: ApplicationService,
 		private videoRepo: IVideoRepository,
-		private storage: IStorage,
+		private storage: IStorage
 	) {}
 
 	async execute(
@@ -55,8 +57,8 @@ export class UploadAudioVideoMediasUsecase
 			mime_type: input.file.mime_type
 		});
 
-		await this.uow.do(async () => {
-			return await this.videoRepo.update(video)
+		await this.appService.run(async () => {
+			return this.videoRepo.update(video);
 		});
 	}
 }
