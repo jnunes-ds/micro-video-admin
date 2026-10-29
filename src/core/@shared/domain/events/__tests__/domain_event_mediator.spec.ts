@@ -56,5 +56,6 @@ describe('DomainEventMediator Unit Tests', () => {
 		const aggregate = new StubAggregate();
 		aggregate.action('test');
 		await mediator.publish(aggregate);
+		await mediator.publish(aggregate);
 	});
 });
