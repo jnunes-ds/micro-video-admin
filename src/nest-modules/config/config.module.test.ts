@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { join } from 'path';
-import {ConfigModule, validationSchema} from "@/nest-modules/config/config.module";
+import {ConfigModule, CONFIG_DB_SCHEMA} from "@/nest-modules/config/config.module";
 
 function expectValidate(schema: any, value: any, key?: string) {
 	const result = schema.safeParse(value);
@@ -11,7 +11,7 @@ function expectValidate(schema: any, value: any, key?: string) {
 
 describe('Schema Unit Tests', () => {
 	describe('DB Schema', () => {
-		const schema = validationSchema;
+		const schema = CONFIG_DB_SCHEMA;
 
 		describe('DB_VENDOR', () => {
 			test('invalid cases', () => {

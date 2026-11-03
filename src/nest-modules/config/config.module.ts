@@ -3,7 +3,21 @@ import {ConfigModule as NestConfigModule, ConfigModuleOptions} from '@nestjs/con
 import {join} from "path";
 import {z} from "zod";
 
-export const validationSchema = z.object({
+const zodJson = <T extends z.ZodType>(schema: T) =>
+	z.preprocess((value) => {
+		if (typeof value !== 'string' || !value.trimStart().startsWith('{')) {
+			return value;
+		}
+
+		try {
+			return JSON.parse(value);
+		} catch (err) {
+			console.log(err);
+			return value;
+		}
+	}, schema);
+
+export const CONFIG_DB_SCHEMA = z.object({
 		DB_VENDOR: z.string().superRefine((val, ctx) => {
 			if (val && val !== 'mysql' && val !== 'sqlite') {
 				ctx.addIssue({
@@ -60,8 +74,20 @@ export const validationSchema = z.object({
 		}
 	});
 
-type ValidationSchemaType = z.infer<typeof validationSchema>;
+type ValidationSchemaType = z.infer<typeof CONFIG_DB_SCHEMA>;
 export type CONFIG_SCHEMA_TYPE = ValidationSchemaType & { DB_VENDOR: 'mysql' | 'sqlite' };
+
+type CONFIG_GOOGLE_SCHEMA_TYPE = {
+	GOOGLE_CLOUD_CREDENTIALS: object;
+	GOOGLE_CLOUD_STORAGE_BUCKET_NAME: string;
+};
+
+export const CONFIG_GOOGLE_SCHEMA = z.object<
+	ToZodShape<CONFIG_GOOGLE_SCHEMA_TYPE>
+>({
+	GOOGLE_CLOUD_CREDENTIALS: zodJson(z.record(z.string(), z.unknown())),
+	GOOGLE_CLOUD_STORAGE_BUCKET_NAME: z.string().min(2)
+});
 
 @Module({})
 export class ConfigModule extends NestConfigModule {
@@ -76,7 +102,7 @@ export class ConfigModule extends NestConfigModule {
 				join(process.cwd(), 'envs', `.env`),
 			],
 			validate: (env) => {
-				const result = validationSchema.safeParse(env);
+				const result = CONFIG_DB_SCHEMA.and(CONFIG_GOOGLE_SCHEMA).safeParse(env);
 				if (!result.success) {
 					throw new Error(
 						`Config validation error: ${JSON.stringify(result.error.format(), null, 2)}`,
