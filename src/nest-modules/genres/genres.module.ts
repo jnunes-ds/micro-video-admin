@@ -17,6 +17,7 @@ import { CategoriesModule } from '../categories/categories.module';
   providers: [
     ...Object.values(GENRE_PROVIDERS.REPOSITORIES),
     ...Object.values(GENRE_PROVIDERS.USE_CASES),
+    ...Object.values(GENRE_PROVIDERS.VALIDATIONS),
   ],
   exports: [GENRE_PROVIDERS.REPOSITORIES.GENRE_REPOSITORY.provide]
 })

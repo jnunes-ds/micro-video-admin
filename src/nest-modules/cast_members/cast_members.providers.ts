@@ -17,6 +17,13 @@ import {
 	DeleteCastMemberUsecase
 } from "@core/cast_member/application/usecases/delete_cast_member/delete_cast_member.usecase";
 import {GetCastMemberUsecase} from "@core/cast_member/application/usecases/get_cast_member/get_cast_member.usecase";
+import {
+	GenresIdExistsInDatabaseValidator
+} from "@core/genre/application/validators/genres_id_exists_in_database.validator";
+import {IGenreRepository} from "@core/genre/domain/genre.repository";
+import {
+	CastMembersIdExistsInDatabaseValidator
+} from "@core/cast_member/application/validators/cast_members_id_exists_in_database.validator";
 
 export type ObjectProvider = Exclude<Provider, Function | string | symbol>;
 
@@ -87,7 +94,17 @@ export const USE_CASES: Usecases = {
 	}
 };
 
+export const VALIDATIONS = {
+	CAST_MEMBERS_IDS_EXISTS_IN_DATABASE_VALIDATOR: {
+		provide: CastMembersIdExistsInDatabaseValidator,
+		useFactory: (castMemberRepo: ICastMemberRepository) =>
+			new CastMembersIdExistsInDatabaseValidator(castMemberRepo),
+		inject: [REPOSITORIES.CAST_MEMBER_REPOSITORY.provide]
+	}
+}
+
 export const CAST_MEMBER_PROVIDERS = {
 	REPOSITORIES,
 	USE_CASES,
+	VALIDATIONS
 }

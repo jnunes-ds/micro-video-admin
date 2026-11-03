@@ -14,6 +14,9 @@ import { ICategoryRepository } from '@core/category/domain/category.repository';
 import { CategoriesIdExistsInDatabaseValidator } from '@core/category/application/validators/categories_ids_exists_in_database.validator';
 import { CATEGORY_PROVIDERS } from '@/nest-modules/categories/categories.providers';
 import { UnitOfWorkSequelize } from '@core/@shared/infra/db/sequelize/unit_of_work_sequelize';
+import {
+  GenresIdExistsInDatabaseValidator
+} from "@core/genre/application/validators/genres_id_exists_in_database.validator";
 
 export type ObjectProvider = Exclude<Provider, Function | string | symbol>;
 
@@ -131,7 +134,17 @@ export const USE_CASES: Usecases = {
   },
 };
 
+export const VALIDATIONS = {
+  GENRES_IDS_EXISTS_IN_DATABASE_VALIDATOR: {
+    provide: GenresIdExistsInDatabaseValidator,
+    useFactory: (genreRepo: IGenreRepository) =>
+      new GenresIdExistsInDatabaseValidator(genreRepo),
+    inject: [REPOSITORIES.GENRE_REPOSITORY.provide]
+  }
+}
+
 export const GENRE_PROVIDERS = {
   REPOSITORIES,
   USE_CASES,
+  VALIDATIONS
 };

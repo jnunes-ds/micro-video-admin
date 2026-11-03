@@ -10,6 +10,7 @@ import {CAST_MEMBER_PROVIDERS} from "@/nest-modules/cast_members/cast_members.pr
   providers: [
     ...Object.values(CAST_MEMBER_PROVIDERS.REPOSITORIES),
     ...Object.values(CAST_MEMBER_PROVIDERS.USE_CASES),
+    ...Object.values(CAST_MEMBER_PROVIDERS.VALIDATIONS),
   ]
 })
 export class CastMembersModule {}
