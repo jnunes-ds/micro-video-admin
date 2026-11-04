@@ -6,8 +6,8 @@ import {UnitOfWorkSequelize} from "@core/@shared/infra/db/sequelize/unit_of_work
 import {setupSequelizeForVideo} from "@core/video/infra/db/sequelize/testing/helpers";
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
-import {GenreSequelizeRepository} from "@core/genre/infra/sequelize/genre_sequelize.repository";
-import {GenreModel} from "@core/genre/infra/sequelize/genre.model";
+import {GenreSequelizeRepository} from "@core/genre/infra/db/sequelize/genre_sequelize.repository";
+import {GenreModel} from "@core/genre/infra/db/sequelize/genre.model";
 import {CastMemberSequelizeRepository} from "@core/cast_member/infra/db/sequelize/cast_member-sequelize.repository";
 import {CastMemberModel} from "@core/cast_member/infra/db/sequelize/cast_member.model";
 import {VideoSequelizeRepository} from "@core/video/infra/db/sequelize/video_sequelize.repository";

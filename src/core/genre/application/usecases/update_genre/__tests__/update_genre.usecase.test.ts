@@ -1,12 +1,12 @@
 import {UnitOfWorkSequelize} from "@core/@shared/infra/db/sequelize/unit_of_work_sequelize";
 import {UpdateGenreUsecase} from "@core/genre/application/usecases/update_genre/update_genre.usecase";
-import {GenreSequelizeRepository} from "@core/genre/infra/sequelize/genre_sequelize.repository";
+import {GenreSequelizeRepository} from "@core/genre/infra/db/sequelize/genre_sequelize.repository";
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {
 	CategoriesIdExistsInDatabaseValidator
 } from "@core/category/application/validators/categories_ids_exists_in_database.validator";
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
-import {GenreCategoryModel, GenreModel} from "@core/genre/infra/sequelize/genre.model";
+import {GenreCategoryModel, GenreModel} from "@core/genre/infra/db/sequelize/genre.model";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {Genre} from "@core/genre/domain/genre.aggregate";

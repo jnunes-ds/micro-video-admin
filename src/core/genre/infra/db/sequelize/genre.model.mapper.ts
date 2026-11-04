@@ -1,5 +1,5 @@
 import {Genre, GenreId} from "@core/genre/domain/genre.aggregate";
-import {GenreCategoryModel, GenreModel} from "@core/genre/infra/sequelize/genre.model";
+import {GenreCategoryModel, GenreModel} from "@core/genre/infra/db/sequelize/genre.model";
 import {CategoryId} from "@core/category/domain/category.aggregate";
 import {Notification} from "@core/@shared/domain/validators/notification";
 

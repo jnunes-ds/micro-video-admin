@@ -1,7 +1,7 @@
 import {DataType} from "sequelize-typescript";
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
-import {GenreCategoryModel, GenreModel, GenreModelProps} from "@core/genre/infra/sequelize/genre.model";
+import {GenreCategoryModel, GenreModel, GenreModelProps} from "@core/genre/infra/db/sequelize/genre.model";
 
 describe('GenreModel Integration Test', () => {
 	setupSequelize({

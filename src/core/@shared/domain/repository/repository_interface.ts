@@ -4,7 +4,7 @@ import {SearchParams} from "@core/@shared/domain/repository/search_params";
 import {SearchResult} from "@core/@shared/domain/repository/search_result";
 import {Genre, GenreId} from "@core/genre/domain/genre.aggregate";
 import {Op} from "sequelize";
-import {GenreModelMapper} from "@core/genre/infra/sequelize/genre.model.mapper";
+import {GenreModelMapper} from "@core/genre/infra/db/sequelize/genre.model.mapper";
 
 
 export interface IRepository<

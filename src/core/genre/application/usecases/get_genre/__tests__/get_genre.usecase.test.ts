@@ -1,8 +1,8 @@
 import {GetGenreUsecase} from "@core/genre/application/usecases/get_genre/get_genre.usecase";
-import {GenreSequelizeRepository} from "@core/genre/infra/sequelize/genre_sequelize.repository";
+import {GenreSequelizeRepository} from "@core/genre/infra/db/sequelize/genre_sequelize.repository";
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
-import {GenreCategoryModel, GenreModel} from "@core/genre/infra/sequelize/genre.model";
+import {GenreCategoryModel, GenreModel} from "@core/genre/infra/db/sequelize/genre.model";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {UnitOfWorkSequelize} from "@core/@shared/infra/db/sequelize/unit_of_work_sequelize";
 import {Genre, GenreId} from "@core/genre/domain/genre.aggregate";

@@ -7,7 +7,7 @@ import { CastMemberModel } from '@core/cast_member/infra/db/sequelize/cast_membe
 import {
   GenreModel,
   GenreCategoryModel,
-} from '@core/genre/infra/sequelize/genre.model';
+} from '@core/genre/infra/db/sequelize/genre.model';
 import { UnitOfWorkSequelize } from '@core/@shared/infra/db/sequelize/unit_of_work_sequelize';
 import { Sequelize } from 'sequelize-typescript';
 

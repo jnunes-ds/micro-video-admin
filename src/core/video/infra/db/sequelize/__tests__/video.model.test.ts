@@ -8,7 +8,7 @@ import {
 import {DataType} from "sequelize-typescript";
 import {RatingValues} from "@core/video/domain/rating.vo";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
-import {GenreModel} from "@core/genre/infra/sequelize/genre.model";
+import {GenreModel} from "@core/genre/infra/db/sequelize/genre.model";
 import {CastMemberModel} from "@core/cast_member/infra/db/sequelize/cast_member.model";
 import {ImageMediaModel, ImageMediaRelatedField} from "@core/video/infra/db/sequelize/image_media.model";
 import {
@@ -19,7 +19,7 @@ import {AudioVideoMediaStatus} from "@core/@shared/domain/value_objects/audio_vi
 import {Uuid} from "@core/@shared/domain/value_objects/uuid.vo";
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {Category} from "@core/category/domain/category.aggregate";
-import {GenreSequelizeRepository} from "@core/genre/infra/sequelize/genre_sequelize.repository";
+import {GenreSequelizeRepository} from "@core/genre/infra/db/sequelize/genre_sequelize.repository";
 import {UnitOfWorkFakeInMemory} from "@core/@shared/infra/db/in_memory/fake_unit_of_work_in_memory";
 import {Genre} from "@core/genre/domain/genre.aggregate";
 import {CastMemberSequelizeRepository} from "@core/cast_member/infra/db/sequelize/cast_member-sequelize.repository";

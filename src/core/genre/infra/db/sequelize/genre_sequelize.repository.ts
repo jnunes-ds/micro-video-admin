@@ -8,9 +8,9 @@ import { SortDirection } from '@core/@shared/domain/repository/search_params';
 import {
   GenreCategoryModel,
   GenreModel,
-} from '@core/genre/infra/sequelize/genre.model';
+} from '@core/genre/infra/db/sequelize/genre.model';
 import { Genre, GenreId } from '@core/genre/domain/genre.aggregate';
-import { GenreModelMapper } from '@core/genre/infra/sequelize/genre.model.mapper';
+import { GenreModelMapper } from '@core/genre/infra/db/sequelize/genre.model.mapper';
 import { NotFoundError } from '@core/@shared/domain/errors/not_found.error';
 import { SearchResult } from '@core/@shared/domain/repository/search_result';
 import { UnitOfWorkSequelize } from '@core/@shared/infra/db/sequelize/unit_of_work_sequelize';

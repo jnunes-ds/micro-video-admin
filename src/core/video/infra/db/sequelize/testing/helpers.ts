@@ -8,7 +8,7 @@ import {
 } from "@core/video/infra/db/sequelize/video.models";
 import {AudioVideoMediaModel} from "@core/video/infra/db/sequelize/audio_video_media.model";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
-import {GenreCategoryModel, GenreModel} from "@core/genre/infra/sequelize/genre.model";
+import {GenreCategoryModel, GenreModel} from "@core/genre/infra/db/sequelize/genre.model";
 import {CastMemberModel} from "@core/cast_member/infra/db/sequelize/cast_member.model";
 import {SequelizeOptions} from "sequelize-typescript";
 

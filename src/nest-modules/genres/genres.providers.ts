@@ -1,8 +1,8 @@
 import { Provider } from '@nestjs/common';
-import { GenreModel } from '@core/genre/infra/sequelize/genre.model';
+import { GenreModel } from '@core/genre/infra/db/sequelize/genre.model';
 import { getModelToken } from '@nestjs/sequelize';
-import { GenreSequelizeRepository } from '@core/genre/infra/sequelize/genre_sequelize.repository';
-import { GenreInMemoryRepository } from '@core/genre/infra/in_memory/genre_in_memory.repository';
+import { GenreSequelizeRepository } from '@core/genre/infra/db/sequelize/genre_sequelize.repository';
+import { GenreInMemoryRepository } from '@core/genre/infra/db/in_memory/genre_in_memory.repository';
 import { IGenreRepository } from '@core/genre/domain/genre.repository';
 import { CreateGenreUsecase } from '@core/genre/application/usecases/create_genre/create_genre.usecase';
 import { UpdateGenreUsecase } from '@core/genre/application/usecases/update_genre/update_genre.usecase';

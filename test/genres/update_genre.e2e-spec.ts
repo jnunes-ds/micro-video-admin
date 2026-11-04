@@ -11,8 +11,8 @@ import { ICategoryRepository } from '@core/category/domain/category.repository';
 import { Genre } from '@core/genre/domain/genre.aggregate';
 import { Category } from '@core/category/domain/category.aggregate';
 import { GenreOutputMapper } from '@core/genre/application/usecases/common/genre_output';
-import { GenreSequelizeRepository } from '@core/genre/infra/sequelize/genre_sequelize.repository';
-import { GenreModelMapper } from '@core/genre/infra/sequelize/genre.model.mapper';
+import { GenreSequelizeRepository } from '@core/genre/infra/db/sequelize/genre_sequelize.repository';
+import { GenreModelMapper } from '@core/genre/infra/db/sequelize/genre.model.mapper';
 import { NotFoundError } from '@core/@shared/domain/errors/not_found.error';
 
 GenreSequelizeRepository.prototype.update = async function (aggregate: any) {

@@ -1,4 +1,4 @@
-import {GenreInMemoryRepository} from "@core/genre/infra/in_memory/genre_in_memory.repository";
+import {GenreInMemoryRepository} from "@core/genre/infra/db/in_memory/genre_in_memory.repository";
 import {Genre} from "@core/genre/domain/genre.aggregate";
 import {CategoryId} from "@core/category/domain/category.aggregate";
 

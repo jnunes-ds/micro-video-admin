@@ -1,5 +1,5 @@
 import {GetGenreUsecase} from "@core/genre/application/usecases/get_genre/get_genre.usecase";
-import {GenreInMemoryRepository} from "@core/genre/infra/in_memory/genre_in_memory.repository";
+import {GenreInMemoryRepository} from "@core/genre/infra/db/in_memory/genre_in_memory.repository";
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {InvalidUuidError} from "@core/@shared/domain/value_objects/uuid.vo";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";

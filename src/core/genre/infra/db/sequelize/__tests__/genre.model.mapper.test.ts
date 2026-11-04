@@ -1,8 +1,8 @@
 import {setupSequelize} from "@core/@shared/infra/testing/helpers";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {CategoryId} from "@core/category/domain/category.aggregate";
-import {GenreCategoryModel, GenreModel} from "@core/genre/infra/sequelize/genre.model";
-import {GenreModelMapper} from "@core/genre/infra/sequelize/genre.model.mapper";
+import {GenreCategoryModel, GenreModel} from "@core/genre/infra/db/sequelize/genre.model";
+import {GenreModelMapper} from "@core/genre/infra/db/sequelize/genre.model.mapper";
 import {Genre, GenreId} from "@core/genre/domain/genre.aggregate";
 
 describe('GenreModelMapper Integration Test', () => {

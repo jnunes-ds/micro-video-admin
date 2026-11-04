@@ -13,8 +13,8 @@ import {VideoSearchParams, VideoSearchResult} from "@core/video/domain/video.rep
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
 import {CategorySequelizeRepository} from "@core/category/infra/db/sequelize/category-sequelize.repository";
 import {Category} from "@core/category/domain/category.aggregate";
-import {GenreModel} from "@core/genre/infra/sequelize/genre.model";
-import {GenreSequelizeRepository} from "@core/genre/infra/sequelize/genre_sequelize.repository";
+import {GenreModel} from "@core/genre/infra/db/sequelize/genre.model";
+import {GenreSequelizeRepository} from "@core/genre/infra/db/sequelize/genre_sequelize.repository";
 import {Genre} from "@core/genre/domain/genre.aggregate";
 import {CastMemberModel} from "@core/cast_member/infra/db/sequelize/cast_member.model";
 import {CastMemberSequelizeRepository} from "@core/cast_member/infra/db/sequelize/cast_member-sequelize.repository";

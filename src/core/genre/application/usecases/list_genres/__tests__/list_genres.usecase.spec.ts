@@ -1,5 +1,5 @@
 import {ListGenresUsecase} from "@core/genre/application/usecases/list_genres/list_genres.usecase";
-import {GenreInMemoryRepository} from "@core/genre/infra/in_memory/genre_in_memory.repository";
+import {GenreInMemoryRepository} from "@core/genre/infra/db/in_memory/genre_in_memory.repository";
 import {CategoryInMemoryRepository} from "@core/category/infra/db/in_memory/category_in_memory.repository";
 import {SearchResult} from "@core/@shared/domain/repository/search_result";
 import {Genre} from "@core/genre/domain/genre.aggregate";

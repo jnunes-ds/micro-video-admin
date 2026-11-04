@@ -1,6 +1,6 @@
 import {RatingValues} from "@core/video/domain/rating.vo";
 import {CategoryModel} from "@core/category/infra/db/sequelize/category.model";
-import {GenreModel} from "@core/genre/infra/sequelize/genre.model";
+import {GenreModel} from "@core/genre/infra/db/sequelize/genre.model";
 import {CastMemberModel} from "@core/cast_member/infra/db/sequelize/cast_member.model";
 import {BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table} from "sequelize-typescript";
 import {ImageMediaModel} from "@core/video/infra/db/sequelize/image_media.model";
