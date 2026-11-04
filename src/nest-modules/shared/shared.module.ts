@@ -4,6 +4,9 @@ import {GoogleCloudStorage} from "@core/@shared/infra/storage/google_cloud.stora
 import {Storage as GoogleCloudStorageSdk} from "@google-cloud/storage";
 import {DomainEventMediator} from "@core/@shared/domain/events/domain_event_mediator";
 import {EventEmitter2} from 'eventemitter2';
+import {ApplicationService} from "@core/@shared/application/application.service";
+import {IUnitOfWork} from "@core/@shared/domain/repository/unit_of_work.interface";
+import {Scope} from "@nestjs/common";
 
 @Global()
 @Module({
@@ -23,7 +26,17 @@ import {EventEmitter2} from 'eventemitter2';
 		{
 			provide: DomainEventMediator,
 			useValue: new DomainEventMediator(new EventEmitter2())
-		}
-	]
+		},
+		{
+			provide: ApplicationService,
+			useFactory: (
+				uow: IUnitOfWork,
+				domainEventMediator: DomainEventMediator
+			) => new ApplicationService(uow, domainEventMediator),
+			inject: ['UnitOfWork', DomainEventMediator],
+			scope: Scope.REQUEST
+		},
+	],
+	exports: ['IStorage', ApplicationService]
 })
 export class SharedModule {}
