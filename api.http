@@ -1,4 +1,5 @@
-### Create Category
+###
+# @name createCategory
 POST http://localhost:3000/categories
 Content-Type: application/json
 
@@ -7,10 +8,23 @@ Content-Type: application/json
   "description": "Description 1"
 }
 
-### Get categories
-GET http://localhost:3000/categories
+> {% client.global.set("categoryId", response.body.data.id) %}
 
-### Create Cast Member
+###
+# @name createGenre
+POST http://localhost:3000/genres
+Content-Type: application/json
+
+{
+  "name": "Genre 1",
+  "categories_id": ["{{categoryId}}"]
+}
+
+
+> {% client.global.set("genreId", response.body.data.id) %}
+
+###
+# @name createCastMember
 POST http://localhost:3000/cast-members
 Content-Type: application/json
 
@@ -19,20 +33,27 @@ Content-Type: application/json
   "type": 2
 }
 
-### GET Cast Member by id
-GET http://localhost:3000/cast-members/013f4c0a-6ebf-4562-8290-b10a811f87d4
+> {% client.global.set("castMemberId", response.body.data.cast_member_id) %}
 
-### LIST Cast Members
-GET http://localhost:3000/cast-members
-
-### UPDATE Cast Member
-PATCH localhost:3000/cast-members/013f4c0a-6ebf-4562-8290-b10a811f87d4
+###
+POST http://localhost:3000/videos
 Content-Type: application/json
 
 {
-  "cast_member_id": "013f4c0a-6ebf-4562-8290-b10a811f87d4",
-  "name": "Zé do Bó"
+  "title": "Video 1",
+  "description": "Description 1",
+  "year_launched": 2020,
+  "is_opened": false,
+  "rating": "L",
+  "duration": 90,
+  "categories_id": [
+    "{{categoryId}}"
+  ],
+  "genres_id": [
+    "{{genreId}}"
+  ],
+  "cast_members_id": [
+    "{{castMemberId}}"
+  ]
 }
 
-### DELETE Cast Member
-DELETE http://localhost:3000/cast-members/1e177315-df0e-40e5-90c7-1baf2d3c15f6
