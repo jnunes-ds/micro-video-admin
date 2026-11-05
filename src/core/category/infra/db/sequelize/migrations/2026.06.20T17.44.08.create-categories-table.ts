@@ -4,8 +4,10 @@ import {DataTypes} from "sequelize";
 
 type SequelizeMigrationFN = MigrationFn<Sequelize>;
 
+const TABLE_NAME = "categories";
+
 export const up: SequelizeMigrationFN = async ({context: sequelize}) => {
-	await sequelize.getQueryInterface().createTable('categories', {
+	await sequelize.getQueryInterface().createTable(TABLE_NAME, {
 		category_id: {
 			type: DataTypes.UUID,
 			allowNull: false,
@@ -30,5 +32,5 @@ export const up: SequelizeMigrationFN = async ({context: sequelize}) => {
 	});
 };
 export const down: SequelizeMigrationFN = async ({context: seqyelize}) => {
-	await seqyelize.getQueryInterface().dropTable('categories');
+	await seqyelize.getQueryInterface().dropTable(TABLE_NAME);
 };
