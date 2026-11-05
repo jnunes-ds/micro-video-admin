@@ -44,9 +44,9 @@ describe('migrator Unit Tests', () => {
 		// 'categories table schema' abaixo, que documenta essa divergência.
 		const categoriesColumns = await queryInterface.describeTable('categories');
 		expect(Object.keys(categoriesColumns).sort()).toStrictEqual([
+			'category_id',
 			'created_at',
 			'description',
-			'id',
 			'is_active',
 			'name'
 		]);
@@ -92,23 +92,9 @@ describe('migrator Unit Tests', () => {
 	});
 
 	describe('categories table schema', () => {
-		// A migration `create-categories-table` cria a coluna de PK como `id`,
-		// enquanto o `CategoryModel` (e o repositório sequelize de Category)
-		// esperam `category_id`. Nos testes isso passa despercebido porque o
-		// `DatabaseModule` usa `autoLoadModels`/`sync()`, que cria a tabela a
-		// partir do model e nunca executa a migration. Em um banco criado via
-		// `npm run migrate:*`, qualquer consulta a Category quebra.
-		it('currently creates the primary key as `id` instead of `category_id`', async () => {
-			await migrator(sequelize, {logger: undefined}).up();
 
-			const columns = await sequelize.getQueryInterface().describeTable('categories');
 
-			expect(columns).toHaveProperty('id');
-			expect(columns).not.toHaveProperty('category_id');
-			expect(columns['id'].primaryKey).toBe(true);
-		});
-
-		it.skip('should create the primary key as `category_id` to match CategoryModel (desired behavior)', async () => {
+		it('should create the primary key as `category_id` to match CategoryModel (desired behavior)', async () => {
 			await migrator(sequelize, {logger: undefined}).up();
 
 			const columns = await sequelize.getQueryInterface().describeTable('categories');
