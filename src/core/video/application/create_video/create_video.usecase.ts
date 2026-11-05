@@ -44,7 +44,7 @@ export class CreateVideoUsecase
 				rating,
 				categories_id: errorsCategoriesId ? [] : categoriesId,
 				genres_id: errorsGenresId ? [] : genresId,
-				cast_members_id: eitherCastMembersId ? [] : castMembersId
+				cast_members_id: errorsCastMembersId ? [] : castMembersId
 			});
 
 			const notification = video.notification;
