@@ -10,10 +10,29 @@ import {
 } from '@core/genre/infra/db/sequelize/genre.model';
 import { UnitOfWorkSequelize } from '@core/@shared/infra/db/sequelize/unit_of_work_sequelize';
 import { Sequelize } from 'sequelize-typescript';
+import {
+  VideoCastMemberModel,
+  VideoCategoryModel,
+  VideoGenreModel,
+  VideoModel
+} from "@core/video/infra/db/sequelize/video.models";
+import {ImageMediaModel} from "@core/video/infra/db/sequelize/image_media.model";
+import {AudioVideoMediaModel} from "@core/video/infra/db/sequelize/audio_video_media.model";
 
 type Dialect = CONFIG_SCHEMA_TYPE['DB_VENDOR'];
 
-const models = [CategoryModel, CastMemberModel, GenreModel, GenreCategoryModel];
+const models = [
+  CategoryModel,
+  GenreModel,
+  GenreCategoryModel,
+  CastMemberModel,
+  VideoModel,
+  VideoCategoryModel,
+  VideoCastMemberModel,
+  VideoGenreModel,
+  ImageMediaModel,
+  AudioVideoMediaModel
+];
 
 @Global()
 @Module({
