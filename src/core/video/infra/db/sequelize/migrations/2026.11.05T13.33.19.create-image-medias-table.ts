@@ -17,16 +17,8 @@ export const up: MigrationFnSequelize = async ({context: sequelize}) => {
 			type: DataTypes.STRING(255),
 			allowNull: false,
 		},
-		raw_location: {
+		location: {
 			type: DataTypes.STRING(255),
-			allowNull: false,
-		},
-		encoded_location: {
-			type: DataTypes.STRING(255),
-			allowNull: true,
-		},
-		status: {
-			type: DataTypes.ENUM(...Object.values(AudioVideoMediaStatus)),
 			allowNull: false,
 		},
 		video_id: {
