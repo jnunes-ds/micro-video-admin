@@ -74,7 +74,7 @@ describe('UploadAudioVideoMediasUsecase Integration Tests', () => {
 		)
 	}, 10000);
 
-	test("if throw's error when image is invalid", async () => {
+	test("if throw's error when media is invalid", async () => {
 		expect.assertions(2);
 		const category = Category.fake().aCategory().build();
 		await categoryRepo.insert(category);
@@ -113,7 +113,7 @@ describe('UploadAudioVideoMediasUsecase Integration Tests', () => {
 				expect(error.error).toEqual([
 					{
 						video: [
-							'Invalid media file mime type: image/jpg not in image/jpeg, image/png, image/gif'
+							'Invalid media file mime type: image/jpg not in video/mp4'
 						]
 					}
 				]);
@@ -121,7 +121,7 @@ describe('UploadAudioVideoMediasUsecase Integration Tests', () => {
 		}
 	}, 10000);
 
-	test('upload banner image', async () => {
+	test('upload video media', async () => {
 		const category = Category.fake().aCategory().build();
 		await categoryRepo.insert(category);
 
@@ -146,15 +146,15 @@ describe('UploadAudioVideoMediasUsecase Integration Tests', () => {
 			video_id: video.video_id.id,
 			field: 'video',
 			file: {
-				raw_name: 'video.jpg',
+				raw_name: 'video.mp4',
 				data: Buffer.from('test data'),
-				mime_type: 'image/jpeg',
+				mime_type: 'video/mp4',
 				size: 100
 			}
 		});
 
 		const videoUpdated = await videoRepo.findById(video.video_id);
 		expect(videoUpdated!.video).toBeDefined();
-		expect(videoUpdated!.video!.name.includes('.jpg')).toBeTruthy();
+		expect(videoUpdated!.video!.name.includes('.mp4')).toBeTruthy();
 	}, 10000);
 });
