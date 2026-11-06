@@ -53,6 +53,7 @@ export type VideoOutputParams = {
 	cast_members: CastMember[];
 };
 
+// TODO - Adicionar objetos de valores dos uploads
 export class VideoOutputMapper {
 	static toOutput({
 		video,

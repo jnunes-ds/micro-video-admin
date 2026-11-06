@@ -8,6 +8,8 @@ import {GetVideoUsecase} from "@core/video/application/get_video/get_video.useca
 import {CreateVideoDto} from "@/nest-modules/videos/dto/create_video.dto";
 import {UpdateVideoDto} from "@/nest-modules/videos/dto/update_vide.dto";
 
+//TODO - Adicionar VideoPresenter
+
 @Controller('videos')
 export class VideosController {
 	@Inject(CreateVideoUsecase)
@@ -25,6 +27,7 @@ export class VideosController {
 	@Post()
 	async create(@Body() createVideoDto: CreateVideoDto) {
 		const {id} = await this.createUsecase.execute(createVideoDto);
+		//VideoPresenter
 		return await this.getUsecase.execute({id});
 	}
 
@@ -32,6 +35,7 @@ export class VideosController {
 	async findOne(
 		@Param('id', new ParseUUIDPipe({errorHttpStatusCode: 422})) id: string
 	) {
+		//VideoPresenter
 		return await this.getUsecase.execute({id});
 	}
 
