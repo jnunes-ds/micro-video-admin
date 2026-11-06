@@ -83,3 +83,15 @@ Content-Type: application/json
     "{{castMemberId}}"
   ]
 }
+
+### Upload Video
+PATCH http://localhost:3000/videos/{{videoId}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary1234
+
+------WebKitFormBoundary1234
+Content-Disposition: form-data; name="video"; filename="video.mp4"
+Content-type: video/mp4
+
+< ./package.json
+------WebKitFormBoundary1234--
+###

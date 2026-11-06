@@ -1,4 +1,5 @@
 import {
+	BadRequestException,
 	Body,
 	Controller,
 	Get,
@@ -8,7 +9,7 @@ import {
 	ParseUUIDPipe,
 	Patch,
 	Post,
-	UploadedFiles,
+	UploadedFiles, UseInterceptors,
 	ValidationPipe
 } from '@nestjs/common';
 import {CreateVideoUsecase} from "@core/video/application/create_video/create_video.usecase";
@@ -20,6 +21,8 @@ import {GetVideoUsecase} from "@core/video/application/get_video/get_video.useca
 import {CreateVideoDto} from "@/nest-modules/videos/dto/create_video.dto";
 import {UpdateVideoDto} from "@/nest-modules/videos/dto/update_vide.dto";
 import {UpdateVideoInput} from "@core/video/application/update_video/update_video.input";
+import {FileFieldsInterceptor} from "@nestjs/platform-express";
+import {UploadAudioVideoMediaInput} from "@core/video/application/upload_audio_video_medias/audio_video_media.input";
 
 //TODO - Adicionar VideoPresenter
 
@@ -53,11 +56,30 @@ export class VideosController {
 	}
 
 	@Patch(':id')
+	@UseInterceptors(FileFieldsInterceptor([
+		{name: 'banner', maxCount: 1},
+		{name: 'thumbnail', maxCount: 1},
+		{name: 'thumbnail_half', maxCount: 1},
+		{name: 'trailer', maxCount: 1},
+		{name: 'video', maxCount: 1},
+	]))
 	async update(
 		@Param('id', new ParseUUIDPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})) id: string,
 		@Body() updateVideoDto: any,
+		@UploadedFiles() files: {
+			banner?: Express.Multer.File[],
+			thumbnail?: Express.Multer.File[],
+			thumbnail_half?: Express.Multer.File[],
+			trailer?: Express.Multer.File[],
+			video?: Express.Multer.File[],
+		}
 	) {
+		const hasFiles: boolean = Object.keys(files).length > 0;
 		const hasData: boolean = Object.keys(updateVideoDto).length > 0;
+
+		if (hasFiles && hasData) {
+			throw new BadRequestException("Files and data cannot be sent together.");
+		}
 
 		if (hasData) {
 			const data = await new ValidationPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})
@@ -69,12 +91,41 @@ export class VideosController {
 			const {id: newId} = await this.updateUsecase.execute(input);
 			return await this.getUsecase.execute({id: newId});
 		}
+
+		const hasMoreThanOneFile: boolean = Object.keys(files).length > 1;
+
+		if (hasMoreThanOneFile) {
+			throw new BadRequestException('Only one file can be sent');
+		}
+
+		const hasAudioVideoMedia =
+			(files?.trailer && files.trailer?.length > 0 ||
+			files?.video && files.video?.length > 0) || false;
+		const fileField = Object.keys(files)[0];
+		const file = files[fileField][0];
+
+		if (hasAudioVideoMedia) {
+			const dto: UploadAudioVideoMediaInput = {
+				video_id: id,
+				field: fileField as any,
+				file: {
+					raw_name: file.originalname,
+					data: file.buffer,
+					mime_type: file.mimetype,
+					size: file.size
+				}
+			}
+			const input = await new ValidationPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})
+				.transform(dto, {
+					metatype: UploadAudioVideoMediaInput,
+					type: 'body',
+				});
+
+			await this.uploadAudioVideoMedia.execute(input);
+		} else {
+
+		}
+		return await this.getUsecase.execute({id});
 	}
 
-	@Patch(':id/upload')
-	async uploadFile(
-		@UploadedFiles()
-		@Body()
-		data: any
-	) {}
 }
