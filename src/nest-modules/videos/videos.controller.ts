@@ -1,4 +1,16 @@
-import {Controller, Inject, Post, Body, Get, Param, ParseUUIDPipe, Patch, UploadedFiles} from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Get,
+	HttpStatus,
+	Inject,
+	Param,
+	ParseUUIDPipe,
+	Patch,
+	Post,
+	UploadedFiles,
+	ValidationPipe
+} from '@nestjs/common';
 import {CreateVideoUsecase} from "@core/video/application/create_video/create_video.usecase";
 import {UpdateVideoUsecase} from "@core/video/application/update_video/update_video.usecase";
 import {
@@ -7,6 +19,7 @@ import {
 import {GetVideoUsecase} from "@core/video/application/get_video/get_video.usecase";
 import {CreateVideoDto} from "@/nest-modules/videos/dto/create_video.dto";
 import {UpdateVideoDto} from "@/nest-modules/videos/dto/update_vide.dto";
+import {UpdateVideoInput} from "@core/video/application/update_video/update_video.input";
 
 //TODO - Adicionar VideoPresenter
 
@@ -33,7 +46,7 @@ export class VideosController {
 
 	@Get(':id')
 	async findOne(
-		@Param('id', new ParseUUIDPipe({errorHttpStatusCode: 422})) id: string
+		@Param('id', new ParseUUIDPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})) id: string
 	) {
 		//VideoPresenter
 		return await this.getUsecase.execute({id});
@@ -41,9 +54,22 @@ export class VideosController {
 
 	@Patch(':id')
 	async update(
-		@Param('id', new ParseUUIDPipe({errorHttpStatusCode: 422})) id: string,
-		@Body() updateVideoDto: UpdateVideoDto
-	) {}
+		@Param('id', new ParseUUIDPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})) id: string,
+		@Body() updateVideoDto: any,
+	) {
+		const hasData: boolean = Object.keys(updateVideoDto).length > 0;
+
+		if (hasData) {
+			const data = await new ValidationPipe({errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY})
+				.transform(updateVideoDto, {
+					metatype: UpdateVideoDto,
+					type: 'body',
+				});
+			const input  = new UpdateVideoInput({id, ...data});
+			const {id: newId} = await this.updateUsecase.execute(input);
+			return await this.getUsecase.execute({id: newId});
+		}
+	}
 
 	@Patch(':id/upload')
 	async uploadFile(

@@ -62,3 +62,24 @@ Content-Type: application/json
 ### Get Vídeo
 GET http://localhost:3000/videos/{{videoId}}
 
+### Update Video
+PATCH http://localhost:3000/videos/{{videoId}}
+Content-Type: application/json
+
+{
+  "title": "Video 2",
+  "description": "Description 1",
+  "year_launched": 2020,
+  "is_opened": false,
+  "rating": "L",
+  "duration": 90,
+  "categories_id": [
+    "{{categoryId}}"
+  ],
+  "genres_id": [
+    "{{genreId}}"
+  ],
+  "cast_members_id": [
+    "{{castMemberId}}"
+  ]
+}
