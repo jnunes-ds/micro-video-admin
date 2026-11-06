@@ -309,7 +309,7 @@ describe('VideoSequelizeRepository Integration Test', () => {
 
 		video.changeTitle('Movie updated');
 		video.syncCategoriesId([categories[1].category_id, categories[2].category_id]);
-		video.syncGentesId([genres[1].genre_id, genres[2].genre_id]);
+		video.syncGenresId([genres[1].genre_id, genres[2].genre_id]);
 		video.syncCastMembersId([castMembers[1].cast_member_id, castMembers[2].cast_member_id]);
 
 		await uow.start();

@@ -316,14 +316,14 @@ describe('Video Aggregate Unit Tests', () => {
         it('should sync genres id', () => {
             const newGenreId1 = new GenreId();
             const newGenreId2 = new GenreId();
-            video.syncGentesId([newGenreId1, newGenreId2]);
+            video.syncGenresId([newGenreId1, newGenreId2]);
             expect(video.genres_id.size).toBe(2);
             expect(video.genres_id.get(newGenreId1.id)).toBe(newGenreId1);
             expect(video.genres_id.get(newGenreId2.id)).toBe(newGenreId2);
         });
 
         it('should throw error when syncing empty genres id', () => {
-            expect(() => video.syncGentesId([])).toThrow('Genres Id is empty');
+            expect(() => video.syncGenresId([])).toThrow('Genres Id is empty');
         });
     });
 

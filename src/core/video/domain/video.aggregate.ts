@@ -194,7 +194,7 @@ export class Video extends AggregateRoot {
 		this.genres_id.delete(genreId.id);
 	}
 
-	syncGentesId(genresId: GenreId[]): void {
+	syncGenresId(genresId: GenreId[]): void {
 		if (!genresId.length) {
 			throw new Error('Genres Id is empty');
 		}
