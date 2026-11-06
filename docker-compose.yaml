@@ -8,6 +8,8 @@ services:
     volumes:
       - .:/home/node/app
       - /home/node/app/node_modules
+    environment:
+      - TZ=America/Sao_Paulo
   db:
     image: mysql:8.0.30-debian
     platform: linux/amd64
@@ -16,6 +18,7 @@ services:
     environment:
       - MYSQL_DATABASE=micro_videos
       - MYSQL_ROOT_PASSWORD=root
+      - TZ=America/Sao_Paulo
     tmpfs:
       - /var/lib/mysql
     security_opt:
