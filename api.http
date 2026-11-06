@@ -35,7 +35,7 @@ Content-Type: application/json
 
 > {% client.global.set("castMemberId", response.body.data.cast_member_id) %}
 
-###
+### Create Vídeo
 POST http://localhost:3000/videos
 Content-Type: application/json
 
@@ -56,4 +56,9 @@ Content-Type: application/json
     "{{castMemberId}}"
   ]
 }
+
+> {% client.global.set("videoId", response.body.data.id) %}
+
+### Get Vídeo
+GET http://localhost:3000/videos/{{videoId}}
 
