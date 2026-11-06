@@ -70,7 +70,7 @@ export class UpdateVideoUsecase
 				await this.genresIdValidator.validate(input.genres_id)
 			).asArray();
 
-			genresId && video.syncCategoriesId(genresId);
+			genresId && video.syncGenresId(genresId);
 
 			errorsGenresId &&
 			notification.setError(
@@ -84,7 +84,7 @@ export class UpdateVideoUsecase
 				await this.castMembersIdValidator.validate(input.cast_members_id)
 			).asArray();
 
-			castMembersId && video.syncCategoriesId(castMembersId);
+			castMembersId && video.syncCastMembersId(castMembersId);
 
 			errorsCastMembersId &&
 			notification.setError(
