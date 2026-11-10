@@ -23,7 +23,7 @@ Rota: `GET /genres` → `GenresController.search`
 
 ## 1. Pré-requisitos
 
-### 1.1 Adicionar `ListGenresFixture` em `src/nest-modules/genres/testing/genre_fixture.ts`
+### 1.1 Adicionar `ListGenresFixture` em `src/nest-modules/genres_module/testing/genre_fixture.ts`
 
 ```typescript
 export class ListGenresFixture {

@@ -24,7 +24,7 @@ Rota: `PATCH /genres/:id` → `GenresController.update`
 
 ## 1. Pré-requisitos
 
-### 1.1 Adicionar `UpdateGenreFixture` em `src/nest-modules/genres/testing/genre_fixture.ts`
+### 1.1 Adicionar `UpdateGenreFixture` em `src/nest-modules/genres_module/testing/genre_fixture.ts`
 
 ```typescript
 export class UpdateGenreFixture {

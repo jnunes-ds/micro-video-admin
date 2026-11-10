@@ -25,7 +25,7 @@ Rota: `PATCH /cast-members/:id` → `CastMembersController.update`
 
 ## 1. Pré-requisitos
 
-### 1.1 Adicionar `UpdateCastMemberFixture` em `src/nest-modules/cast_members/testing/cast_member_fixture.ts`
+### 1.1 Adicionar `UpdateCastMemberFixture` em `src/nest-modules/cast_members_module/testing/cast_member_fixture.ts`
 
 ```typescript
 export class UpdateCastMemberFixture {

@@ -24,7 +24,7 @@ Rota: `GET /cast-members/:id` → `CastMembersController.findOne`
 
 ## 1. Pré-requisitos
 
-### 1.1 Adicionar `GetCastMemberFixture` em `src/nest-modules/cast_members/testing/cast_member_fixture.ts`
+### 1.1 Adicionar `GetCastMemberFixture` em `src/nest-modules/cast_members_module/testing/cast_member_fixture.ts`
 
 Mínimo necessário (espelhando `GetCategoryFixture`):
 

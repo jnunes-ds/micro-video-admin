@@ -10,26 +10,26 @@ Gerado a partir de `coverage-final.json` (`npm run test:cov`, `coverageProvider:
 
 ## Arquivos com 0% de cobertura
 
-### `src/nest-modules/cast_members` — camada NestJS de Cast Member (7 arquivos)
+### `src/nest-modules/cast_members_module` — camada NestJS de Cast Member (7 arquivos)
 
 | Arquivo | Linhas | Cobertura |
 | --- | --- | --- |
-| `src/nest-modules/cast_members/cast_members.providers.ts` | 93 | 0% |
-| `src/nest-modules/cast_members/cast_members.controller.ts` | 88 | 0% |
-| `src/nest-modules/cast_members/cast_members.presenter.ts` | 32 | 0% |
-| `src/nest-modules/cast_members/cast_members.module.ts` | 15 | 0% |
-| `src/nest-modules/cast_members/dto/search-cast-member.dto.ts` | 13 | 0% |
-| `src/nest-modules/cast_members/dto/update-cast-member.dto.ts` | 9 | 0% |
-| `src/nest-modules/cast_members/dto/create-cast-member.dto.ts` | 5 | 0% |
+| `src/nest-modules/cast_members_module/cast_members.providers.ts` | 93 | 0% |
+| `src/nest-modules/cast_members_module/cast_members.controller.ts` | 88 | 0% |
+| `src/nest-modules/cast_members_module/cast_members.presenter.ts` | 32 | 0% |
+| `src/nest-modules/cast_members_module/cast_members.module.ts` | 15 | 0% |
+| `src/nest-modules/cast_members_module/dto/search-cast-member.dto.ts` | 13 | 0% |
+| `src/nest-modules/cast_members_module/dto/update-cast-member.dto.ts` | 9 | 0% |
+| `src/nest-modules/cast_members_module/dto/create-cast-member.dto.ts` | 5 | 0% |
 
 **Por que está zerado:** esses arquivos são exercitados apenas pelos testes e2e
 (`test/cast_members/*.e2e-spec.ts`), que rodam por outra configuração
 (`test/jest-e2e.config.ts` via `npm run test:e2e`) e não entram no relatório do
 `npm run test:cov`. Em contraste, o módulo de Categories tem specs unitários
-(`src/nest-modules/categories/__tests__/categories.controller.spec.ts` e
+(`src/nest-modules/categories_module/__tests__/categories.controller.spec.ts` e
 `categories.presenter.spec.ts`) e por isso aparece coberto.
 
-**Ação sugerida:** criar `src/nest-modules/cast_members/__tests__/` com
+**Ação sugerida:** criar `src/nest-modules/cast_members_module/__tests__/` com
 `cast_members.controller.spec.ts` e `cast_members.presenter.spec.ts`, espelhando
 os specs já existentes de Categories.
 
@@ -51,8 +51,8 @@ Considere adicioná-las a `coveragePathIgnorePatterns` no `jest.config.ts`
 | --- | --- | --- |
 | `src/nest-modules/global_config.ts` | 26 | 0% |
 | `src/migrate.ts` | 15 | 0% |
-| `src/nest-modules/database/migrations.module.ts` | 6 | 0% |
-| `src/nest-modules/shared/shared.module.ts` | 4 | 0% |
+| `src/nest-modules/database_module/migrations.module.ts` | 6 | 0% |
+| `src/nest-modules/shared_module/shared.module.ts` | 4 | 0% |
 
 **Ação sugerida:** `src/migrate.ts` é um script de linha de comando e
 `migrations.module.ts` / `shared.module.ts` são apenas fiação de módulos — bons
@@ -69,7 +69,7 @@ zerados acima, estes ficam abaixo do limite:
 
 | Arquivo | Cobertura | Linhas cobertas |
 | --- | --- | --- |
-| `src/nest-modules/categories/dto/search_categories.dto.ts` | 33,3% | 3/9 |
+| `src/nest-modules/categories_module/dto/search_categories.dto.ts` | 33,3% | 3/9 |
 | `src/core/@shared/domain/validators/notification.ts` | 42,9% | 21/49 |
 | `src/core/cast_member/infra/db/sequelize/cast_member-sequelize.repository.ts` | 52,2% | 95/182 |
 | `src/core/@shared/domain/validators/validation.error.ts` | 63,4% | 26/41 |

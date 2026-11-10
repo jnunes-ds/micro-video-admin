@@ -1,5 +1,5 @@
 import {NestFactory} from '@nestjs/core';
-import {MigrationsModule} from "@/nest-modules/database/migrations.module";
+import {MigrationsModule} from "@/nest-modules/database_module/migrations.module";
 import {getConnectionToken} from "@nestjs/sequelize";
 import {migrator} from "@core/@shared/infra/db/sequelize/migrator";
 

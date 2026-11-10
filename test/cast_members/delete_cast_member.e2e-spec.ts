@@ -1,7 +1,7 @@
 import request from 'supertest';
 import {HttpStatus} from '@nestjs/common';
-import {startApp} from '@/nest-modules/shared/testing/helpers/start_app.helper';
-import {CAST_MEMBER_PROVIDERS} from '@/nest-modules/cast_members/cast_members.providers';
+import {startApp} from '@/nest-modules/shared_module/testing/helpers/start_app.helper';
+import {CAST_MEMBER_PROVIDERS} from '@/nest-modules/cast_members_module/cast_members.providers';
 import {ICastMemberRepository} from '@core/cast_member/domain/cast_member.repository';
 import {CastMember} from '@core/cast_member/domain/cast_member.aggregate';
 

@@ -29,8 +29,8 @@ Nenhuma fixture nova é necessária — este spec não tem arranges de corpo de 
 ```typescript
 import request from 'supertest';
 import { HttpStatus } from '@nestjs/common';
-import { startApp } from '@/nest-modules/shared/testing/helpers/start_app.helper';
-import { GENRE_PROVIDERS } from '@/nest-modules/genres/genres.providers';
+import { startApp } from '@/nest-modules/shared_module/testing/helpers/start_app.helper';
+import { GENRE_PROVIDERS } from '@/nest-modules/genres_module/genres.providers';
 import { IGenreRepository } from '@core/genre/domain/genre.repository';
 import { Genre } from '@core/genre/domain/genre.aggregate';
 

@@ -1,8 +1,8 @@
 import request from 'supertest';
 import { HttpStatus } from '@nestjs/common';
-import { startApp } from '@/nest-modules/shared/testing/helpers/start_app.helper';
-import { GENRE_PROVIDERS } from '@/nest-modules/genres/genres.providers';
-import { CATEGORY_PROVIDERS } from '@/nest-modules/categories/categories.providers';
+import { startApp } from '@/nest-modules/shared_module/testing/helpers/start_app.helper';
+import { GENRE_PROVIDERS } from '@/nest-modules/genres_module/genres.providers';
+import { CATEGORY_PROVIDERS } from '@/nest-modules/categories_module/categories.providers';
 import { IGenreRepository } from '@core/genre/domain/genre.repository';
 import { ICategoryRepository } from '@core/category/domain/category.repository';
 import { Genre } from '@core/genre/domain/genre.aggregate';

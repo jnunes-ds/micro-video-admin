@@ -15,9 +15,9 @@ import request from 'supertest';
 import {applyGlobalConfig} from '@/nest-modules/global_config';
 import {
 	WrapperDataInterceptor
-} from '@/nest-modules/shared/interceptors/wrapper_data/wrapper_data.interceptor.service';
-import {EntityValidationErrorFilter} from '@/nest-modules/shared/filters/entity_validation_error.filter';
-import {NotFoundErrorFilter} from '@/nest-modules/shared/filters/not_found_error.filter';
+} from '@/nest-modules/shared_module/interceptors/wrapper_data/wrapper_data.interceptor.service';
+import {EntityValidationErrorFilter} from '@/nest-modules/shared_module/filters/entity_validation_error.filter';
+import {NotFoundErrorFilter} from '@/nest-modules/shared_module/filters/not_found_error.filter';
 import {EntityValidationError} from '@core/@shared/domain/validators/validation.error';
 import {NotFoundError} from '@core/@shared/domain/errors/not_found.error';
 import {Category} from '@core/category/domain/category.aggregate';

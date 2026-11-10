@@ -22,7 +22,7 @@ Rota: `GET /genres/:id` → `GenresController.findOne`
 
 ## 1. Pré-requisitos
 
-### 1.1 Adicionar `GetGenreFixture` em `src/nest-modules/genres/testing/genre_fixture.ts`
+### 1.1 Adicionar `GetGenreFixture` em `src/nest-modules/genres_module/testing/genre_fixture.ts`
 
 ```typescript
 export class GetGenreFixture {

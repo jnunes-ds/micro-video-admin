@@ -1,6 +1,6 @@
 import {NestFactory} from '@nestjs/core';
 import {getConnectionToken} from '@nestjs/sequelize';
-import {MigrationsModule} from '@/nest-modules/database/migrations.module';
+import {MigrationsModule} from '@/nest-modules/database_module/migrations.module';
 import {migrator} from '@core/@shared/infra/db/sequelize/migrator';
 
 jest.mock('@nestjs/core', () => ({

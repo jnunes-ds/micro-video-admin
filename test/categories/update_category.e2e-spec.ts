@@ -1,11 +1,11 @@
 import request from 'supertest';
 import { instanceToPlain } from 'class-transformer';
-import {startApp} from "@/nest-modules/shared/testing/helpers/start_app.helper";
+import {startApp} from "@/nest-modules/shared_module/testing/helpers/start_app.helper";
 import {Category, CategoryId} from "@core/category/domain/category.aggregate";
-import {UpdateCategoryFixture} from "@/nest-modules/categories/testing/category_fixture";
+import {UpdateCategoryFixture} from "@/nest-modules/categories_module/testing/category_fixture";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
-import {CATEGORY_PROVIDERS} from "@/nest-modules/categories/categories.providers";
-import {CategoriesController} from "@/nest-modules/categories/categories.controller";
+import {CATEGORY_PROVIDERS} from "@/nest-modules/categories_module/categories.providers";
+import {CategoriesController} from "@/nest-modules/categories_module/categories.controller";
 import {CategoryOutputMapper} from "@core/category/application/usecases/common/category_output";
 import {HttpStatus} from "@nestjs/common";
 

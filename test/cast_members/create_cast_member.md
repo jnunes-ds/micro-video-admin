@@ -26,7 +26,7 @@ Rota: `POST /cast-members` → `CastMembersController.create`
 
 ## 1. Pré-requisitos (construir antes dos testes)
 
-### 1.1 Criar `src/nest-modules/cast_members/testing/cast_member_fixture.ts`
+### 1.1 Criar `src/nest-modules/cast_members_module/testing/cast_member_fixture.ts`
 
 Ainda **não existe** o equivalente de `category_fixture.ts` para cast members. É a primeira peça a construir. Deve exportar:
 
@@ -47,10 +47,10 @@ Usar `CastMember.fake()` (`CastMemberFakeBuilder`) como fonte dos dados: `.anAct
 import request from 'supertest';
 import { HttpStatus } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
-import { startApp } from '@/nest-modules/shared/testing/helpers/start_app.helper';
-import { CastMembersController } from '@/nest-modules/cast_members/cast_members.controller';
-import { CAST_MEMBER_PROVIDERS } from '@/nest-modules/cast_members/cast_members.providers';
-import { CreateCastMemberFixture } from '@/nest-modules/cast_members/testing/cast_member_fixture';
+import { startApp } from '@/nest-modules/shared_module/testing/helpers/start_app.helper';
+import { CastMembersController } from '@/nest-modules/cast_members_module/cast_members.controller';
+import { CAST_MEMBER_PROVIDERS } from '@/nest-modules/cast_members_module/cast_members.providers';
+import { CreateCastMemberFixture } from '@/nest-modules/cast_members_module/testing/cast_member_fixture';
 import { ICastMemberRepository } from '@core/cast_member/domain/cast_member.repository';
 import { CastMemberId } from '@core/cast_member/domain/cast_member.aggregate';
 import { CastMemberOutputMapper } from '@core/cast_member/application/usecases/common/cast_member_output';

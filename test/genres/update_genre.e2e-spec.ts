@@ -1,11 +1,11 @@
 import request from 'supertest';
 import { HttpStatus } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
-import { startApp } from '@/nest-modules/shared/testing/helpers/start_app.helper';
-import { GenresController } from '@/nest-modules/genres/genres.controller';
-import { GENRE_PROVIDERS } from '@/nest-modules/genres/genres.providers';
-import { CATEGORY_PROVIDERS } from '@/nest-modules/categories/categories.providers';
-import { UpdateGenreFixture } from '@/nest-modules/genres/testing/genre_fixture';
+import { startApp } from '@/nest-modules/shared_module/testing/helpers/start_app.helper';
+import { GenresController } from '@/nest-modules/genres_module/genres.controller';
+import { GENRE_PROVIDERS } from '@/nest-modules/genres_module/genres.providers';
+import { CATEGORY_PROVIDERS } from '@/nest-modules/categories_module/categories.providers';
+import { UpdateGenreFixture } from '@/nest-modules/genres_module/testing/genre_fixture';
 import { IGenreRepository } from '@core/genre/domain/genre.repository';
 import { ICategoryRepository } from '@core/category/domain/category.repository';
 import { Genre } from '@core/genre/domain/genre.aggregate';
