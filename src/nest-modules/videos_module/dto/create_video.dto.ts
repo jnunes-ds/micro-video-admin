@@ -1,3 +1,3 @@
-import {CreateVideoInput} from "@core/video/application/create_video/create_video.input";
+import {CreateVideoInput} from "@core/video/application/usecases/create_video/create_video.input";
 
 export class CreateVideoDto extends CreateVideoInput {}

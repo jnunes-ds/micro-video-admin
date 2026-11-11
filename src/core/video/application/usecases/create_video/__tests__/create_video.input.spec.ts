@@ -1,4 +1,4 @@
-import {CreateVideoInput, ValidateCreateVideoInput} from "@core/video/application/create_video/create_video.input";
+import {CreateVideoInput, ValidateCreateVideoInput} from "@core/video/application/usecases/create_video/create_video.input";
 import {RatingValues} from "@core/video/domain/rating.vo";
 
 function makeValidProps() {

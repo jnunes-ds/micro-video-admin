@@ -2,7 +2,7 @@ import {IUseCase} from "@core/@shared/application/usecase.interface";
 import {IVideoRepository} from "@core/video/domain/video.repository";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {IGenreRepository} from "@core/genre/domain/genre.repository";
-import {VideoOutput, VideoOutputMapper} from "@core/video/application/get_video/get_video.output";
+import {VideoOutput, VideoOutputMapper} from "@core/video/application/usecases/get_video/get_video.output";
 import {Video, VideoId} from "@core/video/domain/video.aggregate";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {ICastMemberRepository} from "@core/cast_member/domain/cast_member.repository";

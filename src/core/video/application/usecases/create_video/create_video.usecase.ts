@@ -10,7 +10,7 @@ import {
 import {
 	CastMembersIdExistsInDatabaseValidator
 } from "@core/cast_member/application/validators/cast_members_id_exists_in_database.validator";
-import {CreateVideoInput} from "@core/video/application/create_video/create_video.input";
+import {CreateVideoInput} from "@core/video/application/usecases/create_video/create_video.input";
 import {Rating} from "@core/video/domain/rating.vo";
 import {Video} from "@core/video/domain/video.aggregate";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";

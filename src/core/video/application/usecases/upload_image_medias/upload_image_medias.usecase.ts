@@ -1,5 +1,5 @@
 import {IUseCase} from "@core/@shared/application/usecase.interface";
-import {Fields, UploadImageMediasInput} from "@core/video/application/upload_image_medias/upload_image_medias.input";
+import {Fields, UploadImageMediasInput} from "@core/video/application/usecases/upload_image_medias/upload_image_medias.input";
 import {Video, VideoId} from "@core/video/domain/video.aggregate";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {IVideoRepository} from "@core/video/domain/video.repository";

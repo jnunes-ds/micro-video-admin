@@ -1,14 +1,12 @@
 import {IUseCase} from "@core/@shared/application/usecase.interface";
-import {IUnitOfWork} from "@core/@shared/domain/repository/unit_of_work.interface";
 import {IVideoRepository} from "@core/video/domain/video.repository";
 import {IStorage} from "@core/@shared/application/storage.interface";
 import {Video, VideoId} from "@core/video/domain/video.aggregate";
 import {NotFoundError} from "@core/@shared/domain/errors/not_found.error";
 import {Trailer} from "@core/video/domain/trailer.vo";
-import {CreateFromFileProps, VideoMedia} from "@core/video/domain/video_media.vo";
+import {VideoMedia} from "@core/video/domain/video_media.vo";
 import {EntityValidationError} from "@core/@shared/domain/validators/validation.error";
-import {UploadAudioVideoMediaInput} from "@core/video/application/upload_audio_video_medias/audio_video_media.input";
-import {DomainEventMediator} from "@core/@shared/domain/events/domain_event_mediator";
+import {UploadAudioVideoMediaInput} from "@core/video/application/usecases/upload_audio_video_medias/audio_video_media.input";
 import {ApplicationService} from "@core/@shared/application/application.service";
 
 export class UploadAudioVideoMediasUsecase

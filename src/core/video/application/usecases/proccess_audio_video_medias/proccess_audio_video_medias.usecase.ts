@@ -5,7 +5,7 @@ import {IUnitOfWork} from "@core/@shared/domain/repository/unit_of_work.interfac
 import {IVideoRepository} from "@core/video/domain/video.repository";
 import {
 	ProcessAudioVideoMediaInput
-} from "@core/video/application/proccess_audio_video_medias/proccess_audio_video_media.input";
+} from "@core/video/application/usecases/proccess_audio_video_medias/proccess_audio_video_media.input";
 import {AudioVideoMediaStatus} from "@core/@shared/domain/value_objects/audio_video_media.vo";
 
 export class ProcessAudioVideoMediasUsecase

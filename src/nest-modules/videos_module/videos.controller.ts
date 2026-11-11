@@ -12,17 +12,17 @@ import {
 	UploadedFiles, UseInterceptors,
 	ValidationPipe
 } from '@nestjs/common';
-import {CreateVideoUsecase} from "@core/video/application/create_video/create_video.usecase";
-import {UpdateVideoUsecase} from "@core/video/application/update_video/update_video.usecase";
+import {CreateVideoUsecase} from "@core/video/application/usecases/create_video/create_video.usecase";
+import {UpdateVideoUsecase} from "@core/video/application/usecases/update_video/update_video.usecase";
 import {
 	UploadAudioVideoMediasUsecase
-} from "@core/video/application/upload_audio_video_medias/upload_audio_video_medias.usecase";
-import {GetVideoUsecase} from "@core/video/application/get_video/get_video.usecase";
+} from "@core/video/application/usecases/upload_audio_video_medias/upload_audio_video_medias.usecase";
+import {GetVideoUsecase} from "@core/video/application/usecases/get_video/get_video.usecase";
 import {CreateVideoDto} from "@/nest-modules/videos_module/dto/create_video.dto";
 import {UpdateVideoDto} from "@/nest-modules/videos_module/dto/update_vide.dto";
-import {UpdateVideoInput} from "@core/video/application/update_video/update_video.input";
+import {UpdateVideoInput} from "@core/video/application/usecases/update_video/update_video.input";
 import {FileFieldsInterceptor} from "@nestjs/platform-express";
-import {UploadAudioVideoMediaInput} from "@core/video/application/upload_audio_video_medias/audio_video_media.input";
+import {UploadAudioVideoMediaInput} from "@core/video/application/usecases/upload_audio_video_medias/audio_video_media.input";
 
 //TODO - Adicionar VideoPresenter
 

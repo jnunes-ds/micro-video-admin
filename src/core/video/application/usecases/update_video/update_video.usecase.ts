@@ -1,5 +1,5 @@
 import {IUseCase} from "@core/@shared/application/usecase.interface";
-import {UpdateVideoInput} from "@core/video/application/update_video/update_video.input";
+import {UpdateVideoInput} from "@core/video/application/usecases/update_video/update_video.input";
 import {IUnitOfWork} from "@core/@shared/domain/repository/unit_of_work.interface";
 import {IVideoRepository} from "@core/video/domain/video.repository";
 import {

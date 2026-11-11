@@ -3,7 +3,7 @@ import {VideoInMemoryRepository} from "@core/video/infra/db/in_memory/video_in_m
 import {VideoModel} from "@core/video/infra/db/sequelize/video.models";
 import {UnitOfWorkSequelize} from "@core/@shared/infra/db/sequelize/unit_of_work_sequelize";
 import {getModelToken} from "@nestjs/sequelize";
-import {CreateVideoUsecase} from "@core/video/application/create_video/create_video.usecase";
+import {CreateVideoUsecase} from "@core/video/application/usecases/create_video/create_video.usecase";
 import {IUnitOfWork} from "@core/@shared/domain/repository/unit_of_work.interface";
 import {IVideoRepository} from "@core/video/domain/video.repository";
 import {
@@ -18,19 +18,19 @@ import {
 import {CATEGORY_PROVIDERS} from "@/nest-modules/categories_module/categories.providers";
 import {GENRE_PROVIDERS} from "@/nest-modules/genres_module/genres.providers";
 import {CAST_MEMBER_PROVIDERS} from "@/nest-modules/cast_members_module/cast_members.providers";
-import {UpdateVideoUsecase} from "@core/video/application/update_video/update_video.usecase";
+import {UpdateVideoUsecase} from "@core/video/application/usecases/update_video/update_video.usecase";
 import {
 	UploadAudioVideoMediasUsecase
-} from "@core/video/application/upload_audio_video_medias/upload_audio_video_medias.usecase";
+} from "@core/video/application/usecases/upload_audio_video_medias/upload_audio_video_medias.usecase";
 import {ApplicationService} from "@core/@shared/application/application.service";
 import {IStorage} from "@core/@shared/application/storage.interface";
-import {GetVideoUsecase} from "@core/video/application/get_video/get_video.usecase";
+import {GetVideoUsecase} from "@core/video/application/usecases/get_video/get_video.usecase";
 import {ICategoryRepository} from "@core/category/domain/category.repository";
 import {IGenreRepository} from "@core/genre/domain/genre.repository";
 import {ICastMemberRepository} from "@core/cast_member/domain/cast_member.repository";
 import {
 	ProcessAudioVideoMediasUsecase
-} from "@core/video/application/proccess_audio_video_medias/proccess_audio_video_medias.usecase";
+} from "@core/video/application/usecases/proccess_audio_video_medias/proccess_audio_video_medias.usecase";
 
 const REPOSITORIES = {
 	VIDEO_REPOSITORY: {
